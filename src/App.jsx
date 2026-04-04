@@ -12,7 +12,7 @@ const APP = {
   icon: "🏠",
   color: "#1a6b5a",
   colorLight: "#2d9e87",
-  payhip: "https://payhip.com/tenantfight",
+  payhip: "https://payhip.com/b/Kp6fH",
   support: "support@tenantfight.com",
   price: "$49",
   domain: "landlorddesk.com",
