@@ -64,7 +64,7 @@ const stepFields = {
   ],
   Issue: [
     { key: "issueType",     label: "Type of Issue",               type: "select",   required: true,
-      options: ["Security Deposit Not Returned","Illegal Deductions from Deposit","Habitability / Repair Issues","Illegal Entry by Landlord","Retaliation","Other Landlord Violation"] },
+      options: ["Security Deposit Not Returned","Illegal Deductions from Deposit","Move-In / Move-Out Condition Dispute","Habitability / Repair Issues","Illegal Entry by Landlord","Retaliation","Utility Shutoff","Lease Violation by Landlord","Discrimination / Fair Housing Violation","Wrongful Eviction Notice","Other Landlord Violation"] },
     { key: "depositAmount", label: "Security Deposit Amount Paid", type: "text",    required: false, placeholder: "$2,400.00" },
     { key: "whatHappened",  label: "What Happened? (Plain English)", type: "textarea", required: true,
       placeholder: "e.g. I moved out October 31st, gave 30 days notice, left the apartment in good condition with photos to prove it. My landlord never returned my $2,400 deposit and it has now been 45 days." },
@@ -91,6 +91,62 @@ const requiredFields = {
   Issue: ["issueType","whatHappened"],
   Demand: ["amountDemanded","responseDeadline","nextSteps"],
 };
+
+const conditionalFields = {
+  "Illegal Entry by Landlord": [
+    { key: "entryDates",  label: "Date(s) of Unauthorized Entry", type: "text",   placeholder: "e.g. Nov 3, 2025 and Nov 12, 2025" },
+    { key: "entryNotice", label: "Did Landlord Give Notice?",     type: "select", options: ["No notice at all","Less than 24 hours notice","Verbal only, no written","Claimed emergency (disputed)","Other"] },
+    { key: "entryReason", label: "Reason Landlord Gave (if any)", type: "text",   placeholder: "e.g. 'checking smoke detectors'" },
+  ],
+  "Retaliation": [
+    { key: "protectedActivity", label: "Protected Activity You Engaged In",   type: "select", options: ["Requested repairs in writing","Filed code enforcement complaint","Joined or contacted tenant union","Withheld rent for uninhabitable conditions","Exercised other legal right"] },
+    { key: "retaliatoryAction", label: "Retaliatory Action Landlord Took",    type: "select", options: ["Rent increase","Eviction notice or non-renewal","Reduced services (utilities, amenities)","Harassment or intimidation","Threats"] },
+    { key: "activityDate",      label: "Date of Your Protected Activity",     type: "text",   placeholder: "e.g. October 15, 2025" },
+    { key: "retaliationDate",   label: "Date of Retaliatory Action",          type: "text",   placeholder: "e.g. November 5, 2025" },
+  ],
+  "Habitability / Repair Issues": [
+    { key: "habitabilityConditions", label: "Conditions at Issue",              type: "textarea", rows: 3, placeholder: "e.g. No heat (furnace failed Nov 1), mold in bathroom, leaking kitchen ceiling" },
+    { key: "firstReportedDate",      label: "When First Reported to Landlord", type: "text",     placeholder: "e.g. November 1, 2025" },
+    { key: "landlordResponse",       label: "Landlord's Response So Far",      type: "textarea", rows: 2, placeholder: "e.g. Said they'd 'send someone' on Nov 5, nothing happened" },
+    { key: "healthImpact",           label: "Health or Safety Impact",          type: "textarea", rows: 2, placeholder: "e.g. Child has asthma, mold worsening it; no heat during 20°F nights" },
+  ],
+  "Utility Shutoff": [
+    { key: "utilitiesShutOff", label: "Which Utilities Shut Off",     type: "select", options: ["Water","Heat","Electricity","Gas","Multiple"] },
+    { key: "shutoffStartDate", label: "Date Shutoff Began",            type: "text",   placeholder: "e.g. November 15, 2025" },
+    { key: "shutoffCurrent",   label: "Is It Still Shut Off?",         type: "select", options: ["Yes, still off","Restored after demand","Intermittent"] },
+    { key: "shutoffReason",    label: "Reason Landlord Gave (if any)", type: "text",   placeholder: "e.g. 'you're late on rent'" },
+  ],
+  "Lease Violation by Landlord": [
+    { key: "leaseClauseViolated",  label: "Specific Lease Clause Violated", type: "textarea", rows: 2, placeholder: "e.g. Section 7 — 'Landlord shall provide covered parking space #14 throughout tenancy'" },
+    { key: "violationDescription", label: "Description of Violation",       type: "textarea", rows: 2, placeholder: "e.g. On Oct 1, landlord reassigned parking space to new tenant without consent" },
+    { key: "violationDates",       label: "Date(s) of Violation",           type: "text",     placeholder: "e.g. Ongoing since October 1, 2025" },
+  ],
+  "Discrimination / Fair Housing Violation": [
+    { key: "protectedClass",      label: "Protected Class",        type: "select",   options: ["Race","Color","National origin","Religion","Sex / gender","Familial status (children)","Disability","Source of income (state/local)","Sexual orientation / gender identity (state/local)","Other"] },
+    { key: "discriminatoryAct",   label: "Discriminatory Act",     type: "textarea", rows: 3, placeholder: "e.g. Refused to rent to family with 2 children; stated 'this building isn't for kids'" },
+    { key: "discriminationDates", label: "Date(s) of Incident(s)", type: "text",     placeholder: "e.g. October 12, 2025" },
+    { key: "witnesses",           label: "Witnesses (if any)",     type: "text",     placeholder: "e.g. Spouse was present; voicemail recording exists" },
+  ],
+  "Wrongful Eviction Notice": [
+    { key: "evictionNoticeType",    label: "Type of Eviction Notice Served",   type: "select",   options: ["Non-payment of rent","Lease violation / cure-or-quit","No-cause / end of tenancy","Nuisance","Other"] },
+    { key: "groundsStated",         label: "Grounds Stated in Notice",         type: "textarea", rows: 2, placeholder: "e.g. 'Repeated noise complaints' — no specific incidents listed" },
+    { key: "noticePeriod",          label: "Notice Period Given (days)",       type: "text",     placeholder: "e.g. 3 days" },
+    { key: "justCauseJurisdiction", label: "Just-Cause Eviction Jurisdiction?", type: "select",  options: ["Yes (CA, NJ, OR, WA, parts of NY, etc.)","No","Not sure"] },
+  ],
+  "Move-In / Move-Out Condition Dispute": [
+    { key: "deductionItems",      label: "Deduction Items You Dispute",     type: "textarea", rows: 3, placeholder: "e.g. $800 carpet replacement; $300 'wall scuffs'; $150 cleaning" },
+    { key: "moveInDocumentation", label: "Move-In Documentation You Have",  type: "textarea", rows: 2, placeholder: "e.g. Move-in checklist signed by landlord noting existing carpet stains; dated photos from move-in day" },
+    { key: "moveOutDate",         label: "Move-Out Date",                   type: "text",     placeholder: "e.g. October 31, 2025" },
+  ],
+};
+
+function buildIssueFields(baseFields, issueType) {
+  const cond = conditionalFields[issueType];
+  if (!cond) return baseFields;
+  const idx = baseFields.findIndex(f => f.key === "issueType");
+  if (idx === -1) return [...baseFields, ...cond];
+  return [...baseFields.slice(0, idx + 1), ...cond, ...baseFields.slice(idx + 1)];
+}
 
 const colors = {
   paper: "#f7faf9", paperWarm: "#f0f7f5", paperDark: "#e0ede9",
@@ -232,6 +288,149 @@ Rules:
 - Format: formal letter with [DATE] placeholder, via certified mail notation, proper salutation and signature block
 - Output ONLY the letter, no preamble or commentary`;
 
+  const illegalEntryPrompt = `You are an expert tenant rights attorney specializing in landlord entry and tenant privacy violations. Write firm, legally precise demand letters.
+
+Rules:
+- Open with clear statement of the violation: landlord entered without proper notice on specified dates
+- Cite the state's landlord entry statute by name (e.g., California Civil Code §1954; New York Real Property Law §235-b; Texas Property Code §92.0081; Massachusetts G.L. c. 186 §15B) and identify the specific notice requirement — typically 24-48 hours written notice except true emergencies
+- Rebut any reason given by the landlord — emergency exceptions are narrow and must be documented; "routine inspection" and similar pretexts do not qualify
+- Cite the tenant's right to quiet enjoyment under the lease and common law
+- Demand written acknowledgment of the violation, written commitment to comply with proper notice going forward, and preservation of the tenant's right to seek damages and injunctive relief
+- Warn of remedies: statutory damages where available, lease termination, injunction, and attorney's fees where provided by statute
+- Set a firm response deadline
+- Professional but firm tone
+- 500-700 words
+- Format: formal letter with [DATE] placeholder, via certified mail
+- Output ONLY the letter, no preamble`;
+
+  const retaliationPrompt = `You are an expert tenant rights attorney specializing in landlord retaliation claims. Write firm, legally precise demand letters.
+
+Rules:
+- Open with a clear timeline: tenant engaged in protected activity on a specific date, and landlord took adverse action on a specific date within the statutory presumption window
+- Cite the state's anti-retaliation statute by name (e.g., California Civil Code §1942.5; New York Real Property Law §223-b; Texas Property Code §92.331; Massachusetts G.L. c. 186 §18) — most create a rebuttable presumption of retaliation if adverse action occurs within 90-180 days of protected activity
+- Identify the protected activity: repair request, code enforcement complaint, tenant union participation, withholding rent for uninhabitable conditions, or other exercise of legal rights
+- Identify the retaliatory action: rent increase, eviction notice, non-renewal, reduced services, or harassment
+- Rebut any "legitimate business reason" the landlord may assert — once the presumption attaches, the burden shifts to the landlord to prove a non-retaliatory motive
+- Demand immediate withdrawal of the retaliatory action and written commitment not to retaliate in future
+- Warn of remedies: statutory damages (often 1-3 months rent plus actual damages), injunctive relief, attorney's fees, and a full retaliation defense to any eviction action
+- Set a firm response deadline
+- Professional but firm tone
+- 500-700 words
+- Format: formal letter with [DATE] placeholder, via certified mail
+- Output ONLY the letter, no preamble`;
+
+  const habitabilityPrompt = `You are an expert tenant rights attorney specializing in habitability and failure-to-repair claims. Write firm, legally precise demand letters.
+
+Rules:
+- Open with a clear statement of the uninhabitable conditions, when first reported to the landlord, and the landlord's inadequate response
+- Cite the state's habitability statute and case law establishing the implied warranty of habitability (e.g., California Civil Code §§1941, 1942 and Green v. Superior Court; New York Real Property Law §235-b; Massachusetts G.L. c. 111 §127A and Boston Housing Authority v. Hemingway)
+- Reference applicable local housing code violations and HUD housing quality standards where relevant
+- Demand specific repairs by a specific date — typically 14-30 days, shorter for emergency conditions like no heat, no hot water, sewage backup, or severe infestation
+- Invoke applicable tenant remedies: repair-and-deduct where authorized by state statute (with statutory caps), rent withholding or escrow, rent abatement for the period of uninhabitability, and constructive eviction if conditions are severe
+- Cite documented health and safety impact where applicable
+- Warn of remedies if ignored: code enforcement complaint, rent escrow action, lease termination, and damages
+- Set a firm response deadline
+- Professional but firm tone
+- 500-700 words
+- Format: formal letter with [DATE] placeholder, via certified mail
+- Output ONLY the letter, no preamble`;
+
+  const utilityShutoffPrompt = `You are an expert tenant rights attorney specializing in illegal utility shutoffs and constructive eviction. Write firm, legally precise demand letters with appropriate urgency.
+
+Rules:
+- Open with a clear statement: landlord shut off the specified utility on a specific date without legal basis; this is illegal in every state
+- Cite the state's utility shutoff or self-help eviction statute (e.g., California Civil Code §789.3 — up to $100/day actual damages plus $100/day punitive; Texas Property Code §92.008; Florida §83.67; New York Real Property Law §235; Massachusetts G.L. c. 186 §14) and identify the specific per-day penalty under the applicable state statute
+- Cite the doctrine of constructive eviction — an illegal shutoff designed to force the tenant out is itself a constructive eviction and a breach of the covenant of quiet enjoyment
+- Demand IMMEDIATE restoration of the utility (within 24 hours)
+- Demand statutory damages measured per day of shutoff
+- Warn of criminal liability in states or municipalities where illegal utility shutoff is a landlord-harassment crime (e.g., NYC Administrative Code §27-2005; California Penal Code §418)
+- Warn of civil remedies: injunction, actual and punitive damages, attorney's fees, and a full defense to any eviction action
+- Set a firm deadline measured in hours, not days
+- Firm and urgent tone
+- 500-700 words
+- Format: formal letter with [DATE] placeholder, via certified mail (and note that a copy is being hand-delivered given the urgency)
+- Output ONLY the letter, no preamble`;
+
+  const leaseViolationPrompt = `You are an expert tenant rights attorney specializing in landlord breach of lease. Write firm, legally precise demand letters.
+
+Rules:
+- Open with a clear statement of the specific lease clause breached, quoted verbatim when provided
+- Frame the claim as contract breach under state common law and any applicable landlord-tenant statute
+- Identify each instance of the breach with dates and describe the concrete harm to the tenant
+- Rebut any excuse the landlord has offered
+- Demand cure within a specific timeframe (typically 14-30 days)
+- Reserve the tenant's alternative remedies: damages, specific performance, lease termination if the breach is material, and attorney's fees where the lease provides
+- Warn of remedies: small claims action, lease termination with proper notice, and rent withholding in states where authorized
+- Set a firm response deadline
+- Professional but firm tone
+- 500-700 words
+- Format: formal letter with [DATE] placeholder, via certified mail
+- Output ONLY the letter, no preamble`;
+
+  const fairHousingPrompt = `You are an expert tenant rights attorney specializing in fair housing and anti-discrimination law. Write firm, legally precise demand letters.
+
+Rules:
+- Open with a clear statement of the discriminatory act and the protected class involved
+- Cite the federal Fair Housing Act (42 U.S.C. §§3601-3619) — prohibits discrimination based on race, color, national origin, religion, sex, familial status, and disability; HUD enforces 24 CFR Part 100
+- Cite any applicable state fair housing statute, which typically adds protected classes (source of income, sexual orientation, gender identity, marital status, age, ancestry)
+- Cite any local fair housing ordinance that applies
+- Describe the discriminatory act with specificity: dates, exact words spoken, actions taken, witnesses, and comparators (how similarly situated tenants outside the protected class were treated)
+- For disability discrimination: reference reasonable accommodation and reasonable modification rights under 42 U.S.C. §3604(f) and applicable state law
+- For familial-status discrimination: note that occupancy standards effectively excluding families with children are unlawful (reference HUD's 2-per-bedroom guidance as a floor, not a cap)
+- Demand: immediate cessation of the discriminatory conduct, specific remedial action, and a written policy commitment
+- Warn of remedies: HUD complaint (1-year filing deadline from the act under 42 U.S.C. §3610), state fair housing agency complaint, private right of action under 42 U.S.C. §3613 (actual damages, punitive damages, attorney's fees, injunctive relief), and potential referral to DOJ for pattern-or-practice violations
+- Set a firm response deadline
+- Professional but firm tone — documenting the record
+- 500-700 words
+- Format: formal letter with [DATE] placeholder, via certified mail
+- Output ONLY the letter, no preamble`;
+
+  const wrongfulEvictionPrompt = `You are an expert tenant rights attorney specializing in eviction defense. Write firm, legally precise demand letters challenging improper eviction notices.
+
+Rules:
+- Open with a clear statement of the defective notice: type served, date served, stated grounds, and specific defects
+- Cite the state's eviction statute (e.g., California Code of Civil Procedure §1161; Texas Property Code §24.005; New York RPAPL §711; Massachusetts G.L. c. 186 §12) and identify the exact notice requirements for the type of notice served
+- Rebut the grounds stated: insufficient specificity, incorrect notice period, improper service, facts do not support the claim, or prohibited grounds
+- In just-cause eviction jurisdictions, cite the applicable law (e.g., California Tenant Protection Act at Civil Code §1946.2; Oregon SB 608; Seattle Just Cause Ordinance; NYC rent stabilization or Good Cause Eviction) and identify which of the enumerated just causes (if any) is actually alleged
+- Invoke the tenant's right to cure where applicable
+- Demand written withdrawal of the defective notice within a specific timeframe
+- Warn that the tenant will assert all defenses in any unlawful detainer or summary process action, including every defect identified, and will seek costs and attorney's fees where available
+- Set a firm response deadline (typically equal to or shorter than the notice period)
+- Professional but firm tone
+- 500-700 words
+- Format: formal letter with [DATE] placeholder, via certified mail
+- Output ONLY the letter, no preamble`;
+
+  const moveOutDisputePrompt = `You are an expert tenant rights attorney specializing in security deposit and move-out condition disputes. Write firm, legally precise demand letters.
+
+Rules:
+- Open with a clear statement disputing the specific deduction items and demanding itemized documentation
+- Cite the state's security deposit statute requiring written itemization and receipts for claimed deductions (e.g., California Civil Code §1950.5; Texas Property Code §92.109; New York General Obligations Law §7-108; Massachusetts G.L. c. 186 §15B)
+- Distinguish normal wear and tear (landlord's cost of doing business) from damage beyond normal wear and tear (tenant may be charged); apply the standard used in the tenant's state
+- Challenge each disputed deduction item specifically: pre-existing (documented in move-in checklist or photos), normal wear, undocumented, excessive in amount, or not actually repaired
+- Demand: itemized receipts for all claimed damages, the move-in inspection report or checklist, and return of disputed amounts
+- Reference move-in documentation the tenant has preserved (signed checklist, dated photos)
+- Invoke statutory penalty provisions where applicable (many states allow 2-3x penalties for wrongful withholding or failure to itemize)
+- Warn of small claims action, state attorney general complaint, and attorney's fees where provided by statute
+- Set a firm response deadline
+- Professional but firm tone
+- 500-700 words
+- Format: formal letter with [DATE] placeholder, via certified mail
+- Output ONLY the letter, no preamble`;
+
+  const pickSystemPrompt = (issueType) => {
+    if (!issueType) return systemPrompt;
+    if (issueType === "Illegal Entry by Landlord" || issueType === "Illegal Entry / Privacy Violation") return illegalEntryPrompt;
+    if (issueType === "Retaliation" || issueType === "Landlord Retaliation") return retaliationPrompt;
+    if (issueType === "Habitability / Repair Issues" || issueType === "Failure to Repair / Habitability") return habitabilityPrompt;
+    if (issueType === "Utility Shutoff") return utilityShutoffPrompt;
+    if (issueType === "Lease Violation by Landlord") return leaseViolationPrompt;
+    if (issueType === "Discrimination / Fair Housing Violation") return fairHousingPrompt;
+    if (issueType === "Wrongful Eviction Notice") return wrongfulEvictionPrompt;
+    if (issueType === "Move-In / Move-Out Condition Dispute") return moveOutDisputePrompt;
+    return systemPrompt;
+  };
+
   const buildPrompt = (tone = "standard") => {
     const base = `
 TENANT: ${formData.tenantName}, ${formData.tenantAddress}
@@ -252,22 +451,29 @@ RESPONSE DEADLINE: ${formData.responseDeadline} days
 IF IGNORED: ${formData.nextSteps}
 ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
 
-    if (tone === "assertive") return `Write a MORE ASSERTIVE and DETAILED demand letter. Stronger language, more explicit statutory citations, more forceful consequences. Different wording from standard version:\n${base}`;
-    return `Write a STANDARD PROFESSIONAL demand letter for this situation:\n${base}`;
+    const cond = (conditionalFields[formData.issueType] || [])
+      .filter(f => formData[f.key]?.toString().trim())
+      .map(f => `${f.label.toUpperCase()}: ${formData[f.key]}`)
+      .join("\n");
+    const fullBase = cond ? `${base}\n\nTYPE-SPECIFIC DETAILS:\n${cond}` : base;
+
+    if (tone === "assertive") return `Write a MORE ASSERTIVE and DETAILED demand letter. Stronger language, more explicit statutory citations, more forceful consequences. Different wording from standard version:\n${fullBase}`;
+    return `Write a STANDARD PROFESSIONAL demand letter for this situation:\n${fullBase}`;
   };
 
   const generateLetter = async () => {
     setLoading(true); setError(""); setLetter(""); setAltLetter(""); setChecklist([]);
     try {
+      const effectivePrompt = pickSystemPrompt(formData.issueType);
       setLoadingMsg("Drafting your letter...");
-      const draft = await callAPI(systemPrompt, buildPrompt("standard"));
+      const draft = await callAPI(effectivePrompt, buildPrompt("standard"));
 
       setLoadingMsg("Running quality review...");
       const reviewed = await callAPI("", "", true, draft);
       setLetter(reviewed);
 
       setLoadingMsg("Generating assertive version...");
-      const alt = await callAPI(systemPrompt, buildPrompt("assertive"));
+      const alt = await callAPI(effectivePrompt, buildPrompt("assertive"));
       setAltLetter(alt);
 
       setLoadingMsg("Building checklist...");
@@ -379,7 +585,7 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
             <div style={{ fontSize: "13px", color: colors.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "12px" }}>{APP.icon} {APP.name}</div>
             <h1 style={{ fontFamily: APP.displayFont, fontSize: "clamp(28px, 5vw, 44px)", color: colors.ink, marginBottom: "16px", fontWeight: "900" }}>Tenant Demand Letter Writer</h1>
             <p style={{ fontSize: "17px", color: colors.inkMuted, marginBottom: "48px", maxWidth: "480px", margin: "0 auto 40px", lineHeight: "1.7" }}>
-              Attorney-quality demand letters for security deposit disputes, habitability issues, and landlord violations. Enter your access code to begin.
+              Attorney-quality demand letters for security deposits, habitability, illegal entry, retaliation, utility shutoffs, fair housing, wrongful eviction, and more. Enter your access code to begin.
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px", marginBottom: "40px", textAlign: "left" }}>
               {TIPS.map(t => (
@@ -438,7 +644,7 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-              {stepFields[currentStep].map(f => (
+              {(currentStep === "Issue" ? buildIssueFields(stepFields.Issue, formData.issueType) : stepFields[currentStep]).map(f => (
                 <Field key={f.key} field={f} value={formData[f.key]} onChange={v => handleChange(f.key, v)} />
               ))}
             </div>
