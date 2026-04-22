@@ -14,7 +14,7 @@ const APP = {
   colorLight: "#2d9e87",
   payhip: "https://payhip.com/b/Kp6fH",
   support: "support@tenantfight.com",
-  price: "$49",
+  price: "$39",
   domain: "landlorddesk.com",
   font: "'Source Serif 4', Georgia, serif",
   displayFont: "'Playfair Display', serif",
