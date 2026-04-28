@@ -5,7 +5,13 @@
     { "source": "/app/(.*)", "destination": "/index.html" },
     { "source": "/", "destination": "/landing.html" }
   ],
+  "redirects": [
+    { "source": "/", "destination": "/landing.html", "permanent": true }
+  ],
   "headers": [
     { "source": "/api/(.*)", "headers": [{ "key": "Cache-Control", "value": "no-store" }] }
-  ]
+  ],
+  "functions": {
+    "api/generate.js": { "maxDuration": 60 }
+  }
 }
