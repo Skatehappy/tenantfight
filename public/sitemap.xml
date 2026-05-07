@@ -1,15 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://tenantfight.com/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://tenantfight.com/app</loc>
-    <lastmod>2026-04-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+<url><loc>https://tenantfight.com/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+<url><loc>https://tenantfight.com/california</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/texas</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/florida</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/new-york</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/illinois</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/pennsylvania</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/ohio</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/georgia</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/north-carolina</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/arizona</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/california/security-deposit-demand-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/california/habitability-violation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/california/illegal-entry-notice</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/california/landlord-retaliation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/california/wrongful-eviction-response</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/california/utility-shutoff-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/california/move-out-deduction-dispute</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/california/landlord-lease-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/california/mold-pest-infestation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/california/quiet-enjoyment-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/texas/security-deposit-demand-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/texas/habitability-violation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/texas/illegal-entry-notice</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/texas/landlord-retaliation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/texas/wrongful-eviction-response</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/texas/utility-shutoff-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/texas/move-out-deduction-dispute</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/texas/landlord-lease-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/texas/mold-pest-infestation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/texas/quiet-enjoyment-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/florida/security-deposit-demand-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/florida/habitability-violation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/florida/illegal-entry-notice</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/florida/landlord-retaliation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/florida/wrongful-eviction-response</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/florida/utility-shutoff-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/florida/move-out-deduction-dispute</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/florida/landlord-lease-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/florida/mold-pest-infestation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/florida/quiet-enjoyment-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/new-york/security-deposit-demand-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/new-york/habitability-violation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/new-york/illegal-entry-notice</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/new-york/landlord-retaliation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/new-york/wrongful-eviction-response</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/new-york/utility-shutoff-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/new-york/move-out-deduction-dispute</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/new-york/landlord-lease-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/new-york/mold-pest-infestation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/new-york/quiet-enjoyment-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/illinois/security-deposit-demand-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/illinois/habitability-violation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/illinois/illegal-entry-notice</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/illinois/landlord-retaliation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/illinois/wrongful-eviction-response</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/illinois/utility-shutoff-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/illinois/move-out-deduction-dispute</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/illinois/landlord-lease-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/illinois/mold-pest-infestation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/illinois/quiet-enjoyment-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/pennsylvania/security-deposit-demand-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/pennsylvania/habitability-violation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/pennsylvania/illegal-entry-notice</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/pennsylvania/landlord-retaliation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/pennsylvania/wrongful-eviction-response</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/pennsylvania/utility-shutoff-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/pennsylvania/move-out-deduction-dispute</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/pennsylvania/landlord-lease-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/pennsylvania/mold-pest-infestation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/pennsylvania/quiet-enjoyment-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/ohio/security-deposit-demand-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/ohio/habitability-violation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/ohio/illegal-entry-notice</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/ohio/landlord-retaliation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/ohio/wrongful-eviction-response</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/ohio/utility-shutoff-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/ohio/move-out-deduction-dispute</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/ohio/landlord-lease-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/ohio/mold-pest-infestation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/ohio/quiet-enjoyment-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/georgia/security-deposit-demand-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/georgia/habitability-violation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/georgia/illegal-entry-notice</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/georgia/landlord-retaliation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/georgia/wrongful-eviction-response</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/georgia/utility-shutoff-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/georgia/move-out-deduction-dispute</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/georgia/landlord-lease-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/georgia/mold-pest-infestation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/georgia/quiet-enjoyment-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/north-carolina/security-deposit-demand-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/north-carolina/habitability-violation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/north-carolina/illegal-entry-notice</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/north-carolina/landlord-retaliation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/north-carolina/wrongful-eviction-response</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/north-carolina/utility-shutoff-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/north-carolina/move-out-deduction-dispute</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/north-carolina/landlord-lease-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/north-carolina/mold-pest-infestation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/north-carolina/quiet-enjoyment-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/arizona/security-deposit-demand-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/arizona/habitability-violation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/arizona/illegal-entry-notice</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/arizona/landlord-retaliation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/arizona/wrongful-eviction-response</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/arizona/utility-shutoff-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/arizona/move-out-deduction-dispute</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/arizona/landlord-lease-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/arizona/mold-pest-infestation-letter</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+<url><loc>https://tenantfight.com/arizona/quiet-enjoyment-violation</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
 </urlset>

@@ -190,6 +190,33 @@ export default function App() {
   useEffect(() => { try { const s = sessionStorage.getItem("tf_form"); if (s) setFormData(JSON.parse(s)); } catch {} }, []);
   useEffect(() => { try { sessionStorage.setItem("tf_form", JSON.stringify(formData)); } catch {} }, [formData]);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const stateParam = params.get("state");
+    const disputeParam = params.get("dispute");
+    const slugToStateName = {
+      "california": "California", "texas": "Texas", "florida": "Florida",
+      "new-york": "New York", "illinois": "Illinois", "pennsylvania": "Pennsylvania",
+      "ohio": "Ohio", "georgia": "Georgia", "north-carolina": "North Carolina", "arizona": "Arizona"
+    };
+    const slugToIssueType = {
+      "security-deposit-demand-letter": "Security Deposit Not Returned",
+      "habitability-violation-letter": "Habitability / Repair Issues",
+      "illegal-entry-notice": "Illegal Entry by Landlord",
+      "landlord-retaliation-letter": "Retaliation",
+      "wrongful-eviction-response": "Other Landlord Violation",
+      "utility-shutoff-letter": "Other Landlord Violation",
+      "move-out-deduction-dispute": "Illegal Deductions from Deposit",
+      "landlord-lease-violation": "Other Landlord Violation",
+      "mold-pest-infestation-letter": "Habitability / Repair Issues",
+      "quiet-enjoyment-violation": "Other Landlord Violation"
+    };
+    const updates = {};
+    if (stateParam && slugToStateName[stateParam]) updates.state = slugToStateName[stateParam];
+    if (disputeParam && slugToIssueType[disputeParam]) updates.issueType = slugToIssueType[disputeParam];
+    if (Object.keys(updates).length) setFormData(prev => ({ ...prev, ...updates }));
+  }, []);
+
   const handleChange = (key, value) => setFormData(prev => ({ ...prev, [key]: value }));
 
   const isStepValid = (stepName) => {
