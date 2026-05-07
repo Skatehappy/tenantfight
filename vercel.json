@@ -3,7 +3,9 @@
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/app", "destination": "/index.html" },
     { "source": "/app/(.*)", "destination": "/index.html" },
-    { "source": "/", "destination": "/landing.html" }
+    { "source": "/", "destination": "/landing.html" },
+    { "source": "/:state/:dispute", "destination": "/:state/:dispute/index.html" },
+    { "source": "/:state", "destination": "/:state/index.html" }
   ],
   "redirects": [
     { "source": "/", "destination": "/landing.html", "permanent": true }
