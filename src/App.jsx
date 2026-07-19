@@ -319,7 +319,7 @@ Rules:
 
 Rules:
 - Open with clear statement of the violation: landlord entered without proper notice on specified dates
-- Cite the state's landlord entry statute by name (e.g., California Civil Code §1954; New York Real Property Law §235-b; Texas Property Code §92.0081; Massachusetts G.L. c. 186 §15B) and identify the specific notice requirement — typically 24-48 hours written notice except true emergencies
+- Cite the state's landlord entry statute by name (e.g., California Civil Code §1954; note New York and Texas have no general landlord-entry statute — rely on the lease's entry clause and the common-law covenant of quiet enjoyment; in Massachusetts, G.L. c. 186 §15B(1)(a) limits the purposes for which a lease may authorize entry) and identify the specific notice requirement — typically 24-48 hours written notice except true emergencies
 - Rebut any reason given by the landlord — emergency exceptions are narrow and must be documented; "routine inspection" and similar pretexts do not qualify
 - Cite the tenant's right to quiet enjoyment under the lease and common law
 - Demand written acknowledgment of the violation, written commitment to comply with proper notice going forward, and preservation of the tenant's right to seek damages and injunctive relief
@@ -370,7 +370,7 @@ Rules:
 - Cite the doctrine of constructive eviction — an illegal shutoff designed to force the tenant out is itself a constructive eviction and a breach of the covenant of quiet enjoyment
 - Demand IMMEDIATE restoration of the utility (within 24 hours)
 - Demand statutory damages measured per day of shutoff
-- Warn of criminal liability in states or municipalities where illegal utility shutoff is a landlord-harassment crime (e.g., NYC Administrative Code §27-2005; California Penal Code §418)
+- Warn of criminal liability in states or municipalities where illegal utility shutoff is a landlord-harassment crime (cite your local landlord-harassment or unlawful-eviction ordinance where one applies; do not rely on California Penal Code §418, which governs forcible entry/detainer, not utility service)
 - Warn of civil remedies: injunction, actual and punitive damages, attorney's fees, and a full defense to any eviction action
 - Set a firm deadline measured in hours, not days
 - Firm and urgent tone
