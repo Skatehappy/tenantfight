@@ -1,7 +1,10 @@
 import { APP_CONFIG } from '../data/config.js';
+import { stateLawSnapshot } from './enrichment.js';
 
-export function renderStateHub(state, disputes, allStates) {
+export function renderStateHub(state, disputes, allStates, stateData) {
   const otherStates = allStates.filter(s => s.slug !== state.slug);
+  const snapshot = stateLawSnapshot(state.name, stateData);
+  const snapshotHTML = snapshot ? `\n  <p class="intro" style="margin-top:-24px">${escapeHtml(snapshot)}</p>` : '';
 
   const disputeCards = disputes.map(d => `
     <a class="dispute-card" href="/${state.slug}/${d.slug}">
@@ -77,7 +80,7 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
   <a class="btn-primary" href="/app?state=${state.slug}">Generate My ${state.name} Letter →</a>
 </section>
 <div class="container">
-  <p class="intro">${state.name} has specific statutory protections that govern ${APP_CONFIG.vertical}. Knowing your rights is the first step; enforcing them requires a formal written demand letter that cites the relevant ${state.name} statutes, sets a firm deadline, and states the legal consequences of non-compliance. ${APP_CONFIG.name} generates exactly that letter — tailored to ${state.name} law, your specific dispute, and your timeline. Below are the ${disputes.length} dispute types we cover for ${state.name} residents.</p>
+  <p class="intro">${state.name} has specific statutory protections that govern ${APP_CONFIG.vertical}. Knowing your rights is the first step; enforcing them requires a formal written demand letter that cites the relevant ${state.name} statutes, sets a firm deadline, and states the legal consequences of non-compliance. ${APP_CONFIG.name} generates exactly that letter — tailored to ${state.name} law, your specific dispute, and your timeline. Below are the ${disputes.length} dispute types we cover for ${state.name} residents.</p>${snapshotHTML}
 
   <h2>${state.name} Dispute Types</h2>
   <div class="dispute-grid">${disputeCards}</div>
@@ -126,3 +129,7 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
 }
 
 function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function escapeHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}

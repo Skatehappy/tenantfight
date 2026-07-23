@@ -1,0 +1,292 @@
+{
+  "CA": {
+    "state": "California",
+    "abbreviation": "CA",
+    "landlord_tenant_statute": {
+      "name": "California Civil Code (Hiring of Real Property) plus the Tenant Protection Act of 2019 (AB 1482)",
+      "citation": "Cal. Civ. Code §§ 1940-1954.06; Tenant Protection Act at §§ 1946.2, 1947.12"
+    },
+    "security_deposit_rules": "Max deposit generally 1 month's rent (furnished or unfurnished) as of July 1, 2024 under AB 12 (Cal. Civ. Code § 1950.5). Small-landlord exception: up to 2 months' rent if the landlord is a natural person owning no more than 2 residential rental properties with no more than 4 total units (not for servicemember tenants). Return deadline: 21 calendar days after the tenant vacates; landlord must return the deposit and provide an itemized statement with receipts for deductions. Penalty for bad-faith withholding: up to twice the deposit amount in statutory damages, plus actual damages (§ 1950.5(l)).",
+    "habitability_standards": "Yes — implied warranty of habitability applies. Landlord duties under §§ 1941-1941.1: effective weatherproofing; working plumbing, gas, heating, electrical, and lighting; hot and cold running water; clean and sanitary premises free of vermin; adequate trash receptacles; safe floors, stairways, and railings. A dwelling lacking these is deemed untenantable.",
+    "repair_and_deduct": "Allowed (§ 1942). The defect must render the premises untenantable and not be caused by the tenant; tenant must give reasonable notice (30 days presumed) and an opportunity to repair. Cost may not exceed one month's rent, and the remedy may be used no more than twice in any 12-month period.",
+    "rent_withholding": "Allowed (case-law remedy, Green v. Superior Court, plus the implied warranty of habitability). There must be a substantial habitability defect materially affecting health/safety that the landlord failed to repair after notice; the tenant is not responsible for the defect. It carries risk if a court later finds the unit habitable.",
+    "entry_notice_requirements": "Written notice required; 24 hours is presumed reasonable (§ 1954(d)(1)). Notice must state date, approximate time, and purpose; entry only during normal business hours. Exceptions: emergencies, tenant abandonment/surrender, tenant consent, or showing the unit; a 48-hour notice applies to the pre-move-out inspection.",
+    "retaliation_protections": "Protected activities (§ 1942.5): exercising repair-and-deduct rights, complaining about habitability, or organizing a tenant association. Retaliation is presumed if the adverse action occurs within 180 days of the protected activity (rebuttable). Remedies: actual damages plus punitive damages of $100-$2,000 per retaliatory act and attorney's fees.",
+    "lease_termination_rules": "Month-to-month (§§ 1946, 1946.1): landlord must give 30 days' written notice if the tenant has resided under 1 year, or 60 days if 1 year or more; a tenant generally owes at least 30 days' notice. Fixed-term leases terminate automatically at the end of term. Units covered by AB 1482 or a local just-cause ordinance additionally require 'just cause' to terminate an established tenancy.",
+    "eviction_process": "Notice types (Cal. Code Civ. Proc. § 1161): 3-Day Notice to Pay Rent or Quit (nonpayment; the 3 days exclude weekends/holidays); 3-Day Notice to Perform Covenant or Quit (curable violations); 3-Day Notice to Quit (incurable). Court process: Unlawful Detainer in Superior Court; tenant's response window is 10 business days (extended from 5 by AB 2347, effective Jan. 1, 2025). If the landlord prevails, the court issues a Writ of Possession and the Sheriff posts a 5-day Notice to Vacate. Rough timeline: commonly 5-8 weeks, longer if contested.",
+    "rent_control": "No full state preemption — California has BOTH a statewide rent cap and permits local rent control. AB 1482 caps annual increases at 5% + regional CPI (max 10%) for covered units (generally 15+ years old) and requires just cause. Local rent control is governed by the Costa-Hawkins Act (exempts single-family/condo and post-Feb-1995 units, bars vacancy control). Cities with local rent control include LA, San Francisco, Oakland, Berkeley, Santa Monica, and San Jose; the more protective rule applies.",
+    "regulatory_body": "No single state agency adjudicates individual landlord-tenant disputes; disputes go to Superior Court (unlawful detainer) or small claims (deposit claims). The California DOJ/Attorney General and Department of Consumer Affairs publish guidance, and local rent boards administer rent control where it exists.",
+    "unique_protections": [
+      "AB 12 one-month security-deposit cap (effective July 1, 2024) — one of the strictest deposit caps in the nation",
+      "AB 1482 statewide rent cap (5% + CPI, max 10%) plus just-cause eviction protections layered on top of local rent control",
+      "Strong statutory retaliation protection with a 180-day rebuttable presumption and statutory penalties of $100-$2,000 per act (§ 1942.5)"
+    ],
+    "common_disputes": [
+      "Wrongful withholding of security deposits and disputes over the 21-day return / itemization requirement",
+      "Habitability defects and disputes over repair-and-deduct or rent withholding",
+      "Nonpayment-of-rent evictions and disputes over improper notices or retaliatory/no-just-cause terminations under AB 1482"
+    ],
+    "recent_reform": "AB 2347 (effective Jan. 1, 2025) extended the tenant's time to respond to an unlawful detainer summons from 5 to 10 business days; AB 12 (effective July 1, 2024) capped security deposits at one month's rent."
+  },
+  "TX": {
+    "state": "Texas",
+    "abbreviation": "TX",
+    "landlord_tenant_statute": {
+      "name": "Texas Property Code, Chapter 92 — Residential Tenancies (with Chapter 24 for eviction and Chapter 91 for tenancy termination)",
+      "citation": "Tex. Prop. Code Ch. 92 (also Ch. 91, Ch. 24)"
+    },
+    "security_deposit_rules": "No statutory maximum on the deposit amount. Return deadline: 30 days after the tenant surrenders the premises (§ 92.103); the 30-day clock does not run until the tenant provides a written forwarding address (§ 92.107). Itemization required: a written description and itemized list of deductions must accompany any withholding (§ 92.104). Penalty for bad-faith wrongful withholding: forfeiture of the right to withhold plus liability for $100 + 3x the wrongfully withheld amount + reasonable attorney's fees (§ 92.109).",
+    "habitability_standards": "Yes — statutory duty to repair conditions that materially affect the physical health or safety of an ordinary tenant. The landlord must make a diligent effort to repair after proper written notice, provided the tenant is not delinquent in rent (§§ 92.052, 92.056). Texas courts also recognize an implied warranty of habitability.",
+    "repair_and_deduct": "Allowed but limited (§ 92.0561). The tenant must give proper written notice, be current on rent, and the landlord must have failed to make a diligent effort to repair a condition materially affecting health/safety. Cap: total repairs/deductions in any one month may not exceed the greater of one month's rent or $500.",
+    "rent_withholding": "Not a standard statutory remedy. Texas does not authorize general rent withholding/escrow; the tenant must stay current on rent to preserve statutory repair remedies. Remedies for failure to repair are instead repair-and-deduct (§ 92.0561) and judicial remedies including termination, court-ordered repair, rent reduction, and damages.",
+    "entry_notice_requirements": "No statutory advance-notice requirement. The Texas Property Code contains no provision governing landlord entry — advance notice is required only if the lease specifies it (24-hour notice is a common lease standard, not a statutory mandate). Emergencies require no notice.",
+    "retaliation_protections": "Protected activities (§ 92.331): giving notice to repair, exercising a statutory remedy, complaining in good faith about a condition to the landlord or a government entity, or participating in a tenant organization. The landlord may not retaliate within 6 months of the protected activity. Remedies: a civil penalty of one month's rent plus $500, actual damages, court costs, and attorney's fees (§ 92.333).",
+    "lease_termination_rules": "Month-to-month: either party terminates by notice; if the rent-paying period is at least one month, the tenancy ends on the later of the date stated in the notice or one month after notice is given (§ 91.001). Fixed-term: terminates at the end of the stated term; no notice required unless the lease specifies it.",
+    "eviction_process": "Notice: a default written 'notice to vacate' at least 3 days before filing suit, unless the lease provides otherwise (§ 24.005); may combine a demand for overdue rent. Court process: a 'forcible entry and detainer' (eviction suit) filed in the Justice of the Peace court for the precinct where the property is located (Ch. 24). Rough timeline: after the 3-day notice, hearing roughly 10-21 days out; a writ of possession cannot issue until at least 5 days after judgment, so a typical uncontested eviction runs about 3-6 weeks.",
+    "rent_control": "State-preempted. Municipalities may not impose rent control except when the governing body finds a housing emergency due to a disaster and the governor approves (Tex. Local Gov't Code § 214.902). No Texas city currently has general rent control.",
+    "regulatory_body": "No state agency adjudicates landlord-tenant disputes; disputes go to the courts (Justice of the Peace / small claims). The Texas Attorney General and the Texas State Law Library / TexasLawHelp provide information but do not resolve individual disputes.",
+    "unique_protections": [
+      "Treble-damages penalty: bad-faith wrongful withholding of a security deposit exposes the landlord to $100 + three times the withheld amount + attorney's fees (§ 92.109)",
+      "Statutory duty and remedies for security devices (keyed deadbolts, window latches) and smoke alarms (Ch. 92 Subchapters D & F), with tenant self-help and damages",
+      "Strong utility/lockout protections: a landlord may not intentionally cut off utilities or lock a tenant out except under narrow statutory conditions, with statutory penalties (§§ 92.008, 92.0081)"
+    ],
+    "common_disputes": [
+      "Security-deposit return: missed 30-day deadline, non-itemized or excessive deductions, and forwarding-address disputes",
+      "Failure to repair / habitability conditions and proper use of repair-and-deduct",
+      "Eviction / notice-to-vacate defects and alleged retaliatory or 'self-help' (lockout/utility shutoff) evictions"
+    ],
+    "recent_reform": "No major statewide tenant-protection expansion identified in recent sessions; activity has been incremental, and Texas continues to preempt local rent control and local eviction-diversion ordinances."
+  },
+  "FL": {
+    "state": "Florida",
+    "abbreviation": "FL",
+    "landlord_tenant_statute": {
+      "name": "Florida Residential Landlord and Tenant Act",
+      "citation": "Fla. Stat. Chapter 83, Part II (§§ 83.40-83.683)"
+    },
+    "security_deposit_rules": "No statutory maximum deposit. Return deadline: 15 days after termination if the landlord imposes NO claim; if the landlord intends to claim, the landlord must send written notice of intent (with reasons) within 30 days by certified mail (§ 83.49). Itemization/reason for the claim is required in the 30-day notice; the tenant has 15 days to object. Penalty: a landlord who fails to give timely notice forfeits the right to claim any of the deposit, and the prevailing party may recover attorney's fees (§ 83.49(3)).",
+    "habitability_standards": "Yes — statutory duty to maintain the dwelling (§ 83.51): comply with building/housing/health codes; maintain roofs, windows, doors, floors, steps, porches, exterior walls, foundations, and plumbing in reasonable working condition. For multi-unit buildings the landlord must also provide extermination, locks/keys, clean common areas, garbage removal, functioning heat, running water, and hot water.",
+    "repair_and_deduct": "Not allowed — Florida has NO general statutory repair-and-deduct remedy. The tenant's statutory remedy for a landlord's failure to maintain is to give 7-day written notice and then either withhold rent (raised as a defense under § 83.60) or terminate the rental agreement (§ 83.56(1)).",
+    "rent_withholding": "Allowed as a defense with strict conditions — the tenant must first deliver written notice specifying the noncompliance under § 83.51(1) and intent to withhold, then wait 7 days for the landlord to cure (§ 83.56(1)). If the landlord files for eviction, the tenant MUST deposit the withheld/accruing rent into the court registry (§ 83.60(2)) or the defense is waived.",
+    "entry_notice_requirements": "For repairs, the landlord must give at least 24 hours' reasonable notice and enter only between 7:30 a.m. and 8:00 p.m. (§ 83.53(2)) — raised from 12 hours effective July 1, 2022. The landlord may enter without notice in an emergency or when the tenant unreasonably withholds consent.",
+    "retaliation_protections": "Prohibited under § 83.64. The landlord may not discriminatorily raise rent, decrease services, or bring/threaten a possession action primarily in retaliation. Protected activities include complaining to a government agency about a code violation, complaining to the landlord under § 83.56(1), and participating in a tenant organization. Conduct is presumptively retaliatory if it occurs within roughly 6 months of the protected activity unless the landlord shows good cause. Retaliation may be raised as a defense to a possession action.",
+    "lease_termination_rules": "Month-to-month: at least 30 days' written notice before the end of a monthly period (§ 83.57, raised from 15 to 30 days by HB 1417 effective July 1, 2023). Week-to-week: 7 days; quarter-to-quarter: 30 days; year-to-year: 60 days. Fixed-term leases expire on their own terms without separate notice unless the lease provides otherwise.",
+    "eviction_process": "Notice types: 3-day notice to pay rent or deliver possession (nonpayment; excludes weekends/legal holidays, § 83.56(3)); 7-day notice to cure a curable lease violation (§ 83.56(2)(a)); 7-day unconditional notice to vacate for a non-curable or repeat violation (§ 83.56(2)(b)). Court process: an eviction action in COUNTY COURT; the tenant has 5 days (excluding weekends/holidays) to answer and, in nonpayment cases, must deposit disputed rent into the court registry. If the landlord prevails, the clerk issues a Writ of Possession served by the sheriff, after which the tenant generally has 24 hours to vacate. Rough timeline: about 2-4 weeks uncontested.",
+    "rent_control": "State preemption: § 166.043 preempts local rent control. No Florida city or county may impose rent control on residential property. The former housing-emergency/referendum exception was eliminated by the Live Local Act effective July 1, 2023. Cities with active rent control: NONE.",
+    "regulatory_body": "No state agency adjudicates residential landlord-tenant disputes; disputes go to county court (eviction) or small claims (deposit/money). The Florida Attorney General handles general consumer complaints, but there is no state rent board or housing tribunal.",
+    "unique_protections": [
+      "Deposit-forfeiture penalty: a landlord who misses the 15-day/30-day notice deadlines forfeits the entire right to claim against the deposit and can owe the tenant's attorney's fees (§ 83.49)",
+      "Mandatory statutory disclosure: within 30 days of receiving a deposit, the landlord must notify the tenant in writing where it is held and include the specific statutory disclosure language (§ 83.49(2)-(3))",
+      "Servicemember early-termination rights (§ 83.682) with associated anti-retaliation protection"
+    ],
+    "common_disputes": [
+      "Wrongful withholding or non-return of the security deposit and disputes over the 15/30-day notice and itemized deductions",
+      "Nonpayment-of-rent evictions and disputes over the validity/service of the 3-day notice",
+      "Habitability/repair failures and improper tenant self-help (withholding without the required 7-day notice or court-registry deposit)"
+    ],
+    "recent_reform": "HB 1417 (effective July 1, 2023) — statewide preemption of local landlord-tenant regulation and increase of the month-to-month termination notice from 15 to 30 days (§ 83.57); the Live Local Act (SB 102, 2023) separately removed the housing-emergency exception to rent-control preemption effective July 1, 2023."
+  },
+  "NY": {
+    "state": "New York",
+    "abbreviation": "NY",
+    "landlord_tenant_statute": {
+      "name": "New York Real Property Law + RPAPL; major 2019 reform: Housing Stability and Tenant Protection Act (HSTPA)",
+      "citation": "N.Y. Real Property Law (RPL); Real Property Actions and Proceedings Law (RPAPL); General Obligations Law (GOL) Art. 7; HSTPA of 2019"
+    },
+    "security_deposit_rules": "Max deposit = ONE month's rent (GOL § 7-108(1-a), extended statewide by HSTPA effective June 14, 2019; no first-and-last-plus-security). Return deadline = 14 days after the tenant vacates (GOL § 7-108(1-e)). Itemization required: the landlord must provide an itemized statement of any amount retained plus return the remainder within 14 days. Penalty: if the landlord fails to provide the itemized statement and return within 14 days, the landlord forfeits any right to retain any portion; the burden of proof is on the landlord.",
+    "habitability_standards": "Implied warranty of habitability: yes, RPL § 235-b — a non-waivable warranty that premises are fit for human habitation and free of conditions dangerous to life, health, or safety. Duties include heat (Oct 1-May 31), year-round hot water, working plumbing, structural soundness, and pest-free conditions. Any waiver is void as against public policy.",
+    "repair_and_deduct": "Allowed by case law (not a bright-line statute). The repair must remedy a habitability violation; the tenant must give written notice and a reasonable time to repair; the landlord must have failed to act; and the cost must be reasonable and documented. No fixed statutory dollar or rent-percentage cap ('reasonable' cost standard).",
+    "rent_withholding": "Allowed — the tenant may withhold or pay reduced rent when serious habitability (RPL § 235-b) violations exist, after written notice and a reasonable time to cure. Best practice is to deposit withheld rent into escrow. The tenant may also sue (or seek a DHCR order for regulated units) for a rent abatement measured by the diminished value.",
+    "entry_notice_requirements": "No statewide statutory hours-of-notice rule (RPL is silent). The state standard is 'reasonable notice' for non-emergency entry (commonly ~24 hours). NYC rule: at least 24 hours' notice for inspections and one week's notice for repairs/improvements. Emergency entry requires no notice.",
+    "retaliation_protections": "RPL § 223-b. Protected activities: good-faith complaints to a government agency about habitability, complaints to the landlord about warranty-of-habitability violations, and participation in a tenants' organization. Retaliation is presumed if adverse action is taken within ONE YEAR of the protected activity (extended from 6 months by HSTPA 2019); the landlord must rebut with a non-retaliatory reason.",
+    "lease_termination_rules": "Periodic/month-to-month notice tiered by length of occupancy under RPL § 226-c (and § 232-a for NYC): 30 days if the tenant occupied under 1 year, 60 days if 1-2 years, 90 days if 2+ years. Fixed-term leases require the same 30/60/90-day advance notice before refusing to renew or raising rent significantly (>5%).",
+    "eviction_process": "Predicate notices: nonpayment = 14-day written rent demand (RPAPL § 711(2); increased from 3 days by HSTPA 2019), which must include the Good Cause Eviction notice (RPL § 231-c). Holdover/lease-violation notices vary (notice to cure then notice of termination). Court process: a summary proceeding in the local Housing Court / District/City/Justice Court; the landlord obtains a judgment of possession and a warrant of eviction executed by a marshal/sheriff. Rough timeline: often 2-3+ months and frequently longer given mandatory notice periods and cure opportunities.",
+    "rent_control": "No blanket preemption — state law authorizes local rent regulation. Legacy rent CONTROL exists mainly in NYC for pre-1947 units with continuous tenancy. Rent STABILIZATION operates under the Emergency Tenant Protection Act (ETPA) of 1974: NYC plus municipalities that declare a housing emergency (e.g., in Nassau, Rockland, Westchester, and Ulster counties). HSTPA 2019 made ETPA opt-in available statewide and repealed vacancy/high-rent deregulation. Administered by NYS Homes and Community Renewal (HCR/DHCR).",
+    "regulatory_body": "No single state agency adjudicates ordinary landlord-tenant disputes — they go to Housing Court / local courts or small claims. For rent-regulated matters: NYS Homes and Community Renewal (HCR), Division of Housing and Community Renewal (DHCR), Office of Rent Administration. Tenant-rights enforcement: NYS Office of the Attorney General.",
+    "unique_protections": [
+      "Good Cause Eviction Law (2024): in covered municipalities, landlords need statutory 'good cause' to evict/refuse renewal, and rent increases above the greater of 10% or (5% + CPI) are presumptively unreasonable (NYC plus opt-in cities such as Albany, Kingston, Poughkeepsie, Ithaca, Beacon, Newburgh)",
+      "Statutory cap on late fees: no late fee until rent is 5+ days late, and the fee cannot exceed the lesser of 5% of monthly rent or $50 (HSTPA 2019)",
+      "Non-waivable warranty of habitability (RPL § 235-b) plus a strict 14-day deposit-return-or-forfeit rule (GOL § 7-108) with the burden of proof on the landlord"
+    ],
+    "common_disputes": [
+      "Wrongful withholding of security deposits / failure to provide the 14-day itemized statement",
+      "Warranty-of-habitability breaches (no heat/hot water, mold, pests, leaks) and resulting rent withholding/abatement claims",
+      "Nonpayment and holdover evictions, including disputes over Good Cause Eviction coverage and 'unreasonable' rent increases"
+    ],
+    "recent_reform": "Good Cause Eviction Law, enacted as part of the FY2025 New York State Budget, effective April 20, 2024 (rent-increase reasonableness cap and just-cause eviction protections; NYC plus opt-in localities). The preceding landmark reform was the Housing Stability and Tenant Protection Act (HSTPA) of 2019."
+  },
+  "IL": {
+    "state": "Illinois",
+    "abbreviation": "IL",
+    "landlord_tenant_statute": {
+      "name": "No single comprehensive statewide act; governed by the Security Deposit Return Act, Security Deposit Interest Act, Landlord Retaliation Act, Residential Tenants' Right to Repair Act, and the Eviction Article of the Code of Civil Procedure; strong local ordinances (Chicago RLTO, Cook County RTLO) supplement",
+      "citation": "765 ILCS 710; 765 ILCS 715; 765 ILCS 721 (eff. 1/1/2025); 765 ILCS 742; 735 ILCS 5/9-101 et seq."
+    },
+    "security_deposit_rules": "No statewide cap on the deposit amount. Return deadline: 45 days after the tenant vacates. If deductions are made, an itemized written statement with paid receipts/estimates must be furnished within 30 days; itemization is required to withhold. Since 1/1/2024 the Security Deposit Return Act applies to ALL residential landlords. Penalty for bad-faith withholding: the tenant may recover twice (2x) the deposit amount plus court costs and reasonable attorney's fees (765 ILCS 710/1). The Security Deposit Interest Act (765 ILCS 715) requires landlords with 25+ units to pay interest on deposits held more than 6 months (rate set annually by IDFPR).",
+    "habitability_standards": "Yes — implied warranty of habitability recognized under Illinois common law (Jack Spring, Inc. v. Little, 1972), not a statewide statute; it cannot be waived, and the duty to pay rent is dependent on the landlord's performance. Duties: keep the unit and common areas fit for human habitation and comply with local health/building codes. Local ordinances (Chicago RLTO, Cook County RTLO) codify more specific duties.",
+    "repair_and_deduct": "Yes — Residential Tenants' Right to Repair Act (765 ILCS 742). The repair must be one required by the lease or law; reasonable cost may not exceed the LESSER of $500 or one-half of the monthly rent; the tenant must notify the landlord in writing by registered/certified mail of intent to repair at the landlord's expense; the landlord has 14 days (or sooner in an emergency) to repair. Chicago RLTO grants broader repair-and-deduct rights.",
+    "rent_withholding": "Yes (limited) — no dedicated statewide statute, but under the common-law implied warranty of habitability a tenant may raise a material habitability breach as a defense to nonpayment and withhold/abate rent proportionate to the diminished value, typically asserted as a defense in an eviction. Chicago RLTO (§ 5-12-110) provides explicit statutory withholding/reduction remedies.",
+    "entry_notice_requirements": "No statewide statute governs entry notice. Under the Chicago RLTO (§ 5-12-050), at least 2 days' notice is required for non-emergency entry (8:00 a.m.-8:00 p.m. presumed reasonable); in an emergency the landlord may enter without notice but must notify the tenant within 2 days after. Absent a local ordinance, entry terms are governed by the lease.",
+    "retaliation_protections": "Yes — Landlord Retaliation Act (765 ILCS 721), effective 1/1/2025, replacing the older Retaliatory Eviction Act. Protected activities (expanded): complaining to a code/health authority, making repair requests, organizing/joining a tenant union, and complaining to a community organization or the news media. Remedies: damages of the GREATER of two months' rent or two times (2x) actual damages, plus attorney's fees; retaliation may be pled as an affirmative defense to eviction.",
+    "lease_termination_rules": "Under 735 ILCS 5/9-207: week-to-week 7 days' written notice; month-to-month 30 days' written notice; year-to-year 60 days' written notice (given within the last 4 months of the lease year). Fixed-term leases end on their stated date without notice unless the lease requires it. Local ordinances (e.g., Chicago Fair Notice Ordinance: 30/60/120 days by tenancy length) may require longer notice.",
+    "eviction_process": "Eviction action under the Eviction Article (735 ILCS 5/9-101 et seq.) filed in the circuit court. Pre-suit notices: 5-day notice to pay or quit for nonpayment (§ 9-209 — full payment within 5 days waives termination; the notice must demand only actual rent owed); 10-day notice for a lease/covenant violation (§ 9-210); 7/30/60-day termination notice by tenancy type (§ 9-207). After the notice lapses, the landlord files the complaint; if the landlord prevails, the court enters an order of possession enforced by the sheriff (self-help/lockouts are illegal). Rough timeline: commonly ~1-3 months, longer if contested or in Cook County.",
+    "rent_control": "State preemption: yes. The Rent Control Preemption Act (50 ILCS 825/5) bans all local rent control statewide. No Illinois city currently has enforceable rent control.",
+    "regulatory_body": "No state agency adjudicates private disputes; disputes go to the circuit courts (eviction) or small claims (deposit recovery). The Illinois Attorney General provides tenant-rights information; IDFPR publishes the annual security-deposit interest rate. In Chicago, the Department of Housing and the RLTO provide additional avenues.",
+    "unique_protections": [
+      "Double-damages penalty (2x the deposit) plus attorney's fees for bad-faith failure to return or itemize a security deposit (765 ILCS 710), which since 1/1/2024 covers ALL residential landlords",
+      "New Landlord Retaliation Act (765 ILCS 721, eff. 1/1/2025) with a broad list of protected activities and damages of the greater of 2 months' rent or 2x actual damages",
+      "Statewide rent control is affirmatively preempted (50 ILCS 825), while strong local ordinances (Chicago RLTO, Cook County RTLO) grant enhanced repair-and-deduct, withholding, 2-day entry notice, and interest-on-deposit protections"
+    ],
+    "common_disputes": [
+      "Security deposit disputes — failure to return within 45 days or provide a 30-day itemized statement, and deductions for ordinary wear and tear",
+      "Habitability / repair disputes triggering repair-and-deduct or withholding claims",
+      "Eviction/notice disputes — defective or inflated 5-day pay-or-quit notices and retaliation raised as a defense"
+    ],
+    "recent_reform": "Public Act 103-831 (HB 4768) — repealed the Retaliatory Eviction Act and enacted the new Landlord Retaliation Act (765 ILCS 721), effective January 1, 2025. Also significant: the 2023 amendment to the Security Deposit Return Act extending deposit-return/itemization duties to all residential landlords effective January 1, 2024."
+  },
+  "PA": {
+    "state": "Pennsylvania",
+    "abbreviation": "PA",
+    "landlord_tenant_statute": {
+      "name": "Landlord and Tenant Act of 1951",
+      "citation": "68 P.S. § 250.101 et seq."
+    },
+    "security_deposit_rules": "Max deposit: 2 months' rent during the first year; drops to 1 month's rent after the first year (68 P.S. § 250.511a). Deposits over $100 held past the 2nd year must be in an interest-bearing account with interest paid annually starting year 3 (§ 250.511b). Return deadline: 30 days after lease termination/surrender (68 P.S. § 250.512). Itemization required: a written list of damages with the returned balance. Penalty: a landlord who fails to provide the list and refund within 30 days forfeits the right to withhold and is liable for DOUBLE the amount wrongfully withheld.",
+    "habitability_standards": "Yes — implied warranty of habitability applies to all residential leases (Pugh v. Holmes, 486 Pa. 272 (1979), abolishing caveat emptor). The landlord must provide and maintain premises fit for human habitation; it cannot be waived by lease.",
+    "repair_and_deduct": "Allowed as a judicial remedy under the implied warranty of habitability (Pugh v. Holmes). The tenant may repair a serious defect and deduct the reasonable cost after notice and a reasonable time to fix. No statutory dollar cap; limited to reasonable repair costs for defects materially affecting habitability.",
+    "rent_withholding": "Allowed. Two paths: (1) common-law/equitable withholding as a defense under the implied warranty of habitability (Pugh v. Holmes), with rent typically escrowed pending litigation and abated in proportion to the defect; and (2) the statutory Rent Withholding Act (35 P.S. § 1700-1) — after a government agency certifies a dwelling unfit, the tenant pays rent into escrow until repairs are made (generally up to ~6 months).",
+    "entry_notice_requirements": "No statutory rule — Pennsylvania has no state statute requiring advance notice or setting hours before entry. The lease governs; absent lease terms, courts generally expect 'reasonable' notice (commonly cited as 24 hours) grounded in quiet enjoyment. A landlord may enter without notice in a genuine emergency.",
+    "retaliation_protections": "Protected activities: complaining to a government agency about code/habitability violations, requesting repairs, exercising legal rights, and joining/organizing a tenants' union (68 P.S. § 250.205). Actions within 180 days of a protected complaint are presumed retaliatory. Remedies: a defense to eviction/nonrenewal and statutory recovery.",
+    "lease_termination_rules": "Governed by 68 P.S. § 250.501. Month-to-month: 15 days' notice. Fixed-term of one year or more: 30 days' notice. Lease breach/nonpayment (notice to quit): 10 days. A written lease may shorten or waive these periods.",
+    "eviction_process": "A notice to quit is required first (68 P.S. § 250.501): 10 days for nonpayment; 15 days for other breaches where the tenancy is one year or less; 30 days where it exceeds one year (the lease may modify). Notice must be posted on the door or hand-delivered (not mailed). The landlord then files a Landlord/Tenant Complaint in the Magisterial District Court; hearing ~7-15 days after filing. If the landlord prevails, the tenant generally has ~10-11 days to appeal/vacate before an Order for Possession issues. Overall timeline typically ~1-2 months.",
+    "rent_control": "State preemption: yes. 68 P.S. § 250.510 bars any political subdivision from enacting an ordinance regulating the amount of rent. No statewide rent control; localities (including Philadelphia and Pittsburgh) may not adopt rent control absent state authorization.",
+    "regulatory_body": "No state agency adjudicates private landlord-tenant disputes; cases go to court — Magisterial District Courts (Philadelphia Municipal Court in Philadelphia) hear eviction and deposit disputes. The PA AG's Bureau of Consumer Protection handles certain consumer complaints, but lease disputes are resolved judicially.",
+    "unique_protections": [
+      "Double-damages penalty: a landlord who misses the 30-day deposit deadline forfeits the right to withhold and owes double the amount wrongfully withheld (68 P.S. § 250.512)",
+      "Security deposit cap decreases over time (2 months first year, 1 month thereafter); deposits held past 2 years must earn interest paid to the tenant (68 P.S. §§ 250.511a-511b)",
+      "Statutory anti-retaliation protection for tenants who join or organize a tenants' union, with a 180-day retaliation presumption window (68 P.S. § 250.205)"
+    ],
+    "common_disputes": [
+      "Wrongful withholding of security deposits and disputes over the required 30-day itemized return",
+      "Habitability/repair failures (heat, water, mold, pests) leading to rent withholding or repair-and-deduct claims",
+      "Nonpayment-of-rent evictions and disputes over proper notice-to-quit service and timing"
+    ],
+    "recent_reform": "House Bill 1095 (2025-2026 session) — eviction record sealing: automatically shields eviction filings where the tenant prevailed or that were dismissed, and limits public access to tenant-at-fault records to 7 years. Passed the PA House and referred to Senate Judiciary; not yet enacted as of 2026-07-22."
+  },
+  "OH": {
+    "state": "Ohio",
+    "abbreviation": "OH",
+    "landlord_tenant_statute": {
+      "name": "Ohio Landlords and Tenants Law",
+      "citation": "Ohio Revised Code (ORC) Chapter 5321"
+    },
+    "security_deposit_rules": "No statutory cap on the deposit amount under ORC Ch. 5321. Return deadline: 30 days after the tenant surrenders possession AND provides a forwarding address (ORC 5321.16(B)). Itemization required: a written itemized statement of deductions. Interest: any deposit exceeding the greater of $50 or one month's rent bears 5% annual interest if the tenant stays 6+ months (ORC 5321.16(A)). Penalty: wrongful withholding or failure to itemize allows recovery of double (2x) the amount wrongfully withheld plus reasonable attorney fees (ORC 5321.16(C)).",
+    "habitability_standards": "Yes. ORC 5321.04 imposes statutory landlord duties amounting to an implied warranty of habitability: comply with building/housing/health/safety codes; make repairs to keep premises fit and habitable; keep common areas safe and sanitary; maintain electrical, plumbing, heating, ventilating, and AC fixtures in good working order; supply running water, reasonable hot water, and heat.",
+    "repair_and_deduct": "No classic repair-and-deduct remedy. ORC Ch. 5321 does not authorize a general repair-and-deduct self-help remedy. A tenant whose landlord fails to make required repairs must use the rent-escrow (rent deposited with the court) mechanism under ORC 5321.07-5321.09.",
+    "rent_withholding": "Yes, via court rent escrow (not direct withholding). Under ORC 5321.07-5321.08, if the landlord fails to fulfill ORC 5321.04 duties, the tenant may give written notice (reasonable time to cure, generally up to 30 days), and if uncured, deposit rent with the clerk of the municipal/county court, apply for court-ordered repairs, or terminate. The tenant must be current on rent. Paying nothing to anyone is NOT protected — funds must go to the court.",
+    "entry_notice_requirements": "ORC 5321.04(A)(8) requires 'reasonable notice' before entry, with 24 hours presumed reasonable, at reasonable times. Emergency exception: no advance notice required in an emergency. Remedies for improper entry (ORC 5321.04(B)): actual damages, injunctive relief, attorney fees, and/or lease termination.",
+    "retaliation_protections": "Prohibited under ORC 5321.02. Protected activities: complaining to a government agency about a code violation materially affecting health/safety; complaining to the landlord about an ORC 5321.04 violation; joining/organizing with tenants. Prohibited retaliation: raising rent, decreasing services, or bringing/threatening eviction. There is no fixed statutory day window; courts infer retaliation when adverse action follows protected activity within a reasonable time. Remedies: actual damages plus attorney fees; defense to eviction.",
+    "lease_termination_rules": "Governed by ORC 5321.17. Month-to-month: at least 30 days' written notice prior to the rent-due date. Week-to-week: at least 7 days' written notice. Fixed-term leases end on their stated date; no notice required unless the lease specifies.",
+    "eviction_process": "Governed by ORC Chapter 1923 (Forcible Entry and Detainer). Step 1 — a 3-day notice to leave (ORC 1923.04) that must contain the statutory language. Step 2 — the landlord files a forcible-entry-and-detainer complaint in municipal/county court. Step 3 — hearing set no sooner than ~7 days after service. Step 4 — if the landlord prevails, a writ of restitution is executed by a bailiff/sheriff (~5-10 days later). Overall ~3-8 weeks. Self-help/lockouts are unlawful.",
+    "rent_control": "State preemption: yes. HB 430 (signed June 24, 2022, effective Sept. 22, 2022) amended ORC Ch. 5321 to prohibit political subdivisions from enacting rent-control/rent-stabilization ordinances on private residential property. No local exceptions for private rentals.",
+    "regulatory_body": "No state agency adjudicates private landlord-tenant disputes; matters are resolved in municipal or county court (small claims / forcible-entry-and-detainer). Rent-escrow deposits are held by the clerk of court. The Ohio AG publishes consumer guidance but does not adjudicate.",
+    "unique_protections": [
+      "Rent escrow via the court clerk (ORC 5321.07-5321.09): instead of repair-and-deduct, tenants deposit rent with the court to compel repairs or terminate",
+      "Mandatory security-deposit interest: deposits exceeding the greater of $50 or one month's rent earn 5% annual interest for tenants staying 6+ months, plus a 2x-damages-and-attorney-fees penalty for wrongful withholding (ORC 5321.16)",
+      "Right-to-privacy entry standard with 24-hour presumed-reasonable notice and tenant remedies for landlord violations (ORC 5321.04)"
+    ],
+    "common_disputes": [
+      "Security-deposit disputes — failure to return within 30 days or provide itemized deductions, triggering double-damages claims",
+      "Habitability/repair disputes under ORC 5321.04, leading to rent-escrow actions",
+      "Eviction disputes — defective 3-day notices, nonpayment claims, and retaliatory or unlawful self-help lockouts"
+    ],
+    "recent_reform": "State rent-control preemption via HB 430 (effective Sept. 22, 2022) remains the most recent significant statewide statutory change. Some Ohio cities (Columbus, Cincinnati) adopted local tenant protections (deposit installment options, source-of-income anti-discrimination), but these are municipal, not statewide."
+  },
+  "GA": {
+    "state": "Georgia",
+    "abbreviation": "GA",
+    "landlord_tenant_statute": {
+      "name": "Georgia Landlord and Tenant Act",
+      "citation": "O.C.G.A. Title 44, Chapter 7 (§§ 44-7-1 to 44-7-119)"
+    },
+    "security_deposit_rules": "Max deposit: for leases entered into or renewed on or after 7/1/2024, capped at two months' rent (O.C.G.A. § 44-7-30.1, added by HB 404); all refundable deposits (including pet deposits) count toward the cap. For older leases there was historically NO statutory cap. Return deadline: within 30 days after the tenant vacates and the landlord regains possession (O.C.G.A. § 44-7-34). Itemization: yes — an itemized written list of deductions; a pre-move-in/move-out inspection list is also required. Penalty: bad-faith retention exposes the landlord to up to three times (3x) the wrongfully withheld amount plus reasonable attorney's fees (O.C.G.A. § 44-7-35).",
+    "habitability_standards": "Yes. O.C.G.A. § 44-7-13 requires the landlord to keep the premises in repair; § 44-7-14 imposes liability for defective construction and failure to repair. HB 404 (Safe at Home Act, 2024) created an express statutory 'duty of habitability' (§ 44-7-14.1) — premises must be fit for human habitation and free from health/safety hazards. It cannot be waived by lease.",
+    "repair_and_deduct": "Not clearly authorized by statute (no explicit repair-and-deduct statute with a defined cap). Georgia case law is limited; tenants generally must sue for damages or specific performance rather than use self-help repair-and-deduct.",
+    "rent_withholding": "Not authorized. Georgia has no statutory rent-withholding/rent-escrow remedy. Withholding rent risks eviction for nonpayment; tenants instead pursue damages or raise habitability/repair failure as a defense/counterclaim in a dispossessory action.",
+    "entry_notice_requirements": "No statutory rule. Georgia has no state statute specifying advance-notice hours or an emergency exception for landlord entry; access is governed by the lease. Absent a lease term, landlords are advised to give reasonable notice.",
+    "retaliation_protections": "O.C.G.A. § 44-7-24 prohibits retaliation against a tenant who complains in good faith to a government agency about code/health/safety violations. Retaliatory action within 3 months of the protected complaint is presumed retaliatory. Remedies: the tenant may recover one month's rent plus $500, plus court costs and reasonable attorney's fees, for deliberate retaliation; also an affirmative defense to a dispossessory action.",
+    "lease_termination_rules": "Tenancy at will / month-to-month (O.C.G.A. § 44-7-7): the landlord must give 60 days' written notice; the tenant must give 30 days' notice. Fixed-term leases terminate per their stated term; HB 404 also requires at least 3 days' notice before filing eviction for nonpayment.",
+    "eviction_process": "Called a 'dispossessory' proceeding (O.C.G.A. §§ 44-7-49 to 44-7-59), filed in magistrate court. (1) The landlord makes a demand for possession / notice to quit (§ 44-7-50); HB 404 requires at least 3 business days' notice to pay or vacate before filing for nonpayment. (2) The landlord files a dispossessory affidavit; a summons is served. (3) The tenant has 7 days from service to answer; if none, the landlord may request a writ of possession on the 8th day (default). (4) If contested, a hearing is held; if the landlord prevails, a writ issues and is executed by the sheriff/marshal. Timeline: uncontested ~2-4 weeks.",
+    "rent_control": "State preemption: yes. O.C.G.A. § 44-7-19 bars any county or municipality from regulating the amount of rent on private residential or commercial rental property. Governments may regulate rent only on property they themselves own.",
+    "regulatory_body": "No state agency adjudicates private landlord-tenant disputes; disputes are resolved in magistrate court (dispossessory) or superior court. The Georgia Department of Community Affairs publishes the state Landlord-Tenant Handbook, and the Georgia AG's Consumer Protection Division handles some complaints, but neither adjudicates lease disputes.",
+    "unique_protections": [
+      "Safe at Home Act (HB 404, 2024) — first statewide statutory 'duty of habitability' plus a security-deposit cap of two months' rent and a mandatory 3-day pay-or-quit notice for nonpayment",
+      "Bad-faith security-deposit withholding triggers treble (3x) damages plus attorney's fees under O.C.G.A. § 44-7-35",
+      "60-day landlord notice (vs. 30-day tenant notice) to terminate a tenancy at will under O.C.G.A. § 44-7-7"
+    ],
+    "common_disputes": [
+      "Wrongful or unitemized withholding of security deposits (and treble-damages claims)",
+      "Failure to make repairs / habitability disputes (mold, HVAC/cooling, pests) under §§ 44-7-13/14 and HB 404",
+      "Dispossessory (eviction) actions for nonpayment, including disputes over the required demand-for-possession/3-day notice"
+    ],
+    "recent_reform": "Georgia Safe at Home Act, House Bill 404 (2024), signed April 2024, effective July 1, 2024 — established a statutory duty of habitability (§ 44-7-14.1), capped security deposits at two months' rent (§ 44-7-30.1), and added a 3-day pay-or-vacate notice requirement before eviction filing."
+  },
+  "NC": {
+    "state": "North Carolina",
+    "abbreviation": "NC",
+    "landlord_tenant_statute": {
+      "name": "North Carolina General Statutes, Chapter 42 (Landlord and Tenant), including the Residential Rental Agreements Act and the Tenant Security Deposit Act",
+      "citation": "N.C. Gen. Stat. Ch. 42 (§ 42-38 et seq.; § 42-50 et seq.)"
+    },
+    "security_deposit_rules": "Statutory caps (§ 42-51(b)): 2 weeks' rent for week-to-week; 1.5 months' rent for month-to-month; 2 months' rent for terms greater than month-to-month. Return deadline: 30 days after termination of tenancy and delivery of possession (§ 42-52). If the claim amount cannot be determined in 30 days, the landlord must give an interim accounting within 30 days and a final accounting within 60 days. Itemization: yes — a written itemization mailed with the balance. Penalty (§ 42-55): willful failure to comply voids the landlord's right to retain ANY portion of the deposit; the landlord may also owe reasonable attorney's fees and damages for bad-faith retention.",
+    "habitability_standards": "Yes — statutory implied warranty of habitability under § 42-42(a). Duties: comply with building/housing codes; make repairs to keep premises fit and habitable; keep common areas safe; maintain in good working order electrical, plumbing, heating, ventilating, AC and landlord-supplied appliances; provide operable smoke and carbon monoxide alarms; and repair imminently dangerous conditions after written notice.",
+    "repair_and_deduct": "No — North Carolina has no statutory tenant repair-and-deduct right. Tenants may not lawfully make repairs and deduct the cost from rent.",
+    "rent_withholding": "No — North Carolina has no statutory rent-withholding right. A tenant who stops paying rent risks eviction. The remedy for a habitability breach is rent abatement (reduction in fair rental value), typically asserted as a counterclaim/defense in the landlord's summary ejectment action.",
+    "entry_notice_requirements": "No statutory rule — North Carolina has no statute requiring landlord notice before entering, and no statutory emergency exception. Entry terms are governed by the lease; 24 hours' notice is only a common courtesy, not a legal mandate.",
+    "retaliation_protections": "Yes — retaliatory eviction is barred under § 42-37.1. Protected activities: a good-faith complaint to the landlord about a condition the landlord must repair; a complaint to a government agency about a health/safety code violation; exercising rights under the lease or law; and organizing/joining a tenants' rights group. The tenant may raise retaliation as a defense to summary ejectment if the protected activity occurred within the 12 months before the alleged retaliatory act.",
+    "lease_termination_rules": "Notice to quit under § 42-14: year-to-year — one month or more before the end of the current year; month-to-month — 7 days; week-to-week — 2 days. Manufactured-home space rentals require at least 60 days' notice. Fixed-term leases end at their stated expiration without additional notice unless the lease provides otherwise.",
+    "eviction_process": "Called 'summary ejectment' (Ch. 42, Art. 3). Nonpayment: the landlord must make a 10-day demand for rent (§ 42-3) before filing, unless the lease waives it. Process: the landlord files a Complaint in Summary Ejectment, usually in small claims court before a magistrate; the sheriff serves the summons (the landlord cannot self-serve). Hearing typically ~7-14 days after filing. After judgment, either party may appeal to district court within 10 days. If no appeal, the landlord obtains a writ of possession and only the sheriff may execute the lockout. Self-help eviction is prohibited (§ 42-25.6 et seq.).",
+    "rent_control": "State preemption — yes. N.C. Gen. Stat. § 42-14.1 prohibits local rent-control ordinances; no city or county may cap rent levels.",
+    "regulatory_body": "No state agency adjudicates private landlord-tenant disputes; disputes go to court (small claims / magistrate, appealable to district court). The N.C. Department of Justice / Attorney General publishes tenant guidance but does not decide individual cases.",
+    "unique_protections": [
+      "Strong self-help-eviction prohibition (§ 42-25.6 et seq.) requiring sheriff-executed writs, protecting tenants from lockouts and utility shutoffs",
+      "Willful noncompliance with deposit/notice rules forfeits the landlord's entire right to retain any part of the security deposit (§ 42-55)",
+      "Rent-abatement defense: even without a statutory withholding right, a tenant can recover for uninhabitable conditions by asserting a rent-abatement counterclaim in the landlord's eviction case"
+    ],
+    "common_disputes": [
+      "Security deposit disputes — failure to return within 30 days or provide a written itemized accounting",
+      "Habitability/repair disputes surfacing as rent-abatement counterclaims in eviction actions (since tenants can't repair-and-deduct or withhold)",
+      "Summary ejectment / nonpayment disputes, including whether the 10-day rent demand and proper service were satisfied and whether the eviction was retaliatory"
+    ],
+    "recent_reform": "HB 556 (2024) addressed source-of-income and summary-ejectment rules; 2025 provisions (HB 737 / S.L. 2025-45) allow landlords to require renters' insurance without mandating a specific carrier; a 2025 fix limited recovery of attorney's fees in eviction appeals to landlords who prevail against bad-faith appeals."
+  },
+  "AZ": {
+    "state": "Arizona",
+    "abbreviation": "AZ",
+    "landlord_tenant_statute": {
+      "name": "Arizona Residential Landlord and Tenant Act (ARLTA)",
+      "citation": "A.R.S. Title 33, Chapter 10, § 33-1301 et seq. (based on the URLTA)"
+    },
+    "security_deposit_rules": "Max deposit: 1.5 months' rent (excluding first month's rent) per A.R.S. § 33-1321(A). Return deadline: 14 business days (excluding weekends and legal holidays) after termination, delivery of possession, and demand by the tenant. Itemization required: an itemized written list of all deductions with any amount due, mailed to the tenant's last known residence. Penalty: the tenant may recover double the amount wrongfully withheld plus attorney fees (A.R.S. § 33-1321).",
+    "habitability_standards": "Yes — implied warranty of habitability under A.R.S. § 33-1324. The landlord must comply with codes materially affecting health and safety; make repairs to keep premises fit and habitable; keep common areas clean and safe; maintain electrical, plumbing, heating, ventilating, and AC in good working order; and provide running water, reasonable hot water, and heat/AC where installed.",
+    "repair_and_deduct": "Yes — a statutory self-help remedy. (1) Self-help for minor defects, A.R.S. § 33-1363 — if the landlord fails to comply with § 33-1324 and the reasonable cost is less than $300 OR one-half of one month's rent (whichever is greater), the tenant may, after written notice and a 10-day cure period (or as promptly as conditions require in emergencies), have work done by a licensed contractor and deduct the actual cost (capped at the $300-or-half-month figure). (2) A.R.S. § 33-1364 covers failure to supply essential services, allowing substitute services and cost deduction, diminished-rent recovery, or substitute housing. Not available if the tenant caused the condition.",
+    "rent_withholding": "Yes (conditional). Under A.R.S. §§ 33-1361/33-1365, for material noncompliance affecting health and safety, the tenant may deliver written notice specifying the breach and terminate if not remedied within the statutory cure period. For essential-services failures (§ 33-1364) the tenant may recover diminished rental value. Arizona has no general 'stop paying and stay' rent-escrow scheme; withholding must follow the statutory notice-and-cure procedures.",
+    "entry_notice_requirements": "At least 2 days' notice required for landlord entry, at reasonable times, per A.R.S. § 33-1343. Emergency exception: the landlord may enter without notice in an emergency. Repeated unlawful entry makes the landlord liable for actual damages plus a penalty of one month's rent.",
+    "retaliation_protections": "Prohibited under A.R.S. § 33-1381. Protected activities: complaining to a governmental agency about a code violation materially affecting health and safety; complaining to the landlord of a § 33-1324 violation; and organizing or joining a tenants' union. A complaint made within 6 months prior to the alleged retaliatory act creates a rebuttable presumption of retaliation. Remedies: § 33-1367 remedies and a defense in an action for possession.",
+    "lease_termination_rules": "Month-to-month: at least 30 days' written notice before the periodic rental date (A.R.S. § 33-1375(B)). Week-to-week: at least 10 days' written notice (§ 33-1375(A)). Fixed-term leases end on their stated date unless otherwise agreed.",
+    "eviction_process": "Called a 'special detainer' action (A.R.S. § 33-1377), filed in justice court. Notice types: (1) Nonpayment — 5-day written notice to pay or terminate (§ 33-1368(B)); all calendar days count. (2) Material health-and-safety noncompliance — 5-day notice to cure. (3) Non-health-and-safety material breach — 10-day notice to cure. (4) Material and irreparable breach — immediate/unconditional notice. After the notice period without cure, the landlord files a special detainer; the court sets a hearing within a short statutory window and, if judgment for the landlord, a writ of restitution issues (execution typically after ~5 days). Overall ~2-5 weeks.",
+    "rent_control": "State preemption: yes. A.R.S. § 33-1329 declares rent control on private residential property a matter of statewide concern and preempts it — no city, town, or county may impose rent control on private residential rental units.",
+    "regulatory_body": "No state agency adjudicates private landlord-tenant disputes; disputes go to court (justice/magistrate court for special detainer/eviction and small claims). The Arizona Department of Housing and the Arizona AG publish guidance but do not resolve individual tenancy disputes.",
+    "unique_protections": [
+      "Statutory repair-and-deduct/self-help remedy for minor defects (A.R.S. § 33-1363) capped at the greater of $300 or one-half month's rent, plus a separate essential-services remedy (§ 33-1364)",
+      "Strong security-deposit enforcement: a statutory cap of 1.5 months' rent and a double-damages penalty for wrongful withholding after the 14-business-day itemized-return deadline (§ 33-1321)",
+      "6-month rebuttable presumption of retaliation protecting tenants who complain about code/habitability violations or join a tenants' union (§ 33-1381)"
+    ],
+    "common_disputes": [
+      "Security deposit deductions and late/incomplete return (failure to provide the itemized list within 14 business days)",
+      "Habitability and repair failures — broken HVAC/cooling, plumbing, or essential-services outages, and disputes over repair-and-deduct or rent-withholding procedures",
+      "Nonpayment-of-rent evictions via the 5-day notice and special detainer process, including disputes over late fees and cure amounts"
+    ],
+    "recent_reform": "Effective January 1, 2025, Arizona eliminated local transaction privilege (rental) taxes on long-term residential rentals (SB 1131, 2023 session — phased to Jan. 1, 2025), reducing costs passed through to tenants. No comprehensive tenant-protection overhaul to the ARLTA identified in 2025-2026."
+  }
+}

@@ -9,6 +9,14 @@ import { renderDeepPage } from './templates/deep-page-template.js';
 const PUBLIC_DIR = 'public';
 const GENERATED_DIR = path.join('scripts', 'data', 'generated');
 
+// SEO Phase 2 — per-state regulatory data (verified; see VERIFICATION_LOG-SEO-CONTENT.md).
+let STATE_DATA = {};
+try {
+  STATE_DATA = JSON.parse(fs.readFileSync(path.join('scripts', 'data', 'state-data.json'), 'utf8'));
+} catch (e) {
+  console.warn('WARN: scripts/data/state-data.json not found — pages will build without enrichment sections.');
+}
+
 let stats = { stateHubs: 0, deepPages: 0, missing: 0 };
 const missingPages = [];
 
@@ -18,7 +26,7 @@ for (const state of STATES) {
 
   fs.writeFileSync(
     path.join(stateDir, 'index.html'),
-    renderStateHub(state, DISPUTES, STATES)
+    renderStateHub(state, DISPUTES, STATES, STATE_DATA[state.abbr])
   );
   stats.stateHubs++;
 
@@ -38,7 +46,7 @@ for (const state of STATES) {
 
     fs.writeFileSync(
       path.join(disputeDir, 'index.html'),
-      renderDeepPage(state, dispute, content, STATES, DISPUTES)
+      renderDeepPage(state, dispute, content, STATES, DISPUTES, STATE_DATA[state.abbr])
     );
     stats.deepPages++;
   }

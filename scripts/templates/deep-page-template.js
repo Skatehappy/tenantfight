@@ -1,16 +1,21 @@
 import { APP_CONFIG } from '../data/config.js';
+import { renderEnrichmentSections, dataFaqs } from './enrichment.js';
 
-export function renderDeepPage(state, dispute, content, allStates, allDisputes) {
+export function renderDeepPage(state, dispute, content, allStates, allDisputes, stateData) {
   const otherStatesForDispute = allStates.filter(s => s.slug !== state.slug);
   const otherDisputesForState = allDisputes.filter(d => d.slug !== dispute.slug);
 
-  const faqHTML = content.faq.map(f => `
+  // SEO Phase 2 — verified, state-specific sections + data-derived FAQs.
+  const enrichmentHTML = renderEnrichmentSections(state, dispute, stateData);
+  const faqAll = [...content.faq, ...dataFaqs(state, stateData)];
+
+  const faqHTML = faqAll.map(f => `
     <div class="faq-item">
       <div class="faq-q">${escapeHtml(f.q)}</div>
       <div class="faq-a">${escapeHtml(f.a)}</div>
     </div>`).join('');
 
-  const faqSchema = content.faq.map(f => ({
+  const faqSchema = faqAll.map(f => ({
     "@type": "Question",
     "name": f.q,
     "acceptedAnswer": { "@type": "Answer", "text": f.a }
@@ -87,6 +92,13 @@ h2{font-family:'Fraunces',Georgia,serif;font-size:28px;font-weight:900;margin:40
 .cross-link{display:block;padding:8px 14px;background:#fff;border:1px solid #dde3ec;border-radius:6px;text-decoration:none;color:#0f0f0f;font-size:13px;margin-bottom:6px}
 .cross-link:hover{background:${APP_CONFIG.primaryColor};color:#fff}
 @media(max-width:640px){.cross-grid{grid-template-columns:1fr}}
+.enrich{margin:8px 0 8px}
+.enrich-section{margin:36px 0}
+.enrich-section h2{margin-bottom:12px}
+.enrich-section p{font-size:16px;line-height:1.8;color:#3a3a3a;margin-bottom:12px}
+.enrich-section ul{margin:8px 0 8px 22px;padding:0}
+.enrich-section li{font-size:15px;line-height:1.7;color:#3a3a3a;margin-bottom:8px}
+.enrich-section strong{color:#0f0f0f}
 .disclaimer{background:#eef2f7;padding:24px;border-radius:8px;font-size:13px;color:#6b6b6b;line-height:1.7;margin:48px 0}
 footer{background:#0f0f0f;color:rgba(255,255,255,0.5);text-align:center;padding:32px 24px;font-size:12px}
 footer a{color:rgba(255,255,255,0.7);text-decoration:none}
@@ -136,7 +148,7 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
 
   <h2>Procedural Notes for ${state.name}</h2>
   <div class="prose">${formatProse(content.proceduralNotes)}</div>
-
+${enrichmentHTML}
   <div class="cta-block">
     <h2>Generate Your ${state.name} ${escapeHtml(dispute.name)}</h2>
     <p>$${APP_CONFIG.price} flat. State-specific. Ready in 5 minutes.</p>
