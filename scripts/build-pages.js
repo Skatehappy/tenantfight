@@ -52,10 +52,12 @@ for (const state of STATES) {
   }
 }
 
+const LASTMOD = new Date().toISOString().slice(0, 10);
+
 const sitemapUrls = [
-  `<url><loc>https://${APP_CONFIG.domain}/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>`,
-  ...STATES.map(s => `<url><loc>https://${APP_CONFIG.domain}/${s.slug}</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>`),
-  ...STATES.flatMap(s => DISPUTES.map(d => `<url><loc>https://${APP_CONFIG.domain}/${s.slug}/${d.slug}</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>`))
+  `<url><loc>https://${APP_CONFIG.domain}/</loc><lastmod>${LASTMOD}</lastmod><priority>1.0</priority><changefreq>weekly</changefreq></url>`,
+  ...STATES.map(s => `<url><loc>https://${APP_CONFIG.domain}/${s.slug}</loc><lastmod>${LASTMOD}</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>`),
+  ...STATES.flatMap(s => DISPUTES.map(d => `<url><loc>https://${APP_CONFIG.domain}/${s.slug}/${d.slug}</loc><lastmod>${LASTMOD}</lastmod><priority>0.7</priority><changefreq>monthly</changefreq></url>`))
 ].filter(u => u && u.includes('<loc>'));
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
