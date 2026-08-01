@@ -8,7 +8,7 @@
     { "source": "/:state", "destination": "/:state/index.html" }
   ],
   "redirects": [
-    { "source": "/landing.html", "destination": "/", "permanent": true }
+    { "source": "/", "destination": "/landing.html", "permanent": true }
   ],
   "headers": [
     { "source": "/api/(.*)", "headers": [{ "key": "Cache-Control", "value": "no-store" }] }
