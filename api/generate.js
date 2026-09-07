@@ -1,4 +1,6 @@
 // api/generate.js
+import { MODEL } from './_config.js';
+
 export const config = { runtime: 'edge' };
 
 const PRODUCT_LINK = 'Kp6fH';
@@ -66,8 +68,9 @@ export default async function handler(req) {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1500,
+        model: MODEL,
+        max_tokens: 3000,
+        thinking: { type: 'disabled' },
         system: (!isCheckCall && systemPrompt) ? systemPrompt : undefined,
         messages,
       }),
@@ -79,7 +82,14 @@ export default async function handler(req) {
     }
 
     const data = await response.json();
-    const text = data.content?.[0]?.text || '';
+    // Extract the text block by type, not by position. With adaptive thinking a
+    // model can place a "thinking" block at content[0], so content[0].text is
+    // undefined even on a 200 (proven against claude-opus-5 on 2026-09-07). Fail
+    // loudly on a missing text block — never return undefined — and because this
+    // throws BEFORE the mark-usage call below, the buyer's one-use license is NOT
+    // burned on a parse miss.
+    const text = data.content?.find(b => b.type === 'text')?.text;
+    if (!text) throw new Error(`No text block in API response (stop_reason: ${data.stop_reason || 'unknown'})`);
 
     // Mark license as used (non-blocking)
     if (!isCheckCall) {
