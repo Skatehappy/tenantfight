@@ -1,7 +1,11 @@
 // api/generate.js
 import { MODEL } from './_config.js';
 
-export const config = { runtime: 'edge' };
+// Node serverless runtime (NOT edge): edge functions cap at ~25s on Hobby and
+// ignore vercel.json maxDuration, which 504'd ~25s Opus letters. Node honors
+// maxDuration, giving the full 60s. Handler is the Web Request->Response style,
+// which Vercel's Node runtime supports.
+export const config = { maxDuration: 60 };
 
 const PRODUCT_LINK = 'Kp6fH';
 
