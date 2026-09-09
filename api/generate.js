@@ -55,8 +55,14 @@ export default async function handler(req, res) {
         `https://payhip.com/api/v1/license/verify?product_link=${PRODUCT_LINK}&license_key=${encodeURIComponent(accessCode.trim())}`,
         { method: 'GET', headers: { 'payhip-api-key': payhipApiKey } }
       );
-      const payhipData = payhipRes.ok ? await payhipRes.json().catch(() => null) : null;
-      if (!payhipData || !payhipData.data) {
+      if (!payhipRes.ok) {
+        // Fail closed: any non-200 (auth error, timeout, 5xx, unknown key) rejects.
+        return res.status(401).json({ error: 'Invalid access code. Check your Payhip receipt email.' });
+      }
+      const payhipData = await payhipRes.json().catch(() => null);
+      // Must be a REAL, enabled license. Payhip returns a {data} envelope even for
+      // invalid keys (enabled:false), so checking data existence alone fails OPEN.
+      if (!payhipData?.data?.enabled) {
         return res.status(401).json({ error: 'Invalid access code. Check your Payhip receipt email.' });
       }
       if (payhipData.data.uses >= 1) {
