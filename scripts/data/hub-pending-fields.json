@@ -1,8 +1,4 @@
 {
-  "FL": [
-    "habitability_standards",
-    "retaliation_protections"
-  ],
   "NC": [
     "eviction_process",
     "habitability_standards",
@@ -13,8 +9,5 @@
     "eviction_process",
     "habitability_standards",
     "retaliation_protections"
-  ],
-  "TX": [
-    "habitability_standards"
   ]
 }

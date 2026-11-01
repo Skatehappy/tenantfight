@@ -281,3 +281,32 @@ Official text: Illinois Compiled Statutes on ilga.gov (`https://www.ilga.gov/Doc
 | RLTO § 5-12-150 | CORRECTED | "Prohibition on retaliatory conduct" (catchline confirmed); the expanded-activities list was removed. | codelibrary.amlegal.com (via Perplexity) |
 | RLTO § 5-12-160 | VERIFIED | Prohibits interruption of tenant occupancy (lock changes, interrupting services, etc.); tenant recovers possession and not more than two months' rent or twice actual damages, whichever is greater. | https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639281 (via Perplexity) |
 | Cook County RTLO section 42-eight-oh-five; Chicago bed bug section 7-28-eight-ten | REMOVED | Section numbers not confirmed (Cook County RTLO was redesignated; the bed bug duty section is not the one cited). | — |
+
+### Texas (TX)
+Official text: Texas Property Code chapters 91 and 92 from the Texas Legislature (`https://tcss.legis.texas.gov/resources/PR/htm/PR.92.htm`, `.../PR.91.htm`), read 2026-11-01.
+
+| Citation as it now appears | Status | What it says | Official source |
+|---|---|---|---|
+| Tex. Prop. Code §§ 92.051-92.0563 / §§ 92.051-92.061 | VERIFIED | Subchapter B repair-and-remedy provisions. | https://tcss.legis.texas.gov/resources/PR/htm/PR.92.htm |
+| § 92.052 | VERIFIED | Diligent effort to repair a condition materially affecting the physical health or safety of an ordinary tenant (or hot water at 120 degrees F) after notice where rent is paid, tenant not delinquent; no duty for tenant-caused conditions except normal wear and tear. | same |
+| § 92.056 / Section 92.056 / § 92.056(b)(1), (b)(3), (d), (e), (f) | CORRECTED | Liability elements; a single notice by certified, registered, or tracked mail satisfies (b)(1) and (b)(3); seven days presumed reasonable (d); (e) tenant may terminate, repair and deduct, or seek judicial remedies; (f) pro rata refund and deposit on termination. Lease termination was attributed to § 92.0563 and is now attributed to § 92.056(e). | same |
+| § 92.0563 | CORRECTED | Judicial remedies: repair order, rent reduction, civil penalty of one month's rent plus $500, actual damages, court costs and attorney's fees (no fees for personal-injury damages claims); (c) justice, county and district courts concurrent; (e) justice court judgment capped at $20,000. The claim that justice courts have jurisdiction "regardless of the dollar amount" was wrong and was corrected. | same |
+| § 92.061 | VERIFIED | Subchapter duties and remedies are in lieu of common-law warranties of habitability and repair (state-data line "courts also recognize an implied warranty" corrected). | same |
+| § 92.332 | VERIFIED | Nonretaliation exceptions (escalation clauses, project-wide increases, delinquent rent, damage/threats, material breach, holdovers). | same |
+| § 92.335 | VERIFIED | Retaliation is a defense in an eviction suit. | same |
+| § 91.001 | VERIFIED | Month-to-month termination: later of the notice date or one month after notice when the rent-paying period is at least one month. | https://tcss.legis.texas.gov/resources/PR/htm/PR.91.htm |
+
+### Florida (FL)
+Official text: The Florida Statutes (2025) on flsenate.gov, `https://www.flsenate.gov/Laws/Statutes/2025/<section>`, read 2026-11-01.
+
+| Citation as it now appears | Status | What it says | Official source |
+|---|---|---|---|
+| Fla. Stat. § 83.64 | CORRECTED | Unlawful to discriminatorily raise rent, decrease services, or bring/threaten an action for possession primarily in retaliation; tenant must act in good faith; examples: code complaint, tenant organization, complaint under § 83.56(1), servicemember termination under § 83.682, paying an association, fair housing rights. "Paying rent into the court registry" is not a listed example and was replaced. | https://www.flsenate.gov/Laws/Statutes/2025/83.64 |
+| § 83.48 | CORRECTED | Prevailing party in an action to enforce the rental agreement or Part II recovers reasonable attorney fees and court costs. It does not itself give "possession and actual damages" for retaliation (wording corrected). | https://www.flsenate.gov/Laws/Statutes/2025/83.48 |
+| § 83.51 / § 83.51(1) | VERIFIED | Landlord's obligation to maintain premises: codes, or where none, roofs, windows, doors, floors, steps, porches, exterior walls, foundations, and plumbing. | https://www.flsenate.gov/Laws/Statutes/2025/83.51 |
+| § 83.56(1) | VERIFIED | Seven days after written notice of noncompliance with § 83.51(1) or material lease terms. | https://www.flsenate.gov/Laws/Statutes/2025/83.56 |
+| § 83.57 | VERIFIED | Month-to-month: not less than 30 days' notice before the end of a monthly period (ch. 2023-314). | https://www.flsenate.gov/Laws/Statutes/2025/83.57 |
+| § 83.59 | VERIFIED | Right of action for possession in county court; no recovery of possession except by court action, surrender, or abandonment. | https://www.flsenate.gov/Laws/Statutes/2025/83.59 |
+| § 83.67 | VERIFIED | Prohibited practices: no utility interruption, lockout, or removal of doors/windows; (6) actual and consequential damages or 3 months' rent, whichever is greater, plus costs and attorney's fees. | https://www.flsenate.gov/Laws/Statutes/2025/83.67 |
+| § 83.682 | VERIFIED | Servicemember early termination; retaliation for it is covered by § 83.64(1)(d). | https://www.flsenate.gov/Laws/Statutes/2025/83.682 |
+| § 95.11 / § 95.11(3) | CORRECTED | Five years: contract founded on a written instrument (2)(b). Four years: contract not founded on a written instrument, and actions founded on a statutory liability (3). "Oral contracts" wording widened. | https://www.flsenate.gov/Laws/Statutes/2025/95.11 |
