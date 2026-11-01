@@ -64,6 +64,7 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
 .cta-section{text-align:center;padding:64px 24px;background:#fff;border-radius:14px;margin-bottom:48px}
 .cta-section h2{margin-bottom:16px}
 .cta-section p{color:#6b6b6b;margin-bottom:24px}
+.nav-actions{display:flex;align-items:center;gap:16px}.nav-key{color:inherit;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px}@media(max-width:640px){nav{flex-wrap:wrap;gap:8px}.nav-actions{gap:10px;flex-wrap:wrap;justify-content:flex-end}.nav-key{font-size:12px}.nav-cta{padding:7px 12px!important;font-size:13px!important}}
 </style>
 </head>
 <body>
@@ -72,7 +73,7 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
     <div class="nav-icon">${APP_CONFIG.brandIcon}</div>
     <span class="nav-name">${APP_CONFIG.name}</span>
   </a>
-  <a class="nav-cta" href="${APP_CONFIG.payhipUrl}">${APP_CONFIG.ctaText} →</a>
+  <span class="nav-actions"><a class="nav-key" href="/app">Already purchased? Enter your license key →</a><a class="nav-cta" href="${APP_CONFIG.payhipUrl}">${APP_CONFIG.ctaText} →</a></span>
 </nav>
 <section class="hero">
   <h1>${state.name} ${capitalize(APP_CONFIG.vertical)}</h1>

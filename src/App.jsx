@@ -4,6 +4,8 @@ import emailjs from "@emailjs/browser";
 const EMAILJS_SERVICE_ID  = "YOUR_EMAILJS_SERVICE_ID";
 const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
 const EMAILJS_PUBLIC_KEY  = "YOUR_EMAILJS_PUBLIC_KEY";
+// Email-a-copy UI stays hidden until real EmailJS IDs replace the placeholders above.
+const EMAIL_ENABLED = !EMAILJS_SERVICE_ID.startsWith("YOUR_");
 const API_BASE = "";
 
 const APP = {
@@ -13,7 +15,7 @@ const APP = {
   color: "#1a6b5a",
   colorLight: "#2d9e87",
   payhip: "https://payhip.com/b/Kp6fH",
-  support: "support@tenantfight.com",
+  support: "support@buyappsonce.com",
   price: "$19",
   domain: "landlorddesk.com",
   font: "'Source Serif 4', Georgia, serif",
@@ -691,10 +693,12 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
           <div style={{ textAlign: "center" }}>
             <h2 style={{ fontFamily: APP.displayFont, fontSize: "30px", color: colors.ink, marginBottom: "12px" }}>Ready to Generate</h2>
             <p style={{ fontSize: "16px", color: colors.inkMuted, marginBottom: "40px", maxWidth: "480px", margin: "0 auto 36px", lineHeight: "1.7" }}>
-              Enter your email to receive a copy, then click Generate. The AI runs a two-pass quality review — about 20–30 seconds.
+              {EMAIL_ENABLED ? "Enter your email to receive a copy, then click Generate. " : "Click Generate. "}The AI runs a two-pass quality review — about 20–30 seconds.
             </p>
             <div style={{ maxWidth: "420px", margin: "0 auto" }}>
+              {EMAIL_ENABLED && (
               <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" style={{ ...inputStyle(false), textAlign: "center", marginBottom: "16px", fontSize: "15px" }} />
+              )}
               <button onClick={generateLetter} disabled={loading} style={{ ...btnStyle(!loading), width: "100%", justifyContent: "center", padding: "16px", fontSize: "17px" }}>
                 {loading ? <><Spinner /> {loadingMsg || "Generating..."}</> : "Generate My Letter ✦"}
               </button>
@@ -736,7 +740,7 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
               {activeTab === "standard" ? letter : altLetter}
             </div>
 
-            {email && !emailSent && (
+            {EMAIL_ENABLED && email && !emailSent && (
               <div style={{ background: colors.paperWarm, border: `1px solid ${colors.border}`, borderRadius: "8px", padding: "18px 22px", marginBottom: "20px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "16px" }}>
                 <div style={{ fontSize: "14px", color: colors.inkLight }}>Send a copy to <strong>{email}</strong></div>
                 <button onClick={sendEmail} disabled={emailSending} style={{ ...btnStyle(!emailSending), padding: "9px 20px", fontSize: "13px" }}>{emailSending ? <><Spinner /> Sending...</> : "Send Copy →"}</button>
@@ -773,7 +777,7 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
 
             <div style={{ marginTop: "24px", textAlign: "center", padding: "20px", background: colors.white, borderRadius: "10px", border: `1px solid ${colors.borderLight}` }}>
               <div style={{ fontSize: "14px", color: colors.inkMuted, marginBottom: "6px" }}>Did your landlord respond?</div>
-              <div style={{ fontSize: "12px", color: colors.inkFaint }}>Share your outcome → <span style={{ color: colors.goldLight }}>results@tenantfight.com</span></div>
+              <div style={{ fontSize: "12px", color: colors.inkFaint }}>Share your outcome → <span style={{ color: colors.goldLight }}>support@buyappsonce.com</span></div>
             </div>
           </div>
         )}
