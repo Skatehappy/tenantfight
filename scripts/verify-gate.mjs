@@ -5,6 +5,7 @@
 //     entry in VERIFICATION_LOG.md (the citation identifier appears literally).
 // Nonzero exit on any failure. Runs on pre-commit + GitHub Actions.
 import { readFileSync, existsSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -44,5 +45,11 @@ if (missing.length) {
   for (const m of [...missing].sort()) console.error('  ' + m);
   fail(missing.length + ' unlogged citation(s)');
 }
-console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged.');
+// ── A10: letter citation lock — verified-citations.json current + mock tests pass ──
+for (const [label, args] of [['A10: api/_verified-citations.json is stale (run node scripts/build-verified-citations.mjs)', ['scripts/build-verified-citations.mjs', '--check']], ['A10: citation-lock mock tests failed (node scripts/test-citelint.mjs)', ['scripts/test-citelint.mjs']]]) {
+  const r = spawnSync(process.execPath, args, { cwd: ROOT, encoding: 'utf8' });
+  if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail(label); }
+}
+
+console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged; A10 citation lock ok.');
 process.exit(0);

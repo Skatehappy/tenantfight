@@ -298,7 +298,7 @@ export default function App() {
   const callAPI = async (systemPrompt, userPrompt, reviewMode = false, draftLetter = "") => {
     const res = await fetch(`${API_BASE}/api/generate`, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ accessCode, systemPrompt, userPrompt, reviewMode, draftLetter }),
+      body: JSON.stringify({ accessCode, systemPrompt, userPrompt, reviewMode, draftLetter, state: formData.state, letterType: formData.issueType }),
     });
     if (!res.ok) { const err = await res.json(); throw new Error(err.error || "Generation failed"); }
     return (await res.json()).text;
