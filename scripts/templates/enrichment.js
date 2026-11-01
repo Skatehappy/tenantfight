@@ -120,3 +120,20 @@ export function stateTeaser(state, d){
   if(/no single|no comprehensive/i.test(st.name||'')) return `No single tenant code — governed by ${has(st.citation)?st.citation:'multiple statutes'} plus local ordinances`;
   return `Governed by ${st.name}${has(st.citation)?` (${st.citation})`:''}`;
 }
+
+import { readFileSync } from 'fs';
+const HUB_PENDING = JSON.parse(readFileSync('scripts/data/hub-pending-fields.json', 'utf8'));
+
+// Short section for a topic merged into the state hub. Uses only verified
+// state-data.json fields (same source as the deep-page enrichment): the first two
+// rights paragraphs in the topic's emphasis order. Fields listed for the state in
+// hub-pending-fields.json cite statutes not yet in VERIFICATION_LOG; they are skipped
+// on the hub until verified.
+export function mergedTopicSection(state, dispute, d){
+  if(!d) return '';
+  const pending=new Set(HUB_PENDING[state.abbr]||[]);
+  const emph=TOPIC_EMPHASIS[dispute.slug]||RIGHTS.map(r=>r[0]);
+  const order=[...emph, ...RIGHTS.map(r=>r[0]).filter(k=>!emph.includes(k))];
+  const labelOf=Object.fromEntries(RIGHTS);
+  return order.map(k=>{ const v=d[k]; if(!has(v)||!labelOf[k]||pending.has(k)) return ''; return `      <p data-field="${k}"><strong>${esc(labelOf[k])}:</strong> ${esc(sent(v))}</p>`; }).filter(Boolean).slice(0,2).join('\n');
+}

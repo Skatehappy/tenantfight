@@ -1,5 +1,6 @@
 import { APP_CONFIG } from '../data/config.js';
-import { stateLawSnapshot } from './enrichment.js';
+import { stateLawSnapshot, mergedTopicSection } from './enrichment.js';
+import { isMerged } from '../data/merged.js';
 
 export function renderStateHub(state, disputes, allStates, stateData) {
   const otherStates = allStates.filter(s => s.slug !== state.slug);
@@ -7,11 +8,22 @@ export function renderStateHub(state, disputes, allStates, stateData) {
   const snapshotHTML = snapshot ? `\n  <p class="intro" style="margin-top:-24px">${escapeHtml(snapshot)}</p>` : '';
 
   const disputeCards = disputes.map(d => `
-    <a class="dispute-card" href="/${state.slug}/${d.slug}">
+    <a class="dispute-card" href="${isMerged(state.slug, d.slug) ? '#' + d.slug : '/' + state.slug + '/' + d.slug}">
       <div class="dispute-icon">${d.icon}</div>
       <div class="dispute-name">${d.name}</div>
       <div class="dispute-arrow">→</div>
     </a>`).join('');
+
+  const mergedTopics = disputes.filter(d => isMerged(state.slug, d.slug));
+  const mergedHTML = mergedTopics.length ? `
+  <h2>${state.name} Dispute Guides</h2>
+  <div class="merged-topics">${mergedTopics.map(d => `
+    <section class="merged-topic" id="${d.slug}">
+      <h3>${d.icon} ${d.name} in ${state.name}</h3>
+${mergedTopicSection(state, d, stateData)}
+      <p><a class="merged-cta" href="/app?state=${state.slug}&amp;dispute=${d.slug}">Generate my ${state.name} ${d.name.toLowerCase()} letter →</a></p>
+    </section>`).join('')}
+  </div>` : '';
 
   const otherStateLinks = otherStates.map(s => `
     <a class="state-link" href="/${s.slug}">${s.name}</a>`).join('');
@@ -61,6 +73,11 @@ h2{font-family:'Fraunces',Georgia,serif;font-size:32px;font-weight:900;margin-bo
 .state-link:hover{background:${APP_CONFIG.primaryColor};color:#fff}
 footer{background:#0f0f0f;color:rgba(255,255,255,0.5);text-align:center;padding:32px 24px;font-size:12px}
 footer a{color:rgba(255,255,255,0.7);text-decoration:none}
+.merged-topics{display:grid;gap:16px;margin-bottom:64px}
+.merged-topic{background:#fff;border:1px solid #dde3ec;border-radius:10px;padding:24px;scroll-margin-top:80px}
+.merged-topic h3{font-family:'Fraunces',Georgia,serif;font-size:21px;font-weight:700;margin-bottom:10px}
+.merged-topic p{font-size:15px;color:#3a3a3a;line-height:1.7;margin-bottom:10px}
+.merged-cta{color:${APP_CONFIG.primaryColor};font-weight:700;text-decoration:none}
 .cta-section{text-align:center;padding:64px 24px;background:#fff;border-radius:14px;margin-bottom:48px}
 .cta-section h2{margin-bottom:16px}
 .cta-section p{color:#6b6b6b;margin-bottom:24px}
@@ -85,6 +102,7 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
 
   <h2>${state.name} Dispute Types</h2>
   <div class="dispute-grid">${disputeCards}</div>
+${mergedHTML}
 
   <h2>How It Works</h2>
   <div class="steps">

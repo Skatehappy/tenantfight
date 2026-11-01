@@ -1,5 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import { execFileSync } from 'child_process';
+import { isMerged } from './data/merged.js';
 import { STATES } from './data/states.js';
 import { DISPUTES } from './data/disputes.js';
 import { APP_CONFIG } from './data/config.js';
@@ -31,6 +33,12 @@ for (const state of STATES) {
   stats.stateHubs++;
 
   for (const dispute of DISPUTES) {
+    // Merged combos are consolidated into the state hub and 301-redirected (vercel.json).
+    if (isMerged(state.slug, dispute.slug)) {
+      fs.rmSync(path.join(stateDir, dispute.slug), { recursive: true, force: true });
+      stats.merged = (stats.merged || 0) + 1;
+      continue;
+    }
     const cacheFile = path.join(GENERATED_DIR, state.slug, `${dispute.slug}.json`);
 
     if (!fs.existsSync(cacheFile)) {
@@ -52,13 +60,24 @@ for (const state of STATES) {
   }
 }
 
-const LASTMOD = new Date().toISOString().slice(0, 10);
+// Sitemap lists indexable URLs only (merged combos 301 to their hub). lastmod is the
+// file's last git commit date; a file changed since HEAD gets today's date.
+const TODAY = new Date().toISOString().slice(0, 10);
+function lastmod(file) {
+  try {
+    if (execFileSync('git', ['status', '--porcelain', '--', file], { encoding: 'utf8' }).trim()) return TODAY;
+    return execFileSync('git', ['log', '-1', '--format=%cs', '--', file], { encoding: 'utf8' }).trim() || TODAY;
+  } catch { return TODAY; }
+}
+const url = (loc, file, priority, changefreq) =>
+  `<url><loc>https://${APP_CONFIG.domain}${loc}</loc><lastmod>${lastmod(path.join(PUBLIC_DIR, file))}</lastmod><priority>${priority}</priority><changefreq>${changefreq}</changefreq></url>`;
 
 const sitemapUrls = [
-  `<url><loc>https://${APP_CONFIG.domain}/</loc><lastmod>${LASTMOD}</lastmod><priority>1.0</priority><changefreq>weekly</changefreq></url>`,
-  ...STATES.map(s => `<url><loc>https://${APP_CONFIG.domain}/${s.slug}</loc><lastmod>${LASTMOD}</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>`),
-  ...STATES.flatMap(s => DISPUTES.map(d => `<url><loc>https://${APP_CONFIG.domain}/${s.slug}/${d.slug}</loc><lastmod>${LASTMOD}</lastmod><priority>0.7</priority><changefreq>monthly</changefreq></url>`))
-].filter(u => u && u.includes('<loc>'));
+  url('/', 'landing.html', '1.0', 'weekly'),
+  ...STATES.map(s => url(`/${s.slug}`, `${s.slug}/index.html`, '0.8', 'monthly')),
+  ...STATES.flatMap(s => DISPUTES.filter(d => !isMerged(s.slug, d.slug))
+    .map(d => url(`/${s.slug}/${d.slug}`, `${s.slug}/${d.slug}/index.html`, '0.7', 'monthly')))
+];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -77,6 +96,7 @@ fs.writeFileSync(path.join(PUBLIC_DIR, 'robots.txt'), robots);
 console.log(`\n=== Build complete ===`);
 console.log(`State hubs:  ${stats.stateHubs}`);
 console.log(`Deep pages:  ${stats.deepPages}`);
+console.log(`Merged:      ${stats.merged || 0} (301 to state hub)`);
 console.log(`Missing:     ${stats.missing}`);
 if (missingPages.length > 0) {
   console.log(`\nMissing pages (re-run npm run generate:content):`);

@@ -43,6 +43,11 @@ h2{font-family:'Fraunces',Georgia,serif;font-size:32px;font-weight:900;margin-bo
 .state-link:hover{background:#1a3a5c;color:#fff}
 footer{background:#0f0f0f;color:rgba(255,255,255,0.5);text-align:center;padding:32px 24px;font-size:12px}
 footer a{color:rgba(255,255,255,0.7);text-decoration:none}
+.merged-topics{display:grid;gap:16px;margin-bottom:64px}
+.merged-topic{background:#fff;border:1px solid #dde3ec;border-radius:10px;padding:24px;scroll-margin-top:80px}
+.merged-topic h3{font-family:'Fraunces',Georgia,serif;font-size:21px;font-weight:700;margin-bottom:10px}
+.merged-topic p{font-size:15px;color:#3a3a3a;line-height:1.7;margin-bottom:10px}
+.merged-cta{color:#1a3a5c;font-weight:700;text-decoration:none}
 .cta-section{text-align:center;padding:64px 24px;background:#fff;border-radius:14px;margin-bottom:48px}
 .cta-section h2{margin-bottom:16px}
 .cta-section p{color:#6b6b6b;margin-bottom:24px}
@@ -68,12 +73,12 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
 
   <h2>New York Dispute Types</h2>
   <div class="dispute-grid">
-    <a class="dispute-card" href="/new-york/security-deposit-demand-letter">
+    <a class="dispute-card" href="#security-deposit-demand-letter">
       <div class="dispute-icon">💰</div>
       <div class="dispute-name">Security Deposit Demand Letter</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/new-york/habitability-violation-letter">
+    <a class="dispute-card" href="#habitability-violation-letter">
       <div class="dispute-icon">🔧</div>
       <div class="dispute-name">Habitability Violation Letter</div>
       <div class="dispute-arrow">→</div>
@@ -83,7 +88,7 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
       <div class="dispute-name">Illegal Entry Notice</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/new-york/landlord-retaliation-letter">
+    <a class="dispute-card" href="#landlord-retaliation-letter">
       <div class="dispute-icon">⚠️</div>
       <div class="dispute-name">Landlord Retaliation Letter</div>
       <div class="dispute-arrow">→</div>
@@ -98,12 +103,12 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
       <div class="dispute-name">Utility Shutoff Demand Letter</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/new-york/move-out-deduction-dispute">
+    <a class="dispute-card" href="#move-out-deduction-dispute">
       <div class="dispute-icon">📸</div>
       <div class="dispute-name">Move-Out Deduction Dispute</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/new-york/landlord-lease-violation">
+    <a class="dispute-card" href="#landlord-lease-violation">
       <div class="dispute-icon">📄</div>
       <div class="dispute-name">Lease Violation by Landlord</div>
       <div class="dispute-arrow">→</div>
@@ -113,11 +118,51 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
       <div class="dispute-name">Mold and Pest Infestation Letter</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/new-york/quiet-enjoyment-violation">
+    <a class="dispute-card" href="#quiet-enjoyment-violation">
       <div class="dispute-icon">🔇</div>
       <div class="dispute-name">Quiet Enjoyment Violation Letter</div>
       <div class="dispute-arrow">→</div>
     </a></div>
+
+  <h2>New York Dispute Guides</h2>
+  <div class="merged-topics">
+    <section class="merged-topic" id="security-deposit-demand-letter">
+      <h3>💰 Security Deposit Demand Letter in New York</h3>
+      <p data-field="security_deposit_rules"><strong>Security deposit:</strong> Max deposit = ONE month&#039;s rent (GOL § 7-108(1-a), extended statewide by HSTPA effective June 14, 2019; no first-and-last-plus-security). Return deadline = 14 days after the tenant vacates (GOL § 7-108(1-e)). Itemization required: the landlord must provide an itemized statement of any amount retained plus return the remainder within 14 days. Penalty: if the landlord fails to provide the itemized statement and return within 14 days, the landlord forfeits any right to retain any portion; the burden of proof is on the landlord.</p>
+      <p data-field="habitability_standards"><strong>Habitability:</strong> Implied warranty of habitability: yes, RPL § 235-b — a non-waivable warranty that premises are fit for human habitation and free of conditions dangerous to life, health, or safety. Duties include heat (Oct 1-May 31), year-round hot water, working plumbing, structural soundness, and pest-free conditions. Any waiver is void as against public policy.</p>
+      <p><a class="merged-cta" href="/app?state=new-york&amp;dispute=security-deposit-demand-letter">Generate my New York security deposit demand letter letter →</a></p>
+    </section>
+    <section class="merged-topic" id="habitability-violation-letter">
+      <h3>🔧 Habitability Violation Letter in New York</h3>
+      <p data-field="habitability_standards"><strong>Habitability:</strong> Implied warranty of habitability: yes, RPL § 235-b — a non-waivable warranty that premises are fit for human habitation and free of conditions dangerous to life, health, or safety. Duties include heat (Oct 1-May 31), year-round hot water, working plumbing, structural soundness, and pest-free conditions. Any waiver is void as against public policy.</p>
+      <p data-field="repair_and_deduct"><strong>Repair and deduct:</strong> Allowed by case law (not a bright-line statute). The repair must remedy a habitability violation; the tenant must give written notice and a reasonable time to repair; the landlord must have failed to act; and the cost must be reasonable and documented. No fixed statutory dollar or rent-percentage cap (&#039;reasonable&#039; cost standard).</p>
+      <p><a class="merged-cta" href="/app?state=new-york&amp;dispute=habitability-violation-letter">Generate my New York habitability violation letter letter →</a></p>
+    </section>
+    <section class="merged-topic" id="landlord-retaliation-letter">
+      <h3>⚠️ Landlord Retaliation Letter in New York</h3>
+      <p data-field="retaliation_protections"><strong>Retaliation protection:</strong> RPL § 223-b. Protected activities: good-faith complaints to a government agency about habitability, complaints to the landlord about warranty-of-habitability violations, and participation in a tenants&#039; organization. Retaliation is presumed if adverse action is taken within ONE YEAR of the protected activity (extended from 6 months by HSTPA 2019); the landlord must rebut with a non-retaliatory reason.</p>
+      <p data-field="eviction_process"><strong>Eviction process:</strong> Predicate notices: nonpayment = 14-day written rent demand (RPAPL § 711(2); increased from 3 days by HSTPA 2019), which must include the Good Cause Eviction notice (RPL § 231-c). Holdover/lease-violation notices vary (notice to cure then notice of termination). Court process: a summary proceeding in the local Housing Court / District/City/Justice Court; the landlord obtains a judgment of possession and a warrant of eviction executed by a marshal/sheriff. Rough timeline: often 2-3+ months and frequently longer given mandatory notice periods and cure opportunities.</p>
+      <p><a class="merged-cta" href="/app?state=new-york&amp;dispute=landlord-retaliation-letter">Generate my New York landlord retaliation letter letter →</a></p>
+    </section>
+    <section class="merged-topic" id="move-out-deduction-dispute">
+      <h3>📸 Move-Out Deduction Dispute in New York</h3>
+      <p data-field="security_deposit_rules"><strong>Security deposit:</strong> Max deposit = ONE month&#039;s rent (GOL § 7-108(1-a), extended statewide by HSTPA effective June 14, 2019; no first-and-last-plus-security). Return deadline = 14 days after the tenant vacates (GOL § 7-108(1-e)). Itemization required: the landlord must provide an itemized statement of any amount retained plus return the remainder within 14 days. Penalty: if the landlord fails to provide the itemized statement and return within 14 days, the landlord forfeits any right to retain any portion; the burden of proof is on the landlord.</p>
+      <p data-field="habitability_standards"><strong>Habitability:</strong> Implied warranty of habitability: yes, RPL § 235-b — a non-waivable warranty that premises are fit for human habitation and free of conditions dangerous to life, health, or safety. Duties include heat (Oct 1-May 31), year-round hot water, working plumbing, structural soundness, and pest-free conditions. Any waiver is void as against public policy.</p>
+      <p><a class="merged-cta" href="/app?state=new-york&amp;dispute=move-out-deduction-dispute">Generate my New York move-out deduction dispute letter →</a></p>
+    </section>
+    <section class="merged-topic" id="landlord-lease-violation">
+      <h3>📄 Lease Violation by Landlord in New York</h3>
+      <p data-field="habitability_standards"><strong>Habitability:</strong> Implied warranty of habitability: yes, RPL § 235-b — a non-waivable warranty that premises are fit for human habitation and free of conditions dangerous to life, health, or safety. Duties include heat (Oct 1-May 31), year-round hot water, working plumbing, structural soundness, and pest-free conditions. Any waiver is void as against public policy.</p>
+      <p data-field="entry_notice_requirements"><strong>Landlord entry / notice:</strong> No statewide statutory hours-of-notice rule (RPL is silent). The state standard is &#039;reasonable notice&#039; for non-emergency entry (commonly ~24 hours). NYC rule: at least 24 hours&#039; notice for inspections and one week&#039;s notice for repairs/improvements. Emergency entry requires no notice.</p>
+      <p><a class="merged-cta" href="/app?state=new-york&amp;dispute=landlord-lease-violation">Generate my New York lease violation by landlord letter →</a></p>
+    </section>
+    <section class="merged-topic" id="quiet-enjoyment-violation">
+      <h3>🔇 Quiet Enjoyment Violation Letter in New York</h3>
+      <p data-field="entry_notice_requirements"><strong>Landlord entry / notice:</strong> No statewide statutory hours-of-notice rule (RPL is silent). The state standard is &#039;reasonable notice&#039; for non-emergency entry (commonly ~24 hours). NYC rule: at least 24 hours&#039; notice for inspections and one week&#039;s notice for repairs/improvements. Emergency entry requires no notice.</p>
+      <p data-field="retaliation_protections"><strong>Retaliation protection:</strong> RPL § 223-b. Protected activities: good-faith complaints to a government agency about habitability, complaints to the landlord about warranty-of-habitability violations, and participation in a tenants&#039; organization. Retaliation is presumed if adverse action is taken within ONE YEAR of the protected activity (extended from 6 months by HSTPA 2019); the landlord must rebut with a non-retaliatory reason.</p>
+      <p><a class="merged-cta" href="/app?state=new-york&amp;dispute=quiet-enjoyment-violation">Generate my New York quiet enjoyment violation letter letter →</a></p>
+    </section>
+  </div>
 
   <h2>How It Works</h2>
   <div class="steps">

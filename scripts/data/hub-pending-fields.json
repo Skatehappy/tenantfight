@@ -1,0 +1,48 @@
+{
+  "AZ": [
+    "habitability_standards",
+    "rent_withholding",
+    "repair_and_deduct",
+    "retaliation_protections"
+  ],
+  "CA": [
+    "habitability_standards"
+  ],
+  "FL": [
+    "habitability_standards",
+    "retaliation_protections"
+  ],
+  "GA": [
+    "eviction_process",
+    "habitability_standards",
+    "retaliation_protections"
+  ],
+  "IL": [
+    "entry_notice_requirements",
+    "habitability_standards",
+    "lease_termination_rules",
+    "rent_withholding",
+    "repair_and_deduct",
+    "retaliation_protections",
+    "security_deposit_rules"
+  ],
+  "NC": [
+    "eviction_process",
+    "habitability_standards",
+    "security_deposit_rules"
+  ],
+  "OH": [
+    "entry_notice_requirements",
+    "eviction_process",
+    "habitability_standards",
+    "retaliation_protections"
+  ],
+  "PA": [
+    "eviction_process",
+    "retaliation_protections",
+    "security_deposit_rules"
+  ],
+  "TX": [
+    "habitability_standards"
+  ]
+}

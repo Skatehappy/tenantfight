@@ -1,8 +1,9 @@
 import { APP_CONFIG } from '../data/config.js';
 import { renderEnrichmentSections, dataFaqs } from './enrichment.js';
+import { isMerged, comboHref } from '../data/merged.js';
 
 export function renderDeepPage(state, dispute, content, allStates, allDisputes, stateData) {
-  const otherStatesForDispute = allStates.filter(s => s.slug !== state.slug);
+  const otherStatesForDispute = allStates.filter(s => s.slug !== state.slug && !isMerged(s.slug, dispute.slug));
   const otherDisputesForState = allDisputes.filter(d => d.slug !== dispute.slug);
 
   // SEO Phase 2 — verified, state-specific sections + data-derived FAQs.
@@ -25,7 +26,7 @@ export function renderDeepPage(state, dispute, content, allStates, allDisputes, 
     <a class="cross-link" href="/${s.slug}/${dispute.slug}">${s.name} ${dispute.name}</a>`).join('');
 
   const otherDisputeLinks = otherDisputesForState.map(d => `
-    <a class="cross-link" href="/${state.slug}/${d.slug}">${d.icon} ${d.name}</a>`).join('');
+    <a class="cross-link" href="${comboHref(state.slug, d.slug)}">${d.icon} ${d.name}</a>`).join('');
 
   return `<!DOCTYPE html>
 <html lang="en">

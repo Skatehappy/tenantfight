@@ -43,6 +43,11 @@ h2{font-family:'Fraunces',Georgia,serif;font-size:32px;font-weight:900;margin-bo
 .state-link:hover{background:#1a3a5c;color:#fff}
 footer{background:#0f0f0f;color:rgba(255,255,255,0.5);text-align:center;padding:32px 24px;font-size:12px}
 footer a{color:rgba(255,255,255,0.7);text-decoration:none}
+.merged-topics{display:grid;gap:16px;margin-bottom:64px}
+.merged-topic{background:#fff;border:1px solid #dde3ec;border-radius:10px;padding:24px;scroll-margin-top:80px}
+.merged-topic h3{font-family:'Fraunces',Georgia,serif;font-size:21px;font-weight:700;margin-bottom:10px}
+.merged-topic p{font-size:15px;color:#3a3a3a;line-height:1.7;margin-bottom:10px}
+.merged-cta{color:#1a3a5c;font-weight:700;text-decoration:none}
 .cta-section{text-align:center;padding:64px 24px;background:#fff;border-radius:14px;margin-bottom:48px}
 .cta-section h2{margin-bottom:16px}
 .cta-section p{color:#6b6b6b;margin-bottom:24px}
@@ -68,17 +73,17 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
 
   <h2>Texas Dispute Types</h2>
   <div class="dispute-grid">
-    <a class="dispute-card" href="/texas/security-deposit-demand-letter">
+    <a class="dispute-card" href="#security-deposit-demand-letter">
       <div class="dispute-icon">💰</div>
       <div class="dispute-name">Security Deposit Demand Letter</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/texas/habitability-violation-letter">
+    <a class="dispute-card" href="#habitability-violation-letter">
       <div class="dispute-icon">🔧</div>
       <div class="dispute-name">Habitability Violation Letter</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/texas/illegal-entry-notice">
+    <a class="dispute-card" href="#illegal-entry-notice">
       <div class="dispute-icon">🚪</div>
       <div class="dispute-name">Illegal Entry Notice</div>
       <div class="dispute-arrow">→</div>
@@ -88,36 +93,94 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
       <div class="dispute-name">Landlord Retaliation Letter</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/texas/wrongful-eviction-response">
+    <a class="dispute-card" href="#wrongful-eviction-response">
       <div class="dispute-icon">🧾</div>
       <div class="dispute-name">Wrongful Eviction Notice Response</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/texas/utility-shutoff-letter">
+    <a class="dispute-card" href="#utility-shutoff-letter">
       <div class="dispute-icon">💡</div>
       <div class="dispute-name">Utility Shutoff Demand Letter</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/texas/move-out-deduction-dispute">
+    <a class="dispute-card" href="#move-out-deduction-dispute">
       <div class="dispute-icon">📸</div>
       <div class="dispute-name">Move-Out Deduction Dispute</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/texas/landlord-lease-violation">
+    <a class="dispute-card" href="#landlord-lease-violation">
       <div class="dispute-icon">📄</div>
       <div class="dispute-name">Lease Violation by Landlord</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/texas/mold-pest-infestation-letter">
+    <a class="dispute-card" href="#mold-pest-infestation-letter">
       <div class="dispute-icon">🦠</div>
       <div class="dispute-name">Mold and Pest Infestation Letter</div>
       <div class="dispute-arrow">→</div>
     </a>
-    <a class="dispute-card" href="/texas/quiet-enjoyment-violation">
+    <a class="dispute-card" href="#quiet-enjoyment-violation">
       <div class="dispute-icon">🔇</div>
       <div class="dispute-name">Quiet Enjoyment Violation Letter</div>
       <div class="dispute-arrow">→</div>
     </a></div>
+
+  <h2>Texas Dispute Guides</h2>
+  <div class="merged-topics">
+    <section class="merged-topic" id="security-deposit-demand-letter">
+      <h3>💰 Security Deposit Demand Letter in Texas</h3>
+      <p data-field="security_deposit_rules"><strong>Security deposit:</strong> No statutory maximum on the deposit amount. Return deadline: 30 days after the tenant surrenders the premises (§ 92.103); the 30-day clock does not run until the tenant provides a written forwarding address (§ 92.107). Itemization required: a written description and itemized list of deductions must accompany any withholding (§ 92.104). Penalty for bad-faith wrongful withholding: forfeiture of the right to withhold plus liability for $100 + 3x the wrongfully withheld amount + reasonable attorney&#039;s fees (§ 92.109).</p>
+      <p data-field="repair_and_deduct"><strong>Repair and deduct:</strong> Allowed but limited (§ 92.0561). The tenant must give proper written notice, be current on rent, and the landlord must have failed to make a diligent effort to repair a condition materially affecting health/safety. Cap: total repairs/deductions in any one month may not exceed the greater of one month&#039;s rent or $500.</p>
+      <p><a class="merged-cta" href="/app?state=texas&amp;dispute=security-deposit-demand-letter">Generate my Texas security deposit demand letter letter →</a></p>
+    </section>
+    <section class="merged-topic" id="habitability-violation-letter">
+      <h3>🔧 Habitability Violation Letter in Texas</h3>
+      <p data-field="repair_and_deduct"><strong>Repair and deduct:</strong> Allowed but limited (§ 92.0561). The tenant must give proper written notice, be current on rent, and the landlord must have failed to make a diligent effort to repair a condition materially affecting health/safety. Cap: total repairs/deductions in any one month may not exceed the greater of one month&#039;s rent or $500.</p>
+      <p data-field="security_deposit_rules"><strong>Security deposit:</strong> No statutory maximum on the deposit amount. Return deadline: 30 days after the tenant surrenders the premises (§ 92.103); the 30-day clock does not run until the tenant provides a written forwarding address (§ 92.107). Itemization required: a written description and itemized list of deductions must accompany any withholding (§ 92.104). Penalty for bad-faith wrongful withholding: forfeiture of the right to withhold plus liability for $100 + 3x the wrongfully withheld amount + reasonable attorney&#039;s fees (§ 92.109).</p>
+      <p><a class="merged-cta" href="/app?state=texas&amp;dispute=habitability-violation-letter">Generate my Texas habitability violation letter letter →</a></p>
+    </section>
+    <section class="merged-topic" id="illegal-entry-notice">
+      <h3>🚪 Illegal Entry Notice in Texas</h3>
+      <p data-field="entry_notice_requirements"><strong>Landlord entry / notice:</strong> No statutory advance-notice requirement. The Texas Property Code contains no provision governing landlord entry — advance notice is required only if the lease specifies it (24-hour notice is a common lease standard, not a statutory mandate). Emergencies require no notice.</p>
+      <p data-field="retaliation_protections"><strong>Retaliation protection:</strong> Protected activities (§ 92.331): giving notice to repair, exercising a statutory remedy, complaining in good faith about a condition to the landlord or a government entity, or participating in a tenant organization. The landlord may not retaliate within 6 months of the protected activity. Remedies: a civil penalty of one month&#039;s rent plus $500, actual damages, court costs, and attorney&#039;s fees (§ 92.333).</p>
+      <p><a class="merged-cta" href="/app?state=texas&amp;dispute=illegal-entry-notice">Generate my Texas illegal entry notice letter →</a></p>
+    </section>
+    <section class="merged-topic" id="wrongful-eviction-response">
+      <h3>🧾 Wrongful Eviction Notice Response in Texas</h3>
+      <p data-field="eviction_process"><strong>Eviction process:</strong> Notice: a default written &#039;notice to vacate&#039; at least 3 days before filing suit, unless the lease provides otherwise (§ 24.005); may combine a demand for overdue rent. Court process: a &#039;forcible entry and detainer&#039; (eviction suit) filed in the Justice of the Peace court for the precinct where the property is located (Ch. 24). Rough timeline: after the 3-day notice, hearing roughly 10-21 days out; a writ of possession cannot issue until at least 5 days after judgment, so a typical uncontested eviction runs about 3-6 weeks.</p>
+      <p data-field="retaliation_protections"><strong>Retaliation protection:</strong> Protected activities (§ 92.331): giving notice to repair, exercising a statutory remedy, complaining in good faith about a condition to the landlord or a government entity, or participating in a tenant organization. The landlord may not retaliate within 6 months of the protected activity. Remedies: a civil penalty of one month&#039;s rent plus $500, actual damages, court costs, and attorney&#039;s fees (§ 92.333).</p>
+      <p><a class="merged-cta" href="/app?state=texas&amp;dispute=wrongful-eviction-response">Generate my Texas wrongful eviction notice response letter →</a></p>
+    </section>
+    <section class="merged-topic" id="utility-shutoff-letter">
+      <h3>💡 Utility Shutoff Demand Letter in Texas</h3>
+      <p data-field="eviction_process"><strong>Eviction process:</strong> Notice: a default written &#039;notice to vacate&#039; at least 3 days before filing suit, unless the lease provides otherwise (§ 24.005); may combine a demand for overdue rent. Court process: a &#039;forcible entry and detainer&#039; (eviction suit) filed in the Justice of the Peace court for the precinct where the property is located (Ch. 24). Rough timeline: after the 3-day notice, hearing roughly 10-21 days out; a writ of possession cannot issue until at least 5 days after judgment, so a typical uncontested eviction runs about 3-6 weeks.</p>
+      <p data-field="security_deposit_rules"><strong>Security deposit:</strong> No statutory maximum on the deposit amount. Return deadline: 30 days after the tenant surrenders the premises (§ 92.103); the 30-day clock does not run until the tenant provides a written forwarding address (§ 92.107). Itemization required: a written description and itemized list of deductions must accompany any withholding (§ 92.104). Penalty for bad-faith wrongful withholding: forfeiture of the right to withhold plus liability for $100 + 3x the wrongfully withheld amount + reasonable attorney&#039;s fees (§ 92.109).</p>
+      <p><a class="merged-cta" href="/app?state=texas&amp;dispute=utility-shutoff-letter">Generate my Texas utility shutoff demand letter letter →</a></p>
+    </section>
+    <section class="merged-topic" id="move-out-deduction-dispute">
+      <h3>📸 Move-Out Deduction Dispute in Texas</h3>
+      <p data-field="security_deposit_rules"><strong>Security deposit:</strong> No statutory maximum on the deposit amount. Return deadline: 30 days after the tenant surrenders the premises (§ 92.103); the 30-day clock does not run until the tenant provides a written forwarding address (§ 92.107). Itemization required: a written description and itemized list of deductions must accompany any withholding (§ 92.104). Penalty for bad-faith wrongful withholding: forfeiture of the right to withhold plus liability for $100 + 3x the wrongfully withheld amount + reasonable attorney&#039;s fees (§ 92.109).</p>
+      <p data-field="repair_and_deduct"><strong>Repair and deduct:</strong> Allowed but limited (§ 92.0561). The tenant must give proper written notice, be current on rent, and the landlord must have failed to make a diligent effort to repair a condition materially affecting health/safety. Cap: total repairs/deductions in any one month may not exceed the greater of one month&#039;s rent or $500.</p>
+      <p><a class="merged-cta" href="/app?state=texas&amp;dispute=move-out-deduction-dispute">Generate my Texas move-out deduction dispute letter →</a></p>
+    </section>
+    <section class="merged-topic" id="landlord-lease-violation">
+      <h3>📄 Lease Violation by Landlord in Texas</h3>
+      <p data-field="entry_notice_requirements"><strong>Landlord entry / notice:</strong> No statutory advance-notice requirement. The Texas Property Code contains no provision governing landlord entry — advance notice is required only if the lease specifies it (24-hour notice is a common lease standard, not a statutory mandate). Emergencies require no notice.</p>
+      <p data-field="security_deposit_rules"><strong>Security deposit:</strong> No statutory maximum on the deposit amount. Return deadline: 30 days after the tenant surrenders the premises (§ 92.103); the 30-day clock does not run until the tenant provides a written forwarding address (§ 92.107). Itemization required: a written description and itemized list of deductions must accompany any withholding (§ 92.104). Penalty for bad-faith wrongful withholding: forfeiture of the right to withhold plus liability for $100 + 3x the wrongfully withheld amount + reasonable attorney&#039;s fees (§ 92.109).</p>
+      <p><a class="merged-cta" href="/app?state=texas&amp;dispute=landlord-lease-violation">Generate my Texas lease violation by landlord letter →</a></p>
+    </section>
+    <section class="merged-topic" id="mold-pest-infestation-letter">
+      <h3>🦠 Mold and Pest Infestation Letter in Texas</h3>
+      <p data-field="repair_and_deduct"><strong>Repair and deduct:</strong> Allowed but limited (§ 92.0561). The tenant must give proper written notice, be current on rent, and the landlord must have failed to make a diligent effort to repair a condition materially affecting health/safety. Cap: total repairs/deductions in any one month may not exceed the greater of one month&#039;s rent or $500.</p>
+      <p data-field="security_deposit_rules"><strong>Security deposit:</strong> No statutory maximum on the deposit amount. Return deadline: 30 days after the tenant surrenders the premises (§ 92.103); the 30-day clock does not run until the tenant provides a written forwarding address (§ 92.107). Itemization required: a written description and itemized list of deductions must accompany any withholding (§ 92.104). Penalty for bad-faith wrongful withholding: forfeiture of the right to withhold plus liability for $100 + 3x the wrongfully withheld amount + reasonable attorney&#039;s fees (§ 92.109).</p>
+      <p><a class="merged-cta" href="/app?state=texas&amp;dispute=mold-pest-infestation-letter">Generate my Texas mold and pest infestation letter letter →</a></p>
+    </section>
+    <section class="merged-topic" id="quiet-enjoyment-violation">
+      <h3>🔇 Quiet Enjoyment Violation Letter in Texas</h3>
+      <p data-field="entry_notice_requirements"><strong>Landlord entry / notice:</strong> No statutory advance-notice requirement. The Texas Property Code contains no provision governing landlord entry — advance notice is required only if the lease specifies it (24-hour notice is a common lease standard, not a statutory mandate). Emergencies require no notice.</p>
+      <p data-field="retaliation_protections"><strong>Retaliation protection:</strong> Protected activities (§ 92.331): giving notice to repair, exercising a statutory remedy, complaining in good faith about a condition to the landlord or a government entity, or participating in a tenant organization. The landlord may not retaliate within 6 months of the protected activity. Remedies: a civil penalty of one month&#039;s rent plus $500, actual damages, court costs, and attorney&#039;s fees (§ 92.333).</p>
+      <p><a class="merged-cta" href="/app?state=texas&amp;dispute=quiet-enjoyment-violation">Generate my Texas quiet enjoyment violation letter letter →</a></p>
+    </section>
+  </div>
 
   <h2>How It Works</h2>
   <div class="steps">
