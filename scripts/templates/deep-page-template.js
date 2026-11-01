@@ -127,18 +127,21 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
 
   <div class="statute-callout">
     <div class="statute-callout-row">
+${content.statuteCitation ? `
       <div>
         <div class="statute-callout-label">Statute</div>
         <div class="statute-callout-value">${escapeHtml(content.statuteCitation)}</div>
-      </div>
+      </div>` : ''}
+${content.deadline ? `
       <div>
         <div class="statute-callout-label">Deadline</div>
         <div class="statute-callout-value">${escapeHtml(content.deadline)}</div>
-      </div>
+      </div>` : ''}
+${content.penalty ? `
       <div>
         <div class="statute-callout-label">Penalty / Remedy</div>
         <div class="statute-callout-value">${escapeHtml(content.penalty)}</div>
-      </div>
+      </div>` : ''}
     </div>
   </div>
 
