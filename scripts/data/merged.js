@@ -1,5 +1,5 @@
 // State×topic combos consolidated into their state hub (2026-11-01 indexing plan).
-// A merged combo is not generated, is 301-redirected to /<state>#<topic> (vercel.json),
+// A merged combo is not generated, is 301-redirected to /<state>#<topic> (vercel.json: exact path + "/(.*)"),
 // is left out of the sitemap, and is rendered as a short section on the state hub.
 import fs from 'fs';
 import path from 'path';
