@@ -29,7 +29,7 @@ for (const state of STATES) {
 
   fs.writeFileSync(
     path.join(stateDir, 'index.html'),
-    renderStateHub(state, DISPUTES, STATES, STATE_DATA[state.abbr])
+    renderStateHub(state, DISPUTES, STATES, holdBack(state.slug, STATE_DATA[state.abbr]))
   );
   stats.stateHubs++;
 
@@ -51,6 +51,8 @@ for (const state of STATES) {
 
     const pageKey = `${state.slug}/${dispute.slug}`;
     const content = holdBack(pageKey, JSON.parse(fs.readFileSync(cacheFile, 'utf8')));
+    // a description withheld in full falls back to the dispute's generic (citation-free) one
+    if (!content.metaDescription) content.metaDescription = dispute.metaDescription;
     const disputeDir = path.join(stateDir, dispute.slug);
     if (!fs.existsSync(disputeDir)) fs.mkdirSync(disputeDir, { recursive: true });
 
