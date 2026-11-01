@@ -222,3 +222,10 @@ Standard: Three-Gate v7
 - **Subject:** Security deposit handling, itemization, and 14-day return requirement.
 - **Source:** https://www.nysenate.gov/legislation/laws/GOB/7-108
 - **Action:** no change — confirmed
+
+### 2026-11-01 — California Civil Code §789.3(c) (supersedes the 2026-07-19 §789.3 entry's damages wording)
+- **Source file:** src/App.jsx:371 (utilityShutoffPrompt)
+- **Verdict:** CORRECTED
+- **Subject:** §789.3(c): landlord liable for (1) actual damages and (2) an amount not to exceed $100 for each day or part of a day the violation continues, never less than $250 for each separate cause of action; the court shall award reasonable attorney's fees to the prevailing party. The per-day amount is a statutory award, not punitive damages; the prompt said "$100/day actual damages plus $100/day punitive" and was rewritten.
+- **Source:** https://codes.findlaw.com/ca/civil-code/civ-sect-789-3/ (official-text mirror; leginfo.legislature.ca.gov blocks automated fetch), read 2026-11-01
+- **Action:** prompt corrected; local mock generation confirmed the new wording reaches the model request

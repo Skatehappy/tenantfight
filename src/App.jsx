@@ -368,7 +368,7 @@ Rules:
 
 Rules:
 - Open with a clear statement: landlord shut off the specified utility on a specific date without legal basis; this is illegal in every state
-- Cite the state's utility shutoff or self-help eviction statute (e.g., California Civil Code §789.3 — up to $100/day actual damages plus $100/day punitive; Texas Property Code §92.008; Florida §83.67; New York Real Property Law §235; Massachusetts G.L. c. 186 §14) and identify the specific per-day penalty under the applicable state statute
+- Cite the state's utility shutoff or self-help eviction statute (e.g., California Civil Code §789.3(c) — actual damages plus a statutory award of up to $100 for each day the violation continues, never less than $250 per separate cause of action, and mandatory attorney's fees to the prevailing party (this per-day award is a statutory penalty; do not call it punitive damages); Texas Property Code §92.008; Florida §83.67; New York Real Property Law §235; Massachusetts G.L. c. 186 §14) and identify the specific per-day penalty under the applicable state statute
 - Cite the doctrine of constructive eviction — an illegal shutoff designed to force the tenant out is itself a constructive eviction and a breach of the covenant of quiet enjoyment
 - Demand IMMEDIATE restoration of the utility (within 24 hours)
 - Demand statutory damages measured per day of shutoff
