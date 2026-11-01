@@ -633,6 +633,9 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
               <div style={{ marginTop: "16px", fontSize: "12px", color: colors.inkFaint, lineHeight: "1.6" }}>
                 Don't have a code? <a href={APP.payhip} style={{ color: colors.goldLight, textDecoration: "none" }}>Purchase for {APP.price} →</a>
               </div>
+              <div style={{ marginTop: "12px", fontSize: "12px", color: colors.inkFaint }}>
+                Your letter tool is at <strong>tenantfight.com</strong> — bookmark it.
+              </div>
             </div>
           </div>
         )}
