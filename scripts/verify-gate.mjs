@@ -70,5 +70,11 @@ for (const [label, args] of [['A10: api/_verified-citations.js is stale (run nod
   if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail('A13: UI wiring test failed (node tests/ui-wiring.test.mjs)'); }
 }
 
-console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged; A10 citation lock (subsections, numeric claims, checklist, templates) ok; A11 auth gate ok; A12 payhip-mock + isCheckCall ok; A13 UI wiring ok.');
+// ── A14: published pages: 0 held sentences, 0 unverified citations (strict: section + subsection), no corrected/removed value reappears ──
+{
+  const r = spawnSync(process.execPath, ['tests/held-and-unlogged.mjs'], { cwd: ROOT, encoding: 'utf8' });
+  if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail('A14: held / unverified / stale-value check failed (node tests/held-and-unlogged.mjs --list)'); }
+}
+
+console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged; A10 citation lock (subsections, numeric claims, checklist, templates) ok; A11 auth gate ok; A12 payhip-mock + isCheckCall ok; A13 UI wiring ok; A14 0 held / 0 unverified citations / 0 stale values.');
 process.exit(0);
