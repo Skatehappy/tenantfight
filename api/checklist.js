@@ -1,9 +1,8 @@
 // api/checklist.js
 import { MODEL } from './_config.js';
+import { verifyLicense, PRODUCT_LINK } from './_license.js';
 
 export const config = { runtime: 'edge' };
-
-const VALID_CODES = (process.env.ACCESS_CODES || '').split(',').map(c => c.trim()).filter(Boolean);
 
 export default async function handler(req) {
   const headers = {
@@ -19,11 +18,13 @@ export default async function handler(req) {
   try {
     const { accessCode, state, varianceType, letterExcerpt } = await req.json();
 
-    const TEST_KEYS = (process.env.TEST_KEYS || 'SMOKE-TEST-2026-BAO').split(',').map(k => k.trim().toUpperCase()).filter(Boolean);
-    const isTestKey = TEST_KEYS.includes(String(accessCode || '').trim().toUpperCase());
-    if (!isTestKey && (!accessCode || !VALID_CODES.includes(accessCode.toUpperCase()))) {
-      return new Response(JSON.stringify({ error: 'Invalid access code' }), { status: 401, headers });
+    // Same fail-closed Payhip verify as generate.js (no usage mark). No hard-coded or env bypass codes.
+    const payhipApiKey = process.env.PAYHIP_API_KEY;
+    if (!payhipApiKey || !process.env.ANTHROPIC_API_KEY) {
+      return new Response(JSON.stringify({ error: 'Service not configured' }), { status: 500, headers });
     }
+    const lic = await verifyLicense(accessCode, PRODUCT_LINK, payhipApiKey);
+    if (!lic.ok) return new Response(JSON.stringify({ error: lic.error }), { status: lic.status, headers });
 
     const apiKey = process.env.ANTHROPIC_API_KEY;
 

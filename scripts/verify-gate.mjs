@@ -51,5 +51,11 @@ for (const [label, args] of [['A10: api/_verified-citations.json is stale (run n
   if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail(label); }
 }
 
-console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged; A10 citation lock ok.');
+// ── A11: auth gate — no path to Anthropic without a passed Payhip (or G4T) check; no bypass keys ──
+{
+  const r = spawnSync(process.execPath, ['scripts/test-auth.mjs'], { cwd: ROOT, encoding: 'utf8' });
+  if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail('A11: auth gate failed (node scripts/test-auth.mjs)'); }
+}
+
+console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged; A10 citation lock ok; A11 auth gate ok.');
 process.exit(0);
