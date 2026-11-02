@@ -76,5 +76,13 @@ for (const [label, args] of [['A10: api/_verified-citations.js is stale (run nod
   if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail('A14: held / unverified / stale-value check failed (node tests/held-and-unlogged.mjs --list)'); }
 }
 
-console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged; A10 citation lock (subsections, numeric claims, checklist, templates) ok; A11 auth gate ok; A12 payhip-mock + isCheckCall ok; A13 UI wiring ok; A14 0 held / 0 unverified citations / 0 stale values.');
+// ── A15: every SEO-log entry has verified_on; nothing rendered or fed to a generator maps to an entry >12 months old (warn >10) ──
+for (const [label, args] of [['A15: verified_on mock tests failed (node scripts/test-verified-on.mjs)', ['scripts/test-verified-on.mjs']], ['A15: verified_on freshness check failed (node scripts/check-verified-on.mjs)', ['scripts/check-verified-on.mjs']]]) {
+  const r = spawnSync(process.execPath, args, { cwd: ROOT, encoding: 'utf8' });
+  if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail(label); }
+  if (r.stderr) console.warn(r.stderr.trim());
+  if (/^A15 /m.test(r.stdout || '')) console.log((r.stdout.match(/^A15 .*$/m) || [''])[0]);
+}
+
+console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged; A10 citation lock (subsections, numeric claims, checklist, templates) ok; A11 auth gate ok; A12 payhip-mock + isCheckCall ok; A13 UI wiring ok; A14 0 held / 0 unverified citations / 0 stale values; A15 verified_on present + fresh.');
 process.exit(0);

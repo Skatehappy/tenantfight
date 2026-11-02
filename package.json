@@ -23,6 +23,8 @@
     "generate:pages": "node scripts/build-verified-citations.mjs && node scripts/build-pages.js",
     "build:citations": "node scripts/build-verified-citations.mjs",
     "test:citelint": "node scripts/test-citelint.mjs",
+    "test:verified-on": "node scripts/test-verified-on.mjs",
+    "check:verified-on": "node scripts/check-verified-on.mjs",
     "test:auth": "node scripts/test-auth.mjs",
     "generate:all": "npm run generate:content && npm run generate:pages"
   }
