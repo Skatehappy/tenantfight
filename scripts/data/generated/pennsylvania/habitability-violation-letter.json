@@ -2,7 +2,7 @@
   "h1": "Pennsylvania Habitability Violation Letter for Tenants",
   "metaTitle": "PA Habitability Violation Demand Letter | Tenant Tool",
   "metaDescription": "Generate a Pennsylvania habitability violation demand letter to force repairs, withhold rent, or recover damages under the implied warranty of habitability.",
-  "statuteCitation": "68 P.S. § 250.206 and Pugh v. Holmes, 486 Pa. 272 (1979)",
+  "statuteCitation": "Pugh v. Holmes, 486 Pa. 272 (1979)",
   "deadline": "Reasonable time, typically 14 to 30 days depending on severity",
   "penalty": "Rent abatement, repair-and-deduct, rent escrow, or lease termination",
   "introParagraph": "If your Pennsylvania rental has serious problems like no heat, leaking pipes, mold, pest infestations, or broken locks, your landlord is legally required to fix them. Pennsylvania recognizes an implied warranty of habitability under the Pennsylvania Supreme Court's landmark Pugh v. Holmes decision, meaning every residential lease guarantees a livable home regardless of what the lease says. Before you can withhold rent, deposit it into escrow, or sue for damages, you generally must give your landlord written notice and a reasonable opportunity to make repairs. A properly drafted habitability violation letter creates the paper trail Pennsylvania courts expect and often resolves the issue without litigation. This tool helps you build that letter quickly and correctly.",
@@ -28,7 +28,7 @@
     },
     {
       "q": "Can my landlord retaliate by evicting me after I send a letter?",
-      "a": "Pennsylvania law protects tenants from retaliatory eviction when they exercise rights such as reporting code violations or demanding repairs. Under 68 P.S. § 399.11 and case law, a landlord cannot terminate a lease, raise rent, or reduce services in retaliation for a good-faith complaint. If retaliation occurs within six months of your written complaint, courts often presume retaliation. Keep copies of your letter, certified mail receipts, and any communications as evidence if you need to defend against an eviction."
+      "a": "Pennsylvania's anti-retaliation statutes are narrow. The Utility Service Tenants Rights Act (68 P.S. § 399.11) bars reprisals against tenants who exercise their utility-payment rights, with a six-month rebuttable presumption, and a lease cannot be terminated because the tenant participates in a tenants' association (68 P.S. § 250.205). Keep copies of your letter, certified mail receipts, and any communications as evidence if you need to defend against an eviction."
     }
   ]
 }

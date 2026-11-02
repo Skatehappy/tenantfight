@@ -21,22 +21,24 @@ const REPORTERS = String.raw`(?:Cal\.\s?(?:App\.\s?)?(?:2d|3d|4th|5th)|Cal\.\s?R
 // ILCS cite inherits that chapter.
 export function extractCitations(text, { inheritIlcs = false } = {}) {
   const out = [];
-  const add = (key, raw, index) => { if (key && key.length > 2) out.push({ key, raw: raw.trim(), index }); };
+  const add = (key, raw, index, sub) => { if (key && key.length > 2) out.push({ key, raw: raw.trim(), index, sub: sub || [] }); };
+  // subsection designators written after a section number: "92.056(b)(1)" -> ['b', '1']
   const s = String(text || '');
+  const subsAt = i => { const m = s.slice(i).match(/^(?:§+\s*|[Ss]ections?\s+)\d[\w.\-–]*((?:\([A-Za-z0-9]{1,4}\))+)/); return m ? [...m[1].matchAll(/\(([A-Za-z0-9]+)\)/g)].map(x => x[1].toLowerCase()) : []; };
 
   // plural: "§§ 92.331, 92.333", "§§ 1941-1941.1"
   for (const m of s.matchAll(/§§\s*(\d[^\s;),]*(?:\s*(?:,|and|&)\s*(?:§\s*)?\d[^\s;),]*)*)/g)) {
     for (const part of m[1].split(/\s*(?:,|and|&)\s*(?:§\s*)?/)) add('S:' + secCore(part), m[0], m.index);
   }
   // singular: "§ 1942", "§1954", "Section 1942.5" (word form needs a dot/hyphen or 3+ digits so "Section 8" is not a hit)
-  for (const m of s.matchAll(/(?<!§)§\s*(\d[^\s;,)]*)/g)) add('S:' + secCore(m[1]), m[0], m.index);
-  for (const m of s.matchAll(/\b[Ss]ection\s+(\d{3,}[\w.\-–]*|\d+[.\-–]\d[\w.\-–]*)/g)) add('S:' + secCore(m[1]), m[0], m.index);
+  for (const m of s.matchAll(/(?<!§)§\s*(\d[^\s;,)]*)/g)) add('S:' + secCore(m[1]), m[0], m.index, subsAt(m.index));
+  for (const m of s.matchAll(/\b[Ss]ection\s+(\d{3,}[\w.\-–]*|\d+[.\-–]\d[\w.\-–]*)/g)) add('S:' + secCore(m[1]), m[0], m.index, subsAt(m.index));
 
   // Illinois Compiled Statutes: "765 ILCS 721/5", "735 ILCS 5/9-101"
   let lastChapter = null;
   for (const m of s.matchAll(/\b(\d+)\s*ILCS\s*(\d+)(?:\/([\d.\-]+))?(?:\/([\d.\-]+))?/g)) {
     lastChapter = m[1];
-    add('I:' + [m[1], m[2], m[3], m[4]].filter(Boolean).join('/'), m[0], m.index);
+    add('I:' + [m[1], m[2], m[3], m[4]].filter(Boolean).map(x => x.replace(/[.-]+$/, '')).join('/'), m[0], m.index);
   }
   if (inheritIlcs && lastChapter) {
     for (const m of s.matchAll(/(?<![\w/])(\d{3})\/([\d.]+)(?![\w/])/g)) add('I:' + lastChapter + '/' + m[1] + '/' + m[2], m[0], m.index);

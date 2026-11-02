@@ -4,14 +4,15 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@emailjs/browser": "^4.3.3",
     "@anthropic-ai/sdk": "^0.27.0",
-    "dotenv": "^16.3.1"
+    "@emailjs/browser": "^4.3.3",
+    "dotenv": "^16.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
+    "playwright": "^1.59.1",
     "vite": "^5.0.8"
   },
   "scripts": {

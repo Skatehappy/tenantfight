@@ -38,28 +38,28 @@ Via Certified Mail — Return Receipt Requested
 Jane Smith, Property Manager
 Riverside Properties LLC
 456 Management Ave
-Boston, MA 02101
+Houston, TX 77002
 
-Re: Demand for Return of Security Deposit — 123 Elm Street, Apt 4B, Boston, MA 02108
+Re: Demand for Return of Security Deposit — 123 Elm Street, Apt 4B, Houston, TX 77003
 
 Dear Ms. Smith:
 
-This letter constitutes a formal demand for the return of my security deposit in the amount of $2,400.00, plus applicable statutory penalties under M.G.L. c. 186, §15B.
+This letter constitutes a formal demand for the return of my security deposit in the amount of $2,400.00.
 
-I vacated the premises at 123 Elm Street, Apt 4B, Boston, Massachusetts on October 31, 2025, providing written notice on September 30, 2025. The tenancy commenced on November 1, 2023, and I paid a security deposit of $2,400.00 at that time. Under Massachusetts law, you were required to return my deposit within 30 days of the termination of tenancy — no later than November 30, 2025. As of the date of this letter, I have received neither my deposit nor a written itemization of deductions as required under M.G.L. c. 186, §15B(6)...`;
+I vacated the premises at 123 Elm Street, Apt 4B, Houston, Texas on October 31, 2025, providing written notice on September 30, 2025. The tenancy commenced on November 1, 2023, and I paid a security deposit of $2,400.00 at that time. As of the date of this letter, I have received neither my deposit nor a written itemization of deductions. Texas Property Code §92.109 makes a landlord who retains a deposit in bad faith liable for $100, three times the portion wrongfully withheld, and the tenant's reasonable attorney's fees...`;
 
 const stepFields = {
   Tenant: [
     { key: "tenantName",    label: "Your Full Name",              type: "text",     required: true,  placeholder: "Jane Doe" },
     { key: "tenantEmail",   label: "Your Email",                  type: "text",     required: true,  placeholder: "jane@email.com" },
-    { key: "tenantAddress", label: "Your Current Mailing Address",type: "text",     required: true,  placeholder: "456 New St, Boston, MA 02101" },
-    { key: "tenantPhone",   label: "Your Phone Number",           type: "text",     required: false, placeholder: "(617) 555-0100" },
+    { key: "tenantAddress", label: "Your Current Mailing Address",type: "text",     required: true,  placeholder: "456 New St, Houston, TX 77002" },
+    { key: "tenantPhone",   label: "Your Phone Number",           type: "text",     required: false, placeholder: "(713) 555-0100" },
   ],
   Property: [
-    { key: "rentalAddress", label: "Rental Property Address",     type: "text",     required: true,  placeholder: "123 Elm St, Apt 4B, Boston, MA 02108" },
-    { key: "state",         label: "State",                       type: "text",     required: true,  placeholder: "Massachusetts" },
+    { key: "rentalAddress", label: "Rental Property Address",     type: "text",     required: true,  placeholder: "123 Elm St, Apt 4B, Houston, TX 77002" },
+    { key: "state",         label: "State",                       type: "text",     required: true,  placeholder: "Texas" },
     { key: "landlordName",  label: "Landlord / Property Manager Name", type: "text", required: true, placeholder: "Jane Smith / Riverside Properties LLC" },
-    { key: "landlordAddress",label: "Landlord's Mailing Address", type: "text",     required: true,  placeholder: "456 Management Ave, Boston, MA 02101" },
+    { key: "landlordAddress",label: "Landlord's Mailing Address", type: "text",     required: true,  placeholder: "456 Management Ave, Houston, TX 77002" },
     { key: "leaseStart",    label: "Lease Start Date",            type: "text",     required: true,  placeholder: "November 1, 2023" },
     { key: "vacateDate",    label: "Date You Vacated",            type: "text",     required: true,  placeholder: "October 31, 2025" },
     { key: "noticeDate",    label: "Date You Gave Notice",        type: "text",     required: false, placeholder: "September 30, 2025" },
@@ -192,8 +192,14 @@ function Tooltip({ text }) {
   );
 }
 
+const MAX_TEXT = 300, MAX_TEXTAREA = 3000;
 function Field({ field, value, onChange }) {
   const [focused, setFocused] = useState(false);
+  const cap = field.type === "textarea" ? MAX_TEXTAREA : MAX_TEXT;
+  const len = (value || "").length;
+  const counter = field.type === "select" ? null : (
+    <div data-testid="charcount" style={{ textAlign: "right", fontSize: "11px", marginTop: "3px", color: len >= cap ? colors.errorText : colors.inkFaint }}>{len} / {cap}{len >= cap ? " (limit reached)" : ""}</div>
+  );
   return (
     <div style={{ marginBottom: "4px" }}>
       <label style={{ display: "block", marginBottom: "7px", fontSize: "13px", color: colors.inkMuted, letterSpacing: "0.03em" }}>
@@ -207,10 +213,11 @@ function Field({ field, value, onChange }) {
           {field.options.map(o => <option key={o} value={o}>{o}</option>)}
         </select>
       ) : field.type === "textarea" ? (
-        <textarea value={value || ""} onChange={e => onChange(e.target.value)} placeholder={field.placeholder} rows={field.rows || 4} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)} style={{ ...inputStyle(focused), resize: "vertical", lineHeight: "1.7", minHeight: `${(field.rows || 4) * 28}px` }} />
+        <textarea maxLength={MAX_TEXTAREA} value={value || ""} onChange={e => onChange(e.target.value)} placeholder={field.placeholder} rows={field.rows || 4} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)} style={{ ...inputStyle(focused), resize: "vertical", lineHeight: "1.7", minHeight: `${(field.rows || 4) * 28}px` }} />
       ) : (
-        <input type="text" value={value || ""} onChange={e => onChange(e.target.value)} placeholder={field.placeholder} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)} style={inputStyle(focused)} />
+        <input type="text" maxLength={MAX_TEXT} value={value || ""} onChange={e => onChange(e.target.value)} placeholder={field.placeholder} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)} style={inputStyle(focused)} />
       )}
+      {counter}
     </div>
   );
 }
@@ -245,8 +252,25 @@ export default function App() {
     if (code) { setAccessCode(code.toUpperCase()); verifyCode(code.toUpperCase(), true); }
   }, []);
 
-  useEffect(() => { try { const s = sessionStorage.getItem("tf_form"); if (s) setFormData(JSON.parse(s)); } catch {} }, []);
-  useEffect(() => { try { sessionStorage.setItem("tf_form", JSON.stringify(formData)); } catch {} }, [formData]);
+  // Draft persistence: form answers, generated letters and the access code survive a reload or a failed generation.
+  const [restored, setRestored] = useState(false);
+  useEffect(() => {
+    try {
+      const s = JSON.parse(localStorage.getItem("tf_draft") || "null");
+      if (s) {
+        if (s.formData) setFormData(s.formData);
+        if (s.letter) setLetter(s.letter);
+        if (s.altLetter) setAltLetter(s.altLetter);
+        if (Array.isArray(s.checklist)) setChecklist(s.checklist);
+        if (s.accessCode && !new URLSearchParams(window.location.search).get("code")) { setAccessCode(s.accessCode); verifyCode(s.accessCode, true).then(ok => { if (ok) setStep(s.letter ? STEPS.indexOf("Letter") : Math.min(Math.max(1, s.step || 1), STEPS.indexOf("Generate"))); }); }
+      }
+    } catch {}
+    setRestored(true);
+  }, []);
+  useEffect(() => {
+    if (!restored) return;
+    try { localStorage.setItem("tf_draft", JSON.stringify({ formData, letter, altLetter, checklist, step, accessCode: codeValid ? accessCode : "" })); } catch {}
+  }, [restored, formData, letter, altLetter, checklist, step, codeValid, accessCode]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -290,17 +314,28 @@ export default function App() {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ accessCode: code, systemPrompt: "Respond with only: VALID", userPrompt: "Access check" }),
       });
-      if (res.status === 401) { if (!silent) setCodeError("Invalid access code. Check your Payhip receipt email."); setCodeValid(false); }
-      else { setCodeValid(true); if (!silent) setStep(1); }
-    } catch { if (!silent) setCodeError("Could not verify. Check your connection."); }
+      if (res.status === 401) { if (!silent) setCodeError("That access code was not accepted. Check your Payhip receipt email. If you paid and it is still rejected, contact support@buyappsonce.com."); setCodeValid(false); return false; }
+      if (!res.ok) { if (!silent) setCodeError("Verification is temporarily unavailable. Your code has not been used - please try again in a moment."); return false; }
+      setCodeValid(true); if (!silent) setStep(1); return true;
+    } catch { if (!silent) setCodeError("Could not verify. Check your connection and try again - your code has not been used."); return false; }
   };
 
   const callAPI = async (systemPrompt, userPrompt, reviewMode = false, draftLetter = "") => {
-    const res = await fetch(`${API_BASE}/api/generate`, {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ accessCode, systemPrompt, userPrompt, reviewMode, draftLetter, state: formData.state, letterType: formData.issueType }),
-    });
-    if (!res.ok) { const err = await res.json(); throw new Error(err.error || "Generation failed"); }
+    let res;
+    try {
+      res = await fetch(`${API_BASE}/api/generate`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ accessCode, systemPrompt, userPrompt, reviewMode, draftLetter, state: formData.state, letterType: formData.issueType }),
+      });
+    } catch { throw Object.assign(new Error("Network problem. Your access code has not been used - please try again."), { kind: "transient" }); }
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      const kind = res.status === 400 || res.status === 413 ? "invalid" : res.status === 401 ? "consumed" : "transient";
+      const msg = kind === "invalid" ? (err.error || "Part of your input could not be used. Shorten or fix it and try again - your access code is intact.")
+        : kind === "consumed" ? "Your access code is no longer accepted. If you paid, contact support@buyappsonce.com with your Payhip receipt."
+        : "Temporary problem generating your letter. Your access code has not been used - click Generate again.";
+      throw Object.assign(new Error(msg), { kind });
+    }
     return (await res.json()).text;
   };
 
@@ -308,7 +343,7 @@ export default function App() {
 
 Rules:
 - Open with a clear statement of the legal violation and amount demanded
-- Cite the applicable state statute by name (e.g. "M.G.L. c. 186, §15B" for Massachusetts security deposits)
+- Cite the applicable state statute by name (e.g. California Civil Code §1950.5)
 - Reference specific dates, amounts, and communications provided
 - Invoke statutory penalty provisions where applicable (many states allow 2-3x penalties)
 - Set a firm deadline with clear consequences
@@ -321,7 +356,7 @@ Rules:
 
 Rules:
 - Open with clear statement of the violation: landlord entered without proper notice on specified dates
-- Cite the state's landlord entry statute by name (e.g., California Civil Code §1954; note New York and Texas have no general landlord-entry statute — rely on the lease's entry clause and the common-law covenant of quiet enjoyment; in Massachusetts, G.L. c. 186 §15B(1)(a) limits the purposes for which a lease may authorize entry) and identify the specific notice requirement — typically 24-48 hours written notice except true emergencies
+- Cite the state's landlord entry statute by name (e.g., California Civil Code §1954; note New York and Texas have no general landlord-entry statute — rely on the lease's entry clause and the common-law covenant of quiet enjoyment) and identify the specific notice requirement — state the notice period exactly as the cited statute provides it, and note the emergency exception
 - Rebut any reason given by the landlord — emergency exceptions are narrow and must be documented; "routine inspection" and similar pretexts do not qualify
 - Cite the tenant's right to quiet enjoyment under the lease and common law
 - Demand written acknowledgment of the violation, written commitment to comply with proper notice going forward, and preservation of the tenant's right to seek damages and injunctive relief
@@ -336,7 +371,7 @@ Rules:
 
 Rules:
 - Open with a clear timeline: tenant engaged in protected activity on a specific date, and landlord took adverse action on a specific date within the statutory presumption window
-- Cite the state's anti-retaliation statute by name (e.g., California Civil Code §1942.5; New York Real Property Law §223-b; Texas Property Code §92.331; Massachusetts G.L. c. 186 §18) — most create a rebuttable presumption of retaliation if adverse action occurs within 90-180 days of protected activity
+- Cite the state's anti-retaliation statute by name (e.g., California Civil Code §1942.5; New York Real Property Law §223-b; Texas Property Code §92.331) — some create a rebuttable presumption of retaliation when adverse action follows protected activity within a statutory window; state a presumption or its window only if the cited statute provides it
 - Identify the protected activity: repair request, code enforcement complaint, tenant union participation, withholding rent for uninhabitable conditions, or other exercise of legal rights
 - Identify the retaliatory action: rent increase, eviction notice, non-renewal, reduced services, or harassment
 - Rebut any "legitimate business reason" the landlord may assert — once the presumption attaches, the burden shifts to the landlord to prove a non-retaliatory motive
@@ -352,7 +387,7 @@ Rules:
 
 Rules:
 - Open with a clear statement of the uninhabitable conditions, when first reported to the landlord, and the landlord's inadequate response
-- Cite the state's habitability statute and case law establishing the implied warranty of habitability (e.g., California Civil Code §§1941, 1942 and Green v. Superior Court; New York Real Property Law §235-b; Massachusetts G.L. c. 111 §127A and Boston Housing Authority v. Hemingway)
+- Cite the state's habitability statute and case law establishing the implied warranty of habitability (e.g., California Civil Code §§1941, 1942 and Green v. Superior Court; New York Real Property Law §235-b)
 - Reference applicable local housing code violations and HUD housing quality standards where relevant
 - Demand specific repairs by a specific date — typically 14-30 days, shorter for emergency conditions like no heat, no hot water, sewage backup, or severe infestation
 - Invoke applicable tenant remedies: repair-and-deduct where authorized by state statute (with statutory caps), rent withholding or escrow, rent abatement for the period of uninhabitability, and constructive eviction if conditions are severe
@@ -368,7 +403,7 @@ Rules:
 
 Rules:
 - Open with a clear statement: landlord shut off the specified utility on a specific date without legal basis; this is illegal in every state
-- Cite the state's utility shutoff or self-help eviction statute (e.g., California Civil Code §789.3(c) — actual damages plus a statutory award of up to $100 for each day the violation continues, never less than $250 per separate cause of action, and mandatory attorney's fees to the prevailing party (this per-day award is a statutory penalty; do not call it punitive damages); Texas Property Code §92.008; Florida §83.67; New York Real Property Law §235; Massachusetts G.L. c. 186 §14) and identify the specific per-day penalty under the applicable state statute
+- Cite the state's utility shutoff or self-help eviction statute (e.g., California Civil Code §789.3(c) — actual damages plus a statutory award of up to $100 for each day the violation continues, never less than $250 per separate cause of action, and attorney's fees to the prevailing party; New York RPAPL §768; North Carolina G.S. §42-25.9 (actual damages only, no fee provision)) and state any per-day or other damages figure only as the cited statute provides it
 - Cite the doctrine of constructive eviction — an illegal shutoff designed to force the tenant out is itself a constructive eviction and a breach of the covenant of quiet enjoyment
 - Demand IMMEDIATE restoration of the utility (within 24 hours)
 - Demand statutory damages measured per day of shutoff
@@ -418,7 +453,7 @@ Rules:
 
 Rules:
 - Open with a clear statement of the defective notice: type served, date served, stated grounds, and specific defects
-- Cite the state's eviction statute (e.g., California Code of Civil Procedure §1161; Texas Property Code §24.005; New York RPAPL §711; Massachusetts G.L. c. 186 §12) and identify the exact notice requirements for the type of notice served
+- Cite the state's eviction statute (e.g., California Code of Civil Procedure §1161; Texas Property Code §24.005; New York RPAPL §711) and identify the exact notice requirements for the type of notice served
 - Rebut the grounds stated: insufficient specificity, incorrect notice period, improper service, facts do not support the claim, or prohibited grounds
 - In just-cause eviction jurisdictions, cite the applicable law (e.g., California Tenant Protection Act at Civil Code §1946.2; Oregon SB 608; Seattle Just Cause Ordinance; NYC rent stabilization or Good Cause Eviction) and identify which of the enumerated just causes (if any) is actually alleged
 - Invoke the tenant's right to cure where applicable
@@ -434,7 +469,7 @@ Rules:
 
 Rules:
 - Open with a clear statement disputing the specific deduction items and demanding itemized documentation
-- Cite the state's security deposit statute requiring written itemization and receipts for claimed deductions (e.g., California Civil Code §1950.5; Texas Property Code §92.109; New York General Obligations Law §7-108; Massachusetts G.L. c. 186 §15B)
+- Cite the state's security deposit statute requiring written itemization and receipts for claimed deductions (e.g., California Civil Code §1950.5; Texas Property Code §92.109; New York General Obligations Law §7-108)
 - Distinguish normal wear and tear (landlord's cost of doing business) from damage beyond normal wear and tear (tenant may be charged); apply the standard used in the tenant's state
 - Challenge each disputed deduction item specifically: pre-existing (documented in move-in checklist or photos), normal wear, undocumented, excessive in amount, or not actually repaired
 - Demand: itemized receipts for all claimed damages, the move-in inspection report or checklist, and return of disputed amounts
@@ -515,7 +550,7 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
       setStep(STEPS.indexOf("Letter")); setRetryCount(0);
     } catch (e) {
       const n = retryCount + 1; setRetryCount(n);
-      setError(n < 3 ? `Generation failed: ${e.message}. Please try again.` : "Multiple failures. Try refreshing the page or contact support.");
+      setError(e.kind ? e.message : (n < 3 ? `Generation failed: ${e.message}. Please try again.` : "Multiple failures. Try refreshing the page or contact support."));
     }
     setLoading(false); setLoadingMsg("");
   };
@@ -573,7 +608,7 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
   const reset = () => {
     setStep(codeValid ? 1 : 0); setFormData({}); setLetter(""); setAltLetter("");
     setError(""); setEmailSent(false); setChecklist([]); setRetryCount(0);
-    try { sessionStorage.removeItem("tf_form"); } catch {}
+    try { localStorage.removeItem("tf_draft"); } catch {}
   };
 
   const formSteps = ["Tenant","Property","Issue","Demand"];

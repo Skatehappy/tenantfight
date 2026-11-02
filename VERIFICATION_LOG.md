@@ -229,3 +229,17 @@ Standard: Three-Gate v7
 - **Subject:** §789.3(c): landlord liable for (1) actual damages and (2) an amount not to exceed $100 for each day or part of a day the violation continues, never less than $250 for each separate cause of action; the court shall award reasonable attorney's fees to the prevailing party. The per-day amount is a statutory award, not punitive damages; the prompt said "$100/day actual damages plus $100/day punitive" and was rewritten.
 - **Source:** https://codes.findlaw.com/ca/civil-code/civ-sect-789-3/ (official-text mirror; leginfo.legislature.ca.gov blocks automated fetch), read 2026-11-01
 - **Action:** prompt corrected; local mock generation confirmed the new wording reaches the model request
+
+### 2026-11-02 — North Carolina G.S. §42-25.9 (self-help eviction remedy)
+- **Source file:** src/App.jsx (utilityShutoffPrompt example)
+- **Verdict:** VERIFIED
+- **Subject:** A tenant removed contrary to Article 2A may recover possession or terminate the lease and recover actual damages as for trespass or conversion; no punitive, treble, or emotional-distress damages and no attorney's-fee provision (see VERIFICATION_LOG-SEO-CONTENT.md Phase B, North Carolina).
+- **Source:** https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_42/GS_42-25.9.html (Official)
+- **Action:** prompt example corrected to say actual damages only
+
+### 2026-11-02 — New York RPAPL §768 (unlawful eviction)
+- **Source file:** src/App.jsx (utilityShutoffPrompt example)
+- **Verdict:** VERIFIED
+- **Subject:** Unlawful to evict or attempt to evict an occupant of 30+ consecutive days, or a lessee, without a warrant or court order by force, by a course of conduct that interferes with comfort including interruption of essential services, or by removing possessions, the door, or the lock; intentional violation is a class A misdemeanor; civil penalty of not less than ,000 nor more than  ,000 per violation (subdivision 2).
+- **Source:** https://www.nysenate.gov/legislation/laws/RPA/768 (Official: NY State Senate, read 2026-11-02; upgrades the Secondary FindLaw read in the Phase B log)
+- **Action:** prompt example added

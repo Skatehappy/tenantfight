@@ -45,8 +45,8 @@ if (missing.length) {
   for (const m of [...missing].sort()) console.error('  ' + m);
   fail(missing.length + ' unlogged citation(s)');
 }
-// ── A10: letter citation lock — verified-citations.json current + mock tests pass ──
-for (const [label, args] of [['A10: api/_verified-citations.json is stale (run node scripts/build-verified-citations.mjs)', ['scripts/build-verified-citations.mjs', '--check']], ['A10: citation-lock mock tests failed (node scripts/test-citelint.mjs)', ['scripts/test-citelint.mjs']]]) {
+// ── A10: letter citation lock — verified-citations.js current + mock tests pass (incl. subsection + numeric-claims + checklist lock + client templates) ──
+for (const [label, args] of [['A10: api/_verified-citations.js is stale (run node scripts/build-verified-citations.mjs)', ['scripts/build-verified-citations.mjs', '--check']], ['A10: citation-lock mock tests failed (node scripts/test-citelint.mjs)', ['scripts/test-citelint.mjs']], ['A10: extended lock tests failed (node scripts/test-lock-extended.mjs)', ['scripts/test-lock-extended.mjs']]]) {
   const r = spawnSync(process.execPath, args, { cwd: ROOT, encoding: 'utf8' });
   if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail(label); }
 }
@@ -57,5 +57,18 @@ for (const [label, args] of [['A10: api/_verified-citations.json is stale (run n
   if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail('A11: auth gate failed (node scripts/test-auth.mjs)'); }
 }
 
-console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged; A10 citation lock ok; A11 auth gate ok.');
+// ── A12: Payhip mock + access-check tests (node:test) ──
+{
+  const r = spawnSync(process.execPath, ['--test', 'tests/payhip-mock.test.js', 'tests/isCheckCall.test.js'], { cwd: ROOT, encoding: 'utf8' });
+  if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail('A12: payhip-mock / isCheckCall tests failed (node --test tests/)'); }
+}
+
+// ── A13: Playwright UI button-wiring test (every button, nav, modal; zero console errors). Fail-closed: if
+//      playwright is missing the gate is RED (npm i, or set PLAYWRIGHT_DIR to a node_modules that has it). ──
+{
+  const r = spawnSync(process.execPath, ['tests/ui-wiring.test.mjs'], { cwd: ROOT, encoding: 'utf8', timeout: 300000, env: process.env });
+  if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail('A13: UI wiring test failed (node tests/ui-wiring.test.mjs)'); }
+}
+
+console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged; A10 citation lock (subsections, numeric claims, checklist, templates) ok; A11 auth gate ok; A12 payhip-mock + isCheckCall ok; A13 UI wiring ok.');
 process.exit(0);

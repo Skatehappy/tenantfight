@@ -20,7 +20,7 @@
     },
     {
       "q": "What damages can I recover for a landlord's lease violation?",
-      "a": "You can recover actual damages, including the cost of alternative lodging, ruined property, and out-of-pocket expenses. You may also recover rent abatement—the difference between the rent you paid and the fair rental value of the unit in its defective condition. In some cases, attorney's fees are available if the lease provides for them or under specific statutes. Punitive damages are rare but possible for willful, malicious conduct like illegal lockouts under § 42-25.9."
+      "a": "You can recover actual damages, including the cost of alternative lodging, ruined property, and out-of-pocket expenses. You may also recover rent abatement—the difference between the rent you paid and the fair rental value of the unit in its defective condition. In some cases, attorney's fees are available if the lease provides for them or under specific statutes. For an illegal lockout, § 42-25.9 allows actual damages only; it provides no punitive or treble damages and no attorney's fees."
     },
     {
       "q": "Does the landlord have to give notice before entering my unit?",
@@ -28,7 +28,7 @@
     },
     {
       "q": "Will sending a demand letter protect me from retaliation?",
-      "a": "Yes. Under N.C. Gen. Stat. § 42-37.1, once you make a good-faith written complaint about a habitability or code issue, the landlord is barred for 12 months from retaliating through eviction, rent increases, or service reductions. Sending a certified demand letter creates dated proof of your complaint. If the landlord retaliates, you can raise § 42-37.1 as a defense to eviction and may also sue for damages caused by the retaliatory action."
+      "a": "Yes. Under N.C. Gen. Stat. § 42-37.1, once you make a good-faith written complaint about a habitability or code issue, the landlord is barred for 12 months from retaliating through eviction, rent increases, or service reductions. Sending a certified demand letter creates dated proof of your complaint. If the landlord retaliates, you can raise § 42-37.1 as a defense to eviction and, under § 42-37.2, the court must deny a retaliatory ejectment, although you still owe any rent that is due."
     }
   ]
 }
