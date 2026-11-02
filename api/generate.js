@@ -1,7 +1,7 @@
 // api/generate.js
-import { timingSafeEqual } from 'node:crypto';
 import { MODEL } from './_config.js';
 import { verifyLicense, PRODUCT_LINK } from './_license.js';
+import { isTestCode, createQuota } from './_g4t.js';
 import { lockBlock, lintLetter, stripViolations, stateAbbr, logRecord } from './_citelint.js';
 
 // Node serverless runtime (NOT edge). Edge caps at ~25s on Hobby and ignores
@@ -11,32 +11,12 @@ import { lockBlock, lintLetter, stripViolations, stateAbbr, logRecord } from './
 // the function until the timeout).
 export const config = { maxDuration: 60 };
 
-// Gate 4 test code. Inert unless G4_TEST_CODE_SECRET is set in the Vercel env (no default, never
-// in the repo). The accepted code is "G4T-" + that secret. It skips the Payhip verify and the
-// usage-mark, and is capped at TEST_LETTERS_PER_DAY letters a day (the app makes 3 generate calls
-// per letter). The counter lives in this function instance's memory, so it is best-effort: a cold
-// start or a second warm instance starts its own count (worst case several x the cap, never unbounded
-// by one instance). Every use is logged without the code.
-const TEST_PREFIX = 'G4T-';
+// Gate 4 test code: see _g4t.js. Capped at TEST_LETTERS_PER_DAY letters a day (the app makes 3
+// generate calls per letter).
 const TEST_LETTERS_PER_DAY = 10;
 const CALLS_PER_LETTER = 3;
-const testUse = { day: '', calls: 0 };
-
-function isTestCode(code) {
-  const secret = process.env.G4_TEST_CODE_SECRET;
-  if (!secret || !code.startsWith(TEST_PREFIX)) return false;
-  const a = Buffer.from(code.trim());
-  const b = Buffer.from(TEST_PREFIX + secret);
-  return a.length === b.length && timingSafeEqual(a, b);
-}
-
-function testQuota() {
-  const day = new Date().toISOString().slice(0, 10);
-  if (testUse.day !== day) { testUse.day = day; testUse.calls = 0; }
-  if (testUse.calls >= TEST_LETTERS_PER_DAY * CALLS_PER_LETTER) return false;
-  testUse.calls += 1;
-  return true;
-}
+const quota = createQuota(TEST_LETTERS_PER_DAY * CALLS_PER_LETTER);
+const testUse = quota.state;
 
 async function callModel(anthropicKey, system, messages) {
   const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -122,7 +102,7 @@ export default async function handler(req, res) {
     }
     if (isCheckCall) return res.status(200).json({ text: 'VALID' });
     if (testMode) {
-      if (!testQuota()) {
+      if (!quota.take()) {
         console.log(JSON.stringify({ evt: 'g4t_limit', day: testUse.day, calls: testUse.calls }));
         return res.status(429).json({ error: 'Test code daily limit reached.' });
       }

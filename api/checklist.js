@@ -1,8 +1,12 @@
 // api/checklist.js
 import { MODEL } from './_config.js';
 import { verifyLicense, PRODUCT_LINK } from './_license.js';
+import { isTestCode, createQuota } from './_g4t.js';
 
 export const config = { runtime: 'edge' };
+
+// Gate 4 test code (see _g4t.js): one checklist per letter, so 10 a day.
+const quota = createQuota(10);
 
 export default async function handler(req) {
   const headers = {
@@ -23,8 +27,16 @@ export default async function handler(req) {
     if (!payhipApiKey || !process.env.ANTHROPIC_API_KEY) {
       return new Response(JSON.stringify({ error: 'Service not configured' }), { status: 500, headers });
     }
-    const lic = await verifyLicense(accessCode, PRODUCT_LINK, payhipApiKey);
-    if (!lic.ok) return new Response(JSON.stringify({ error: lic.error }), { status: lic.status, headers });
+    if (isTestCode(accessCode)) {
+      if (!quota.take()) {
+        console.log(JSON.stringify({ evt: 'g4t_limit', ep: 'checklist', day: quota.state.day, calls: quota.state.calls }));
+        return new Response(JSON.stringify({ error: 'Test code daily limit reached.' }), { status: 429, headers });
+      }
+      console.log(JSON.stringify({ evt: 'g4t_use', ep: 'checklist', day: quota.state.day, calls: quota.state.calls, cap: quota.state.cap }));
+    } else {
+      const lic = await verifyLicense(accessCode, PRODUCT_LINK, payhipApiKey);
+      if (!lic.ok) return new Response(JSON.stringify({ error: lic.error }), { status: lic.status, headers });
+    }
 
     const apiKey = process.env.ANTHROPIC_API_KEY;
 

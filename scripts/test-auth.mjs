@@ -1,5 +1,5 @@
 // scripts/test-auth.mjs — auth gate: api/generate.js and api/checklist.js must never reach
-// api.anthropic.com without a passed Payhip verify (or a G4T test code, generate only); access
+// api.anthropic.com without a passed Payhip verify (or a G4T test code); access
 // checks never call the model or mark usage; no hard-coded bypass keys anywhere. Stubbed fetch only.
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
@@ -101,7 +101,19 @@ payhipMode = 'notfound'; reset();
 const g = await callGenerate({ accessCode: 'G4T-UNITTESTSECRET12345', systemPrompt: 'Respond with only: VALID', userPrompt: 'Access check' });
 assert.equal(g.status, 200); assert.equal(anthropicCalls, 0); assert.equal(usageMarks, 0);
 assert.equal((await callGenerate({ ...gen, accessCode: 'G4T-WRONG' })).status, 401);
-assert.equal((await callChecklist({ accessCode: 'G4T-UNITTESTSECRET12345', state: 'Texas' })).status, 401, 'checklist does not accept G4T');
+// 5b. G4T on the checklist: wrong secret -> 401 and no Anthropic; correct secret -> Anthropic exactly
+//     once, no Payhip verify, no usage mark; and with the secret unset the same code is just a bad code.
+payhipMode = 'notfound'; reset();
+let k = await callChecklist({ accessCode: 'G4T-WRONG', state: 'Texas' });
+assert.equal(k.status, 401); assert.equal(anthropicCalls, 0, 'checklist: wrong G4T secret reached Anthropic');
+reset();
+k = await callChecklist({ accessCode: 'G4T-UNITTESTSECRET12345', state: 'Texas' });
+assert.equal(k.status, 200); assert.equal(anthropicCalls, 1, 'checklist: valid G4T should reach Anthropic once');
+assert.equal(verifyCalls, 0, 'checklist: G4T must skip Payhip'); assert.equal(usageMarks, 0);
+delete process.env.G4_TEST_CODE_SECRET; reset();
+k = await callChecklist({ accessCode: 'G4T-UNITTESTSECRET12345', state: 'Texas' });
+assert.equal(k.status, 401, 'checklist: G4T with secret unset must be rejected'); assert.equal(anthropicCalls, 0);
+process.env.G4_TEST_CODE_SECRET = 'UNITTESTSECRET12345';
 delete process.env.G4_TEST_CODE_SECRET;
 globalThis.fetch = realFetch;
 
