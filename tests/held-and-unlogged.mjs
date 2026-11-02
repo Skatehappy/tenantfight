@@ -31,7 +31,7 @@ for (const [slug, ab] of Object.entries(AB)) {
   }
 }
 // 3. values Phase B corrected/removed must not come back (rendered pages, source data, landing, client)
-const STALE = [/five court days/i, /765 ILCS 720/, /Utility Payments Act/, /90.180 day/, /5-12-060/, /250\.206/, /Illinois Retaliatory Eviction Act/, /increased from 3 days by HSTPA/, /Philadelphia Code, including the Good Cause/, /§ 1950\.5\(l\)/, /83\.56\(2\)\(a\)\); 7-day unconditional/, /1940-1954\.06(?!1)/];
+const STALE = [/five court days/i, /765 ILCS 720/, /Utility Payments Act/, /90.180 day/, /5-12-060/, /250\.206/, /Illinois Retaliatory Eviction Act/, /increased from 3 days by HSTPA/, /Philadelphia Code, including the Good Cause/, /§ 1950\.5\(l\)/, /83\.56\(2\)\(a\)\); 7-day unconditional/, /1940-1954\.06(?!1)/, /\$3,500/, /up to \$200 in damages/, /greater of \$250 or three months/];
 let stale = 0;
 for (const d of ['public', 'scripts/data', 'src', 'api']) for (const f of fs.readdirSync(d, { recursive: true })) { const p = path.join(d, f); if (!/\.(html|json|js|jsx)$/.test(p) || fs.statSync(p).isDirectory()) continue; const s = fs.readFileSync(p, 'utf8'); for (const re of STALE) if (re.test(s)) { stale++; console.log('STALE ' + re + ' in ' + p); } }
 console.log(`stale corrected values: ${stale}`);

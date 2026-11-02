@@ -21,7 +21,7 @@ t('missing', classify('', NOW) === 'missing');
 t('garbage', classify('soon', NOW) === 'missing');
 
 // mock repo
-function mockRepo({ ruleDate, blockDate, rowDate, rowBlank }) {
+function mockRepo({ ruleDate, blockDate, rowDate, rowBlank, extraPage = '', extraSd = '' }) {
   const d = fs.mkdtempSync(path.join(os.tmpdir(), 'tf-vo-'));
   fs.mkdirSync(path.join(d, 'api')); fs.mkdirSync(path.join(d, 'public', 'texas'), { recursive: true });
   fs.copyFileSync(path.join(ROOT, 'api', '_citekeys.js'), path.join(d, 'api', '_citekeys.js'));
@@ -30,8 +30,11 @@ function mockRepo({ ruleDate, blockDate, rowDate, rowBlank }) {
     '# log', '## Texas (TX)', blockDate ? `- **verified_on:** ${blockDate}` : '- **Primary statute:** x', '- **Sources (1):**', '',
     '## Phase B - x', '### Texas (TX)', '| Citation as it now appears | Status | What it says | Source | verified_on |', '|---|---|---|---|---|', row, ''].join('\n'));
   fs.writeFileSync(path.join(d, 'api', '_verified-citations.js'), 'export default ' + JSON.stringify({
-    states: { TX: { dates: { 'S:92.103': rowDate }, stateDataVerifiedOn: blockDate } }, federal: { dates: {} } }) + ';\n');
-  fs.writeFileSync(path.join(d, 'public', 'texas', 'index.html'), '<html><body><p>Return the deposit within 30 days. Tex. Prop. Code § 92.103 applies.</p></body></html>');
+    states: { TX: { dates: { 'S:92.103': rowDate }, figDates: { 'd:30': rowDate }, stateDataVerifiedOn: blockDate } }, federal: { dates: {}, figDates: {} } }) + ';\n');
+  fs.mkdirSync(path.join(d, 'scripts', 'data'), { recursive: true });
+  fs.copyFileSync(path.join(ROOT, 'api', '_numfacts.js'), path.join(d, 'api', '_numfacts.js'));
+  fs.writeFileSync(path.join(d, 'scripts', 'data', 'state-data.json'), JSON.stringify({ TX: { rules: 'Return the deposit within 30 days. ' + extraSd } }));
+  fs.writeFileSync(path.join(d, 'public', 'texas', 'index.html'), '<html><body><p>Return the deposit within 30 days. Tex. Prop. Code § 92.103 applies. ' + extraPage + '</p></body></html>');
   return d;
 }
 const run = async o => { const d = mockRepo(o); try { return await scanRepo({ root: d, now: NOW }); } finally { fs.rmSync(d, { recursive: true, force: true }); } };
@@ -43,11 +46,21 @@ t('10-month: warns, not fatal', warn.errors.length === 0 && warn.warns.length > 
 const old = await run({ blockDate: '2026-10-01', rowDate: '2025-09-30' }); // 13 months
 t('13-month: fails (page + generator)', old.errors.some(e => /page public\/texas/.test(e)) && old.errors.some(e => /generator lock TX S:92.103/.test(e)));
 const oldFig = await run({ blockDate: '2025-09-01', rowDate: '2026-10-15' });
-t('stale state-data figures fail', oldFig.errors.some(e => /state-data figures/.test(e)));
+t('stale state-data figures fail', oldFig.errors.some(e => /state-data.json figures/.test(e)));
 const miss = await run({ blockDate: '2026-10-01', rowBlank: true });
 t('missing row date fails', miss.errors.some(e => /no valid verified_on/.test(e)));
 const missBlk = await run({ blockDate: '', rowDate: '2026-10-15' });
 t('missing block date fails', missBlk.errors.some(e => /no valid verified_on: Texas \(TX\)/.test(e)));
+
+// STRICT MODE: nothing is skipped. An unmapped citation or an unmapped $ / % / day figure fails the gate.
+const unCite = await run({ blockDate: '2026-10-01', rowDate: '2026-10-15', extraPage: 'See Tex. Prop. Code § 92.999.' });
+t('unmapped citation on a page fails', unCite.errors.some(e => /UNMAPPED CITATION page public\/texas.*92\.999/.test(e)));
+const unFig = await run({ blockDate: '2026-10-01', rowDate: '2026-10-15', extraPage: 'Filing fees run $45 to $80.' });
+t('unmapped dollar figure on a page fails', unFig.errors.some(e => /UNMAPPED FIGURE page public\/texas.*\$45/.test(e)) && unFig.errors.some(e => /\$80/.test(e)));
+const unDay = await run({ blockDate: '2026-10-01', rowDate: '2026-10-15', extraPage: 'The landlord has 14 days to answer and may add 5% interest.' });
+t('unmapped day and percent figures fail', unDay.errors.some(e => /"14 days"/.test(e)) && unDay.errors.some(e => /"5%"/.test(e)));
+const unSd = await run({ blockDate: '2026-10-01', rowDate: '2026-10-15', extraSd: 'Late fee capped at $50 and § 92.888.' });
+t('unmapped figure and citation fed to a generator (state-data.json) fail', unSd.errors.some(e => /UNMAPPED FIGURE state-data\.json\[TX\].*\$50/.test(e)) && unSd.errors.some(e => /UNMAPPED CITATION state-data\.json\[TX\].*92\.888/.test(e)));
 
 // stamp: fills only missing, never overwrites
 const src = ['## Texas (TX)', '- **Primary statute:** x', '', '## Phase B', '### Texas (TX)', '| Citation | Status | What | Source |', '|---|---|---|---|', '| a § 1 | VERIFIED | x | y |'].join('\n');

@@ -13,6 +13,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { extractCitations } from '../api/_citekeys.js';
+import { figures } from '../api/_numfacts.js';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -104,19 +106,53 @@ export function stamp(text, today) {
 const stripHtml = h => h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<head[\s\S]*?<\/head>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&#039;|&apos;/g, "'").replace(/&amp;/g, '&').replace(/&sect;/g, '§').replace(/\s+/g, ' ');
 const SLUG = { arizona: 'AZ', california: 'CA', florida: 'FL', georgia: 'GA', illinois: 'IL', 'new-york': 'NY', 'north-carolina': 'NC', ohio: 'OH', pennsylvania: 'PA', texas: 'TX' };
 
+// ---- strict mapping (no skips): every citation and every $ / % / day figure must map to a dated log entry ----
+export function citeDate(vc, ab, key) {
+  const st = vc.states[ab] || {};
+  const d = st.dates?.[key] ?? vc.federal.dates?.[key];
+  if (d) return d;
+  if (key.startsWith('I:') && key.split('/').length <= 2) { // act-level ILCS cite: dated by its newest logged section
+    let best = '';
+    for (const src of [st.dates, vc.federal.dates]) for (const [k, v] of Object.entries(src || {})) if (k.startsWith(key + '/') && v > best) best = v;
+    return best || null;
+  }
+  return null;
+}
+export function figDate(vc, ab, f) {
+  const k = f.kind + ':' + f.value;
+  return vc.states[ab]?.figDates?.[k] ?? vc.federal.figDates?.[k] ?? null;
+}
+// Maps one block of text. Pushes {where,date} for each mapped item and an error for each unmapped one.
+export function mapText(text, where, ab, vc, used, errors) {
+  for (const c of extractCitations(text)) {
+    const d = citeDate(vc, ab, c.key);
+    if (d) used.push({ where: `${where} ${c.key}`, date: d });
+    else errors.push(`UNMAPPED CITATION ${where}: "${c.raw}" (${c.key}) has no dated log entry`);
+  }
+  for (const f of figures(text)) {
+    const d = figDate(vc, ab, f);
+    if (d) used.push({ where: `${where} figure ${f.raw.trim()}`, date: d });
+    else errors.push(`UNMAPPED FIGURE ${where}: "${f.raw.trim()}" has no dated log entry for ${ab}`);
+  }
+}
+const strings = (v, out = []) => { if (typeof v === 'string') out.push(v); else if (Array.isArray(v)) v.forEach(x => strings(x, out)); else if (v && typeof v === 'object') Object.values(v).forEach(x => strings(x, out)); return out; };
+
 export async function scanRepo({ root = ROOT, now }) {
   const log = fs.readFileSync(path.join(root, 'VERIFICATION_LOG-SEO-CONTENT.md'), 'utf8');
   const entries = parseEntries(log);
   const res = checkEntries(entries, now);
   const vc = (await import(pathToFileURL(path.join(root, 'api', '_verified-citations.js')).href)).default;
-  const { extractCitations } = await import(pathToFileURL(path.join(root, 'api', '_citekeys.js')).href);
-  const used = [];
-  // fed to generators: every lock key and the state-data figures
+  const used = [], mapErrors = [];
+  // fed to generators: every lock key, and the state-data.json text (citations + figures must map too)
   for (const [ab, st] of Object.entries(vc.states)) {
-    used.push({ where: `generator lock ${ab} state-data figures`, date: st.stateDataVerifiedOn });
     for (const [k, d] of Object.entries(st.dates || {})) used.push({ where: `generator lock ${ab} ${k}`, date: d });
   }
   for (const [k, d] of Object.entries(vc.federal.dates || {})) used.push({ where: `generator lock federal ${k}`, date: d });
+  const sdFile = path.join(root, 'scripts', 'data', 'state-data.json');
+  if (fs.existsSync(sdFile)) {
+    const sd = JSON.parse(fs.readFileSync(sdFile, 'utf8'));
+    for (const [ab, o] of Object.entries(sd)) { if (vc.states[ab]) { used.push({ where: `generator feed ${ab} state-data.json figures`, date: vc.states[ab].stateDataVerifiedOn }); mapText(strings(o).join('\n'), `state-data.json[${ab}]`, ab, vc, used, mapErrors); } }
+  }
   // rendered on pages
   let pages = 0;
   const pub = path.join(root, 'public');
@@ -125,16 +161,11 @@ export async function scanRepo({ root = ROOT, now }) {
     const rel = path.relative(pub, f).replace(/\\/g, '/'), ab = SLUG[rel.split('/')[0]];
     pages++;
     if (!ab) continue;
-    const text = stripHtml(fs.readFileSync(f, 'utf8'));
-    const st = vc.states[ab];
-    used.push({ where: `page public/${rel} (state-data figures)`, date: st.stateDataVerifiedOn });
-    for (const c of extractCitations(text, { inheritIlcs: true })) {
-      const d = st.dates?.[c.key] ?? vc.federal.dates?.[c.key];
-      if (d) used.push({ where: `page public/${rel} ${c.key}`, date: d });
-    }
+    mapText(stripHtml(fs.readFileSync(f, 'utf8')), `page public/${rel}`, ab, vc, used, mapErrors);
   }
   const u = checkUsage(used, now);
-  return { entries, pages, errors: [...res.errors, ...u.errors], warns: [...res.warns, ...u.warns] };
+  const uniq = a => [...new Set(a)];
+  return { entries, pages, errors: [...res.errors, ...uniq(mapErrors), ...u.errors], warns: [...res.warns, ...u.warns] };
 }
 
 const argv = process.argv.slice(2);
