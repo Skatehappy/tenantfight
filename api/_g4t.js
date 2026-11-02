@@ -3,7 +3,6 @@
 // "G4T-" + that secret. It skips the Payhip verify and the usage-mark. Each endpoint keeps its own
 // per-day call counter in this function instance's memory, so it is best-effort: a cold start or a
 // second warm instance starts its own count. Every use is logged without the code.
-import { timingSafeEqual } from 'node:crypto';
 
 const TEST_PREFIX = 'G4T-';
 
@@ -11,9 +10,11 @@ export function isTestCode(code) {
   const secret = process.env.G4_TEST_CODE_SECRET;
   const c = (code || '').trim();
   if (!secret || !c.startsWith(TEST_PREFIX)) return false;
-  const a = Buffer.from(c);
-  const b = Buffer.from(TEST_PREFIX + secret);
-  return a.length === b.length && timingSafeEqual(a, b);
+  // constant-time compare without node:crypto (this module is also bundled into the Edge checklist function)
+  const b = TEST_PREFIX + secret;
+  let diff = c.length ^ b.length;
+  for (let i = 0; i < b.length; i++) diff |= (c.charCodeAt(i) || 0) ^ b.charCodeAt(i);
+  return diff === 0;
 }
 
 export function createQuota(cap) {

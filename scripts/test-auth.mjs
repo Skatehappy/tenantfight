@@ -146,4 +146,11 @@ for (const d of ['api', 'src', 'scripts', 'public']) {
 }
 if (existsSync(join(ROOT, 'vercel.json'))) for (const b of BAD) assert.ok(!readFileSync(join(ROOT, 'vercel.json'), 'utf8').includes(b), 'bypass string in vercel.json');
 
+// 7. api/checklist.js runs on the Edge runtime: nothing it imports may pull in a node: builtin (Vercel fails the
+//    whole deployment with 'Edge Function references unsupported modules').
+for (const f of readdirSync(apiDir).filter(f => f.endsWith('.js'))) {
+  if (f === 'generate.js') continue;
+  assert.ok(!/from\s+['"]node:/.test(readFileSync(join(apiDir, f), 'utf8')), f + ': node: import in a module the Edge checklist bundles');
+}
+
 console.log('test-auth: all assertions passed');
