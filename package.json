@@ -26,7 +26,7 @@
     "test:verified-on": "node scripts/test-verified-on.mjs",
     "check:verified-on": "node scripts/check-verified-on.mjs",
     "test:auth": "node scripts/test-auth.mjs",
-    "test": "node --test tests/isCheckCall.test.js tests/payhip-mock.test.js tests/checklist-maxtokens.test.js tests/ui-wiring.test.mjs tests/held-and-unlogged.mjs scripts/test-citelint.mjs scripts/test-verified-on.mjs scripts/test-auth.mjs scripts/test-lock-extended.mjs scripts/test-source-citations.mjs",
+    "test": "node --test tests/isCheckCall.test.js tests/payhip-mock.test.js tests/checklist-maxtokens.test.js tests/budget-markdown-numwords.test.js tests/ui-wiring.test.mjs tests/held-and-unlogged.mjs scripts/test-citelint.mjs scripts/test-verified-on.mjs scripts/test-auth.mjs scripts/test-lock-extended.mjs scripts/test-source-citations.mjs",
     "generate:all": "npm run generate:content && npm run generate:pages"
   }
 }

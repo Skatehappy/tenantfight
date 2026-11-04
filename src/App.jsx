@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
+import { stripMarkdown } from "../api/_stripmd.js";
 
 const EMAILJS_SERVICE_ID  = "YOUR_EMAILJS_SERVICE_ID";
 const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
@@ -259,8 +260,8 @@ export default function App() {
       const s = JSON.parse(localStorage.getItem("tf_draft") || "null");
       if (s) {
         if (s.formData) setFormData(s.formData);
-        if (s.letter) setLetter(s.letter);
-        if (s.altLetter) setAltLetter(s.altLetter);
+        if (s.letter) setLetter(stripMarkdown(s.letter));
+        if (s.altLetter) setAltLetter(stripMarkdown(s.altLetter));
         if (Array.isArray(s.checklist)) setChecklist(s.checklist);
         if (s.accessCode && !new URLSearchParams(window.location.search).get("code")) { setAccessCode(s.accessCode); verifyCode(s.accessCode, true).then(ok => { if (ok) setStep(s.letter ? STEPS.indexOf("Letter") : Math.min(Math.max(1, s.step || 1), STEPS.indexOf("Generate"))); }); }
       }
@@ -534,11 +535,11 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
 
       setLoadingMsg("Running quality review...");
       const reviewed = await callAPI("", "", true, draft);
-      setLetter(reviewed);
+      setLetter(stripMarkdown(reviewed));
 
       setLoadingMsg("Generating assertive version...");
       const alt = await callAPI(effectivePrompt, buildPrompt("assertive"));
-      setAltLetter(alt);
+      setAltLetter(stripMarkdown(alt));
 
       setLoadingMsg("Building checklist...");
       const clRes = await fetch(`${API_BASE}/api/checklist`, {
@@ -562,7 +563,7 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
         to_email: email, to_name: formData.tenantName,
         property: formData.rentalAddress,
-        letter_standard: letter, letter_assertive: altLetter,
+        letter_standard: stripMarkdown(letter), letter_assertive: stripMarkdown(altLetter),
         from_name: APP.name, reply_to: APP.support,
       }, EMAILJS_PUBLIC_KEY);
       setEmailSent(true);
@@ -570,7 +571,7 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
     setEmailSending(false);
   };
 
-  const copyText = (text) => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 2500); };
+  const copyText = (text) => { navigator.clipboard.writeText(stripMarkdown(text)); setCopied(true); setTimeout(() => setCopied(false), 2500); };
 
   const downloadPDF = (text, filename) => {
     // Use jsPDF loaded via CDN
@@ -587,7 +588,7 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
     
     // Replace [DATE] with today's date
     const today = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-    const fullText = text.replace(/\[DATE\]/g, today);
+    const fullText = stripMarkdown(text).replace(/\[DATE\]/g, today);
     
     const lines = doc.splitTextToSize(fullText, usableWidth);
     let y = margin;

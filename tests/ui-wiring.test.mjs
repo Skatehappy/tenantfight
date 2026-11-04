@@ -58,7 +58,7 @@ page.on('pageerror', e => consoleErrors.push('pageerror: ' + e.message));
 const calls = { generate: [], checklist: [] };
 let mode = 'ok'; // ok | 401 | 503 | 400 | down
 let draftN = 0;
-const JSPDF_STUB = `window.__pdf=[];window.jspdf={jsPDF:class{constructor(){this.internal={pageSize:{getWidth:()=>612,getHeight:()=>792}}}setFont(){}setFontSize(){}splitTextToSize(t){return String(t).split('\\n')}text(){}addPage(){}save(n){window.__pdf.push(n)}}};`;
+const JSPDF_STUB = `window.__pdf=[];window.jspdf={jsPDF:class{constructor(){this.internal={pageSize:{getWidth:()=>612,getHeight:()=>792}}}setFont(){}setFontSize(){}splitTextToSize(t){window.__pdfText=String(t);return String(t).split('\\n')}text(){}addPage(){}save(n){window.__pdf.push(n)}}};`;
 await ctx.route(/^https?:\/\/(?!127\.0\.0\.1)/, route => {
   const u = route.request().url();
   if (/jspdf/i.test(u)) return route.fulfill({ status: 200, contentType: 'text/javascript', body: JSPDF_STUB });
@@ -76,7 +76,7 @@ await ctx.route('**/api/generate', async route => {
   if (mode === '400' && !isCheck) return route.fulfill({ status: 400, contentType: 'application/json', body: JSON.stringify({ error: 'Your input is too long. Shorten the longest answers and try again - your access code has not been used.' }) });
   if (isCheck) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ text: 'VALID' }) });
   draftN += 1;
-  return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ text: `[DATE]\n\nDear Landlord,\n\nThis is mock letter number ${draftN}. Please return my deposit.\n\nSincerely,\nTenant` }) });
+  return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ text: `# DEMAND LETTER\n\n[DATE]\n\n**Dear Landlord,**\n\nThis is mock letter number ${draftN}. Please return __my__ *deposit*.\n* item one\n\nSincerely,\nTenant` }) });
 });
 await ctx.route('**/api/checklist', route => {
   calls.checklist.push(JSON.parse(route.request().postData() || '{}'));
@@ -188,6 +188,10 @@ try {
   await page.waitForSelector('text=Copied');
   await page.getByRole('button', { name: /PDF/ }).click();
   assert.equal((await page.evaluate(() => window.__pdf)).length, 1, 'PDF save called');
+  const pdfText = await page.evaluate(() => window.__pdfText);
+  assert.ok(/Dear Landlord,/.test(pdfText) && !/[#*_]/.test(pdfText), 'PDF text has no markdown: ' + pdfText);
+  const shown = await page.evaluate(() => document.body.innerText);
+  assert.ok(/Dear Landlord,/.test(shown) && !/[*]{2}|__|# DEMAND/.test(shown), 'displayed letter has no markdown');
   await page.locator('input[type="checkbox"]').first().check();
   ok('letter screen: both tabs, Copy, PDF, checklist checkbox');
 

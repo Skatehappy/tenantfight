@@ -3,6 +3,8 @@ import { MODEL } from './_config.js';
 import { verifyLicense, PRODUCT_LINK } from './_license.js';
 import { isTestCode, createQuota } from './_g4t.js';
 import { callComplete } from './_complete.js';
+import { budget } from './_budget.js';
+import { stripMarkdown } from './_stripmd.js';
 import { lockBlock, lintLetter, lintNumbers, stripUnverified, stripSentences, stateAbbr, logRecord } from './_citelint.js';
 
 // Node serverless runtime (NOT edge). Edge caps at ~25s on Hobby and ignores
@@ -22,8 +24,17 @@ const testUse = quota.state;
 
 // stop_reason "max_tokens" = truncated: retried once with a higher limit, never returned or linted as a letter.
 const TOKEN_LIMITS = [3000, 6000];
-const callModel = (anthropicKey, system, messages) =>
-  callComplete('https://api.anthropic.com/v1/messages', anthropicKey, max => ({ model: MODEL, max_tokens: max, thinking: { type: 'disabled' }, system, messages }), TOKEN_LIMITS);
+// Time budget (see _budget.js): every call is aborted at `deadline`; the truncation retry (and the lint
+// regeneration below) only run when enough budget is left, so one request never stacks model calls past the limit.
+// Letters are plain text: markdown the model emits anyway is stripped before linting and before returning.
+const PLAIN_TEXT_RULE = `
+
+FORMAT: Write plain text only. No markdown of any kind: no # headings, no ** or __ bold, no * or _ italics, no bullet symbols, no tables, no code fences. Use ordinary paragraphs, and numbered lines (1. 2. 3.) only where a list is needed.`;
+const callModel = async (anthropicKey, system, messages, { deadline, limits = TOKEN_LIMITS } = {}) => {
+  const r = await callComplete('https://api.anthropic.com/v1/messages', anthropicKey, max => ({ model: MODEL, max_tokens: max, thinking: { type: 'disabled' }, system, messages }), limits, { deadline, retryMin: budget('NODE_SECOND_CALL_MIN') });
+  if (r.ok) r.text = stripMarkdown(r.text);
+  return r;
+};
 
 // Citation + numeric lock, step 2: lint the output against the verified set for the user's state
 // (citations incl. subsections, and dollar / percent / day figures stated as law). A miss triggers ONE
@@ -41,16 +52,17 @@ const stripAll = (text, abbr, violations) => {
   return out;
 };
 async function generateLocked({ anthropicKey, system, messages, abbr, kind, t0, userText = '' }) {
-  let r = await callModel(anthropicKey, system, messages);
+  const deadline = t0 + budget('NODE_MODEL_DEADLINE');
+  let r = await callModel(anthropicKey, system, messages, { deadline });
   if (!r.ok) return r;
   let { found, violations } = lintAll(r.text, abbr, userText);
   let regenerated = false;
-  if (violations.length && Date.now() - t0 < 32000) {
+  if (violations.length && deadline - Date.now() >= budget('NODE_SECOND_CALL_MIN')) {
     regenerated = true;
     const bad = [...new Set(violations.map(v => v.kind === 'num' ? `the figure "${v.raw}" (not a verified figure)` : v.reason === 'subsection' ? `${v.raw} (subsection not on file)` : v.raw))].join('; ');
     const r2 = await callModel(anthropicKey, system + `
 
-REGENERATION NOTICE: your previous draft used authorities or figures that are NOT verified and were rejected: ${bad}. Write the letter again without them. Cite nothing that is not on the verified list above, and state no dollar amount, percentage or day count as law unless it is on the verified figures list or was supplied by the user.`, messages);
+REGENERATION NOTICE: your previous draft used authorities or figures that are NOT verified and were rejected: ${bad}. Write the letter again without them, as plain text with no markdown. Cite nothing that is not on the verified list above, and state no dollar amount, percentage or day count as law unless it is on the verified figures list or was supplied by the user.`, messages, { deadline, limits: [TOKEN_LIMITS[0]] });
     if (r2.ok) { r = r2; ({ found, violations } = lintAll(r.text, abbr, userText)); }
   }
   let stripped = 0;
@@ -122,7 +134,7 @@ export default async function handler(req, res) {
 
     let messages;
     if (reviewMode && draftLetter) {
-      messages = [{ role: 'user', content: `Review and improve this appeal letter. Fix vague language, ensure all arguments are explicitly stated, remove emotional appeals, tighten redundancy. Return ONLY the improved letter:\n\n${draftLetter}` }];
+      messages = [{ role: 'user', content: `Review and improve this appeal letter. Fix vague language, ensure all arguments are explicitly stated, remove emotional appeals, tighten redundancy. Return ONLY the improved letter as plain text with no markdown:\n\n${draftLetter}` }];
     } else {
       messages = [{ role: 'user', content: userPrompt }];
     }
@@ -132,12 +144,13 @@ export default async function handler(req, res) {
     const stateName = state || (typeof userPrompt === 'string' && (userPrompt.match(/^STATE:\s*(.+)$/m) || [])[1]) || '';
     const abbr = stateAbbr(stateName);
     const lock = lockBlock(abbr ? stateName : '') + (reviewMode ? '\nIn this review, delete any citation in the draft that is not on the verified list instead of keeping it.' : '');
-    const system = ((systemPrompt || '') + lock).trim() || undefined;
+    const system = ((systemPrompt || '') + lock + PLAIN_TEXT_RULE).trim() || undefined;
 
     const r = await generateLocked({ anthropicKey, system, messages, abbr, kind: reviewMode ? 'review' : 'letter', t0, userText: `${userPrompt || ''}
 ${draftLetter || ''}` });
     if (!r.ok) {
       // returned BEFORE the mark-usage call below, so the buyer's one-use license is NOT burned
+      if (r.timeout) return res.status(504).json({ error: 'The letter took too long to generate. Please try again - your access code has not been used.' });
       if (r.truncated) return res.status(502).json({ error: 'The letter was too long to finish. Please try again - your access code has not been used.' });
       return res.status(502).json({ error: 'AI generation failed', detail: r.err });
     }
@@ -150,13 +163,16 @@ ${draftLetter || ''}` });
     // Mark license as used. Awaited (not fire-and-forget): on Node serverless,
     // work after res is sent is not guaranteed to run. Only for real buyer codes.
     if (!testMode) {
+      const usageCtl = new AbortController(), usageTimer = setTimeout(() => usageCtl.abort(), budget('NODE_USAGE_MARK'));
       try {
         await fetch(`https://payhip.com/api/v1/license/usage`, {
+          signal: usageCtl.signal,
           method: 'PUT',
           headers: { 'payhip-api-key': payhipApiKey, 'Content-Type': 'application/x-www-form-urlencoded' },
           body: `product_link=${PRODUCT_LINK}&license_key=${encodeURIComponent(accessCode.trim())}`,
         });
       } catch { /* letter already generated; don't fail the response on a usage-mark hiccup */ }
+      finally { clearTimeout(usageTimer); }
     }
 
     return res.status(200).json({ text });

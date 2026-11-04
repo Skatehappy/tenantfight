@@ -120,7 +120,7 @@ const near = (a, b) => Math.abs(a - b) < 0.005;
 function userAllowances(userText) {
   const fs = figures(userText);
   const dollars = fs.filter(f => f.kind === '$').map(f => f.value);
-  const ints = new Set([...String(userText || '').matchAll(/\b(\d{1,3})\b/g)].map(m => Number(m[1])));
+  const ints = new Set([...fs.filter(f => f.kind === 'd').map(f => f.value), ...[...String(userText || '').matchAll(/\b(\d{1,3})\b/g)].map(m => Number(m[1]))]);
   const prods = new Set();
   for (const u of dollars) for (const k of [0.5, 1, 2, 3, 4]) prods.add(u * k);
   return { dollars, ints, prods, pcts: new Set(fs.filter(f => f.kind === '%').map(f => f.value)) };

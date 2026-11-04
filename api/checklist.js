@@ -4,6 +4,7 @@ import { verifyLicense, PRODUCT_LINK } from './_license.js';
 import { isTestCode, createQuota } from './_g4t.js';
 import { lockBlock, lintLetter, lintNumbers, stateAbbr, logRecord } from './_citelint.js';
 import { callComplete } from './_complete.js';
+import { budget } from './_budget.js';
 import { typeInfo, fallbackFor } from './_checklist-fallbacks.js';
 
 export const config = { runtime: 'edge' };
@@ -39,7 +40,7 @@ export default async function handler(req) {
       }
       console.log(JSON.stringify({ evt: 'g4t_use', ep: 'checklist', day: quota.state.day, calls: quota.state.calls, cap: quota.state.cap }));
     } else {
-      const lic = await verifyLicense(accessCode, PRODUCT_LINK, payhipApiKey);
+      const lic = await verifyLicense(accessCode, PRODUCT_LINK, payhipApiKey, budget('EDGE_VERIFY'));
       if (!lic.ok) return new Response(JSON.stringify({ error: lic.error }), { status: lic.status, headers });
     }
 
@@ -58,13 +59,13 @@ Letter excerpt: ${letterExcerpt?.substring(0, 200) || ''}`;
     // Never parse a cut-off reply: callComplete retries once with a higher limit, then reports truncation.
     // Any model failure (HTTP error, truncation, unparseable reply) falls back to this letter type's own list.
     const diag = {};
-    const r = await callComplete('https://api.anthropic.com/v1/messages', apiKey, max => ({ model: MODEL, max_tokens: max, system, thinking: { type: 'disabled' }, messages: [{ role: 'user', content: prompt }] }), [2000, 4000]);
+    const r = await callComplete('https://api.anthropic.com/v1/messages', apiKey, max => ({ model: MODEL, max_tokens: max, system, thinking: { type: 'disabled' }, messages: [{ role: 'user', content: prompt }] }), [2000, 4000], { deadline: Date.now() + budget('EDGE_MODEL'), retryMin: budget('EDGE_RETRY_MIN') });
     diag.attempts = r.attempts; diag.stop = r.stop; diag.status = r.status;
     let checklist = null;
     if (r.ok) {
       try { checklist = JSON.parse(r.text.replace(/```json|```/g, '').trim()); } catch { diag.parseFailed = true; }
     } else {
-      diag.failed = r.truncated ? 'truncated' : 'model-error';
+      diag.failed = r.timeout ? 'timeout' : r.truncated ? 'truncated' : 'model-error';
       console.log(JSON.stringify({ evt: 'checklist_model_fail', reason: diag.failed, status: r.status || null }));
     }
 

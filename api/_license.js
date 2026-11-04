@@ -3,11 +3,11 @@
 // timeout / non-JSON -> 503 (never "invalid"). Never marks usage and never calls the model.
 export const PRODUCT_LINK = 'Kp6fH';
 
-export async function verifyLicense(licenseKey, productLink, apiKey) {
+export async function verifyLicense(licenseKey, productLink, apiKey, timeoutMs = 8000) {
   const key = (licenseKey || '').trim();
   if (!key) return { ok: false, status: 401, error: 'Invalid license key.' };
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8000);
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const url = `https://payhip.com/api/v1/license/verify?product_link=${encodeURIComponent(productLink)}&license_key=${encodeURIComponent(key)}`;
     const res = await fetch(url, { headers: { 'payhip-api-key': apiKey }, signal: controller.signal });

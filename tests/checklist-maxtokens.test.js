@@ -117,7 +117,7 @@ test('generate: truncated letter is retried once with a higher limit, then the f
   const r = await callGenerate({});
   assert.equal(r.code, 200);
   assert.equal(calls[0].max_tokens, 3000); assert.equal(calls[1].max_tokens, 6000);
-  assert.equal(r.body.text, letter);
+  assert.equal(r.body.text, letter.trim());
   assert.ok(!JSON.stringify(r.body).includes('HALF A LETTER'));
   assert.equal(usage, 1, 'the delivered letter marks the license used');
 });
