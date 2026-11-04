@@ -5,6 +5,7 @@ import { isTestCode, createQuota } from './_g4t.js';
 import { callComplete } from './_complete.js';
 import { budget } from './_budget.js';
 import { stripMarkdown } from './_stripmd.js';
+import { SIGNER_RULE, voiceHits } from './_voicelint.js';
 import { lockBlock, lintLetter, lintNumbers, stripUnverified, stripSentences, stateAbbr, logRecord } from './_citelint.js';
 
 // Node serverless runtime (NOT edge). Edge caps at ~25s on Hobby and ignores
@@ -56,15 +57,21 @@ async function generateLocked({ anthropicKey, system, messages, abbr, kind, t0, 
   let r = await callModel(anthropicKey, system, messages, { deadline });
   if (!r.ok) return r;
   let { found, violations } = lintAll(r.text, abbr, userText);
+  let voice = voiceHits(r.text);
   let regenerated = false;
-  if (violations.length && deadline - Date.now() >= budget('NODE_SECOND_CALL_MIN')) {
+  if ((violations.length || voice.length) && deadline - Date.now() >= budget('NODE_SECOND_CALL_MIN')) {
     regenerated = true;
     const bad = [...new Set(violations.map(v => v.kind === 'num' ? `the figure "${v.raw}" (not a verified figure)` : v.reason === 'subsection' ? `${v.raw} (subsection not on file)` : v.raw))].join('; ');
+    const notices = [];
+    if (bad) notices.push(`your previous draft used authorities or figures that are NOT verified and were rejected: ${bad}. Write the letter again without them, as plain text with no markdown. Cite nothing that is not on the verified list above, and state no dollar amount, percentage or day count as law unless it is on the verified figures list or was supplied by the user.`);
+    if (voice.length) notices.push(`your previous draft was rejected because it contained the phrase "${voice.join('", "')}". ${SIGNER_RULE} Write the letter again from the tenant's own point of view, signed only with [Your Name].`);
     const r2 = await callModel(anthropicKey, system + `
 
-REGENERATION NOTICE: your previous draft used authorities or figures that are NOT verified and were rejected: ${bad}. Write the letter again without them, as plain text with no markdown. Cite nothing that is not on the verified list above, and state no dollar amount, percentage or day count as law unless it is on the verified figures list or was supplied by the user.`, messages, { deadline, limits: [TOKEN_LIMITS[0]] });
-    if (r2.ok) { r = r2; ({ found, violations } = lintAll(r.text, abbr, userText)); }
+REGENERATION NOTICE: ${notices.join(' ALSO: ')}`, messages, { deadline, limits: [TOKEN_LIMITS[0]] });
+    if (r2.ok) { r = r2; ({ found, violations } = lintAll(r.text, abbr, userText)); voice = voiceHits(r.text); }
   }
+  // Attorney-voice text is NEVER returned: still present after the one regeneration (or no budget to regenerate) => fail.
+  if (voice.length) { console.log(JSON.stringify({ evt: 'voice_reject', kind, phrases: voice, regenerated })); return { ok: false, voice: true, err: 'attorney-voice' }; }
   let stripped = 0;
   if (violations.length) { r.text = stripAll(r.text, abbr, violations); stripped = violations.length; }
   if (found.length || violations.length || regenerated) console.log(logRecord(abbr, kind, found, violations, { regenerated, stripped }));
@@ -144,13 +151,14 @@ export default async function handler(req, res) {
     const stateName = state || (typeof userPrompt === 'string' && (userPrompt.match(/^STATE:\s*(.+)$/m) || [])[1]) || '';
     const abbr = stateAbbr(stateName);
     const lock = lockBlock(abbr ? stateName : '') + (reviewMode ? '\nIn this review, delete any citation in the draft that is not on the verified list instead of keeping it.' : '');
-    const system = ((systemPrompt || '') + lock + PLAIN_TEXT_RULE).trim() || undefined;
+    const system = ((systemPrompt || '') + lock + '\n\n' + SIGNER_RULE + PLAIN_TEXT_RULE).trim() || undefined;
 
     const r = await generateLocked({ anthropicKey, system, messages, abbr, kind: reviewMode ? 'review' : 'letter', t0, userText: `${userPrompt || ''}
 ${draftLetter || ''}` });
     if (!r.ok) {
       // returned BEFORE the mark-usage call below, so the buyer's one-use license is NOT burned
       if (r.timeout) return res.status(504).json({ error: 'The letter took too long to generate. Please try again - your access code has not been used.' });
+      if (r.voice) return res.status(502).json({ error: 'The letter could not be written in your own voice (it described the writer as an attorney or firm). Please try again - your access code has not been used.' });
       if (r.truncated) return res.status(502).json({ error: 'The letter was too long to finish. Please try again - your access code has not been used.' });
       return res.status(502).json({ error: 'AI generation failed', detail: r.err });
     }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { stripMarkdown } from "../api/_stripmd.js";
+import { SIGNER_RULE } from "../api/_voicelint.js";
 
 const EMAILJS_SERVICE_ID  = "YOUR_EMAILJS_SERVICE_ID";
 const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
@@ -340,7 +341,9 @@ export default function App() {
     return (await res.json()).text;
   };
 
-  const systemPrompt = `You are an expert tenant rights attorney with 20 years writing successful demand letters to landlords. Write firm, legally precise demand letters that invoke applicable state statutes by name and maximize settlement probability.
+  const systemPrompt = `You are an expert tenant-rights letter writer with 20 years of experience drafting successful demand letters to landlords. Write firm, legally precise demand letters that invoke applicable state statutes by name and maximize settlement probability.
+
+${SIGNER_RULE}
 
 Rules:
 - Open with a clear statement of the legal violation and amount demanded
@@ -353,7 +356,9 @@ Rules:
 - Format: formal letter with [DATE] placeholder, via certified mail notation, proper salutation and signature block
 - Output ONLY the letter, no preamble or commentary`;
 
-  const illegalEntryPrompt = `You are an expert tenant rights attorney specializing in landlord entry and tenant privacy violations. Write firm, legally precise demand letters.
+  const illegalEntryPrompt = `You are an expert tenant-rights letter writer specializing in landlord entry and tenant privacy violations. Write firm, legally precise demand letters.
+
+${SIGNER_RULE}
 
 Rules:
 - Open with clear statement of the violation: landlord entered without proper notice on specified dates
@@ -368,7 +373,9 @@ Rules:
 - Format: formal letter with [DATE] placeholder, via certified mail
 - Output ONLY the letter, no preamble`;
 
-  const retaliationPrompt = `You are an expert tenant rights attorney specializing in landlord retaliation claims. Write firm, legally precise demand letters.
+  const retaliationPrompt = `You are an expert tenant-rights letter writer specializing in landlord retaliation claims. Write firm, legally precise demand letters.
+
+${SIGNER_RULE}
 
 Rules:
 - Open with a clear timeline: tenant engaged in protected activity on a specific date, and landlord took adverse action on a specific date within the statutory presumption window
@@ -384,7 +391,9 @@ Rules:
 - Format: formal letter with [DATE] placeholder, via certified mail
 - Output ONLY the letter, no preamble`;
 
-  const habitabilityPrompt = `You are an expert tenant rights attorney specializing in habitability and failure-to-repair claims. Write firm, legally precise demand letters.
+  const habitabilityPrompt = `You are an expert tenant-rights letter writer specializing in habitability and failure-to-repair claims. Write firm, legally precise demand letters.
+
+${SIGNER_RULE}
 
 Rules:
 - Open with a clear statement of the uninhabitable conditions, when first reported to the landlord, and the landlord's inadequate response
@@ -400,7 +409,9 @@ Rules:
 - Format: formal letter with [DATE] placeholder, via certified mail
 - Output ONLY the letter, no preamble`;
 
-  const utilityShutoffPrompt = `You are an expert tenant rights attorney specializing in illegal utility shutoffs and constructive eviction. Write firm, legally precise demand letters with appropriate urgency.
+  const utilityShutoffPrompt = `You are an expert tenant-rights letter writer specializing in illegal utility shutoffs and constructive eviction. Write firm, legally precise demand letters with appropriate urgency.
+
+${SIGNER_RULE}
 
 Rules:
 - Open with a clear statement: landlord shut off the specified utility on a specific date without legal basis; this is illegal in every state
@@ -416,7 +427,9 @@ Rules:
 - Format: formal letter with [DATE] placeholder, via certified mail (and note that a copy is being hand-delivered given the urgency)
 - Output ONLY the letter, no preamble`;
 
-  const leaseViolationPrompt = `You are an expert tenant rights attorney specializing in landlord breach of lease. Write firm, legally precise demand letters.
+  const leaseViolationPrompt = `You are an expert tenant-rights letter writer specializing in landlord breach of lease. Write firm, legally precise demand letters.
+
+${SIGNER_RULE}
 
 Rules:
 - Open with a clear statement of the specific lease clause breached, quoted verbatim when provided
@@ -432,7 +445,9 @@ Rules:
 - Format: formal letter with [DATE] placeholder, via certified mail
 - Output ONLY the letter, no preamble`;
 
-  const fairHousingPrompt = `You are an expert tenant rights attorney specializing in fair housing and anti-discrimination law. Write firm, legally precise demand letters.
+  const fairHousingPrompt = `You are an expert tenant-rights letter writer specializing in fair housing and anti-discrimination law. Write firm, legally precise demand letters.
+
+${SIGNER_RULE}
 
 Rules:
 - Open with a clear statement of the discriminatory act and the protected class involved
@@ -450,7 +465,9 @@ Rules:
 - Format: formal letter with [DATE] placeholder, via certified mail
 - Output ONLY the letter, no preamble`;
 
-  const wrongfulEvictionPrompt = `You are an expert tenant rights attorney specializing in eviction defense. Write firm, legally precise demand letters challenging improper eviction notices.
+  const wrongfulEvictionPrompt = `You are an expert tenant-rights letter writer specializing in eviction defense. Write firm, legally precise demand letters challenging improper eviction notices.
+
+${SIGNER_RULE}
 
 Rules:
 - Open with a clear statement of the defective notice: type served, date served, stated grounds, and specific defects
@@ -466,7 +483,9 @@ Rules:
 - Format: formal letter with [DATE] placeholder, via certified mail
 - Output ONLY the letter, no preamble`;
 
-  const moveOutDisputePrompt = `You are an expert tenant rights attorney specializing in security deposit and move-out condition disputes. Write firm, legally precise demand letters.
+  const moveOutDisputePrompt = `You are an expert tenant-rights letter writer specializing in security deposit and move-out condition disputes. Write firm, legally precise demand letters.
+
+${SIGNER_RULE}
 
 Rules:
 - Open with a clear statement disputing the specific deduction items and demanding itemized documentation

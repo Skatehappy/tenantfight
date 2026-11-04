@@ -5,6 +5,7 @@ import { isTestCode, createQuota } from './_g4t.js';
 import { lockBlock, lintLetter, lintNumbers, stateAbbr, logRecord } from './_citelint.js';
 import { callComplete } from './_complete.js';
 import { budget } from './_budget.js';
+import { voiceHits } from './_voicelint.js';
 import { typeInfo, fallbackFor } from './_checklist-fallbacks.js';
 
 export const config = { runtime: 'edge' };
@@ -77,7 +78,7 @@ Letter excerpt: ${letterExcerpt?.substring(0, 200) || ''}`;
     if (Array.isArray(checklist)) {
       checklist = checklist.filter(x => typeof x === 'string' && x.trim()).filter(item => {
         const lc = lintLetter(item, abbr).violations, ln = lintNumbers(item, abbr, userText).violations;
-        const bad = lc.length + ln.length;
+        const bad = lc.length + ln.length + voiceHits(item).length;
         if (bad) { dropped += 1; (diag.droppedItems = diag.droppedItems || []).push({ item: item.slice(0, 120), cites: lc.map(v => v.raw), nums: ln.map(v => v.raw) }); }
         return !bad;
       }).slice(0, 15);
