@@ -30,7 +30,8 @@ export default async function handler(req) {
     if (!payhipApiKey || !process.env.ANTHROPIC_API_KEY) {
       return new Response(JSON.stringify({ error: 'Service not configured' }), { status: 500, headers });
     }
-    if (isTestCode(accessCode)) {
+    const testMode = isTestCode(accessCode);
+    if (testMode) {
       if (!quota.take()) {
         console.log(JSON.stringify({ evt: 'g4t_limit', ep: 'checklist', day: quota.state.day, calls: quota.state.calls }));
         return new Response(JSON.stringify({ error: 'Test code daily limit reached.' }), { status: 429, headers });
@@ -78,10 +79,13 @@ Letter excerpt: ${letterExcerpt?.substring(0, 200) || ''}`,
     const text = data.content?.find(b => b.type === 'text')?.text || '[]';
     const clean = text.replace(/```json|```/g, '').trim();
 
+    // Test-code diagnostics only (never returned to buyers): why the model list was or was not used.
+    const diag = { rawLen: text.length, rawHead: text.slice(0, 160), stop: data.stop_reason };
     let checklist;
     try {
       checklist = JSON.parse(clean);
     } catch {
+      diag.parseFailed = true;
       checklist = FALLBACK;
     }
 
@@ -92,15 +96,17 @@ Letter excerpt: ${letterExcerpt?.substring(0, 200) || ''}`,
     let dropped = 0;
     if (Array.isArray(checklist)) {
       checklist = checklist.filter(x => typeof x === 'string' && x.trim()).filter(item => {
-        const bad = lintLetter(item, abbr).violations.length + lintNumbers(item, abbr, userText).violations.length;
-        if (bad) dropped += 1;
+        const lc = lintLetter(item, abbr).violations, ln = lintNumbers(item, abbr, userText).violations;
+        const bad = lc.length + ln.length;
+        if (bad) { dropped += 1; (diag.droppedItems = diag.droppedItems || []).push({ item: item.slice(0, 120), cites: lc.map(v => v.raw), nums: ln.map(v => v.raw) }); }
         return !bad;
       }).slice(0, 15);
     }
-    if (!Array.isArray(checklist) || checklist.length < 3) checklist = FALLBACK;
+    diag.survivors = Array.isArray(checklist) ? checklist.length : -1;
+    if (!Array.isArray(checklist) || checklist.length < 3) { diag.usedFallback = true; checklist = FALLBACK; }
     if (dropped) console.log(logRecord(abbr, 'checklist', [], [], { dropped }));
 
-    return new Response(JSON.stringify({ checklist }), { status: 200, headers });
+    return new Response(JSON.stringify(testMode ? { checklist, _diag: diag } : { checklist }), { status: 200, headers });
 
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message }), { status: 500, headers });
