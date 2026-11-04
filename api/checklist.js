@@ -3,13 +3,14 @@ import { MODEL } from './_config.js';
 import { verifyLicense, PRODUCT_LINK } from './_license.js';
 import { isTestCode, createQuota } from './_g4t.js';
 import { lockBlock, lintLetter, lintNumbers, stateAbbr, logRecord } from './_citelint.js';
+import { callComplete } from './_complete.js';
+import { typeInfo, fallbackFor } from './_checklist-fallbacks.js';
 
 export const config = { runtime: 'edge' };
 
 // Gate 4 test code (see _g4t.js): one checklist per letter, so 10 a day.
 const quota = createQuota(10);
 
-const FALLBACK = ['Send letter via certified mail with return receipt requested — keep the tracking number', 'Keep a complete copy of everything you send', 'Gather proof of deposit payment — cancelled check, bank statement, or receipt', 'Document property condition at move-out — photos, videos, dated', "Note your state's deadline for landlord to return deposit", 'Compile all prior written communications with your landlord', "Check your state's penalty statute — many states allow 2-3x damages for wrongful withholding", 'If ignored, file in small claims court — no attorney needed, low filing fee', "File complaint with your state's tenant rights agency or attorney general"];
 
 export default async function handler(req) {
   const headers = {
@@ -44,54 +45,32 @@ export default async function handler(req) {
 
     const apiKey = process.env.ANTHROPIC_API_KEY;
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 900,
-        system: `You write short practical checklists for tenants.${lockBlock(stateAbbr(state) ? state : '')}
-Every item must be a plain action step. Do not cite a statute, ordinance or case unless it is on the verified list above, and state no dollar amount, percentage or day count as law unless it is on the verified figures list.`,
-        thinking: { type: 'disabled' },
-        messages: [{
-          role: 'user',
-          content: `Generate a practical submission checklist for a tenant demand letter / security deposit dispute as a JSON array of strings. Include items like: send via certified mail, keep copy of everything, photograph the property condition, gather receipts for deposit payment, check state deadline for deposit return, document all prior communications with landlord, file in small claims court if ignored, check state-specific penalty laws. Return ONLY a valid JSON array, no other text.
+    const type = issueType || varianceType;
+    const abbrS = stateAbbr(state);
+    const system = `You write short practical checklists for tenants.${lockBlock(abbrS ? state : '')}
+Every item must be a plain action step. Do not cite a statute, ordinance or case unless it is on the verified list above, and state no dollar amount, percentage or day count as law unless it is on the verified figures list.`;
+    const prompt = `Generate a practical checklist for a tenant sending a demand letter about ${typeInfo(type).focus}, as a JSON array of 8 to 10 strings. Every item is one plain action step of at most 25 words and fits this situation only: do not mention a security deposit unless the situation is a deposit dispute. Always include sending the letter by certified mail with return receipt and keeping a copy. Return ONLY a valid JSON array, no other text.
 
 State: ${state}
-Situation: ${varianceType || issueType || 'tenant demand letter / security deposit dispute'}
-Letter excerpt: ${letterExcerpt?.substring(0, 200) || ''}`,
-        }],
-      }),
-    });
+Situation: ${type || 'other landlord violation'}
+Letter excerpt: ${letterExcerpt?.substring(0, 200) || ''}`;
 
-    // Fail loudly on an API error instead of silently returning an empty
-    // checklist (the pre-migration bug: a dead model 404'd and this returned []).
-    if (!response.ok) {
-      const detail = await response.text();
-      return new Response(JSON.stringify({ error: 'Checklist generation failed', detail }), { status: 502, headers });
-    }
-
-    const data = await response.json();
-    const text = data.content?.find(b => b.type === 'text')?.text || '[]';
-    const clean = text.replace(/```json|```/g, '').trim();
-
-    // Test-code diagnostics only (never returned to buyers): why the model list was or was not used.
-    const diag = { rawLen: text.length, rawHead: text.slice(0, 160), stop: data.stop_reason };
-    let checklist;
-    try {
-      checklist = JSON.parse(clean);
-    } catch {
-      diag.parseFailed = true;
-      checklist = FALLBACK;
+    // Never parse a cut-off reply: callComplete retries once with a higher limit, then reports truncation.
+    // Any model failure (HTTP error, truncation, unparseable reply) falls back to this letter type's own list.
+    const diag = {};
+    const r = await callComplete('https://api.anthropic.com/v1/messages', apiKey, max => ({ model: MODEL, max_tokens: max, system, thinking: { type: 'disabled' }, messages: [{ role: 'user', content: prompt }] }), [2000, 4000]);
+    diag.attempts = r.attempts; diag.stop = r.stop; diag.status = r.status;
+    let checklist = null;
+    if (r.ok) {
+      try { checklist = JSON.parse(r.text.replace(/```json|```/g, '').trim()); } catch { diag.parseFailed = true; }
+    } else {
+      diag.failed = r.truncated ? 'truncated' : 'model-error';
+      console.log(JSON.stringify({ evt: 'checklist_model_fail', reason: diag.failed, status: r.status || null }));
     }
 
     // Citation + numeric lock: an item that cites an unverified authority (or an unverified subsection) or
     // states an unverified legal figure is dropped. If too little survives, the static fallback list is used.
-    const abbr = stateAbbr(state);
+    const abbr = abbrS;
     const userText = `${state || ''} ${varianceType || issueType || ''} ${letterExcerpt || ''}`;
     let dropped = 0;
     if (Array.isArray(checklist)) {
@@ -103,7 +82,7 @@ Letter excerpt: ${letterExcerpt?.substring(0, 200) || ''}`,
       }).slice(0, 15);
     }
     diag.survivors = Array.isArray(checklist) ? checklist.length : -1;
-    if (!Array.isArray(checklist) || checklist.length < 3) { diag.usedFallback = true; checklist = FALLBACK; }
+    if (!Array.isArray(checklist) || checklist.length < 3) { diag.usedFallback = true; checklist = fallbackFor(type); }
     if (dropped) console.log(logRecord(abbr, 'checklist', [], [], { dropped }));
 
     return new Response(JSON.stringify(testMode ? { checklist, _diag: diag } : { checklist }), { status: 200, headers });

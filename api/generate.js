@@ -2,6 +2,7 @@
 import { MODEL } from './_config.js';
 import { verifyLicense, PRODUCT_LINK } from './_license.js';
 import { isTestCode, createQuota } from './_g4t.js';
+import { callComplete } from './_complete.js';
 import { lockBlock, lintLetter, lintNumbers, stripUnverified, stripSentences, stateAbbr, logRecord } from './_citelint.js';
 
 // Node serverless runtime (NOT edge). Edge caps at ~25s on Hobby and ignores
@@ -19,19 +20,10 @@ const CALLS_PER_LETTER = 3;
 const quota = createQuota(TEST_LETTERS_PER_DAY * CALLS_PER_LETTER);
 const testUse = quota.state;
 
-async function callModel(anthropicKey, system, messages) {
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-api-key': anthropicKey, 'anthropic-version': '2023-06-01' },
-    body: JSON.stringify({ model: MODEL, max_tokens: 3000, thinking: { type: 'disabled' }, system, messages }),
-  });
-  if (!response.ok) return { ok: false, err: await response.text() };
-  const data = await response.json();
-  // Extract the text block by type, not by position (adaptive thinking can put a "thinking" block first).
-  const text = data.content?.find(b => b.type === 'text')?.text;
-  if (!text) throw new Error(`No text block in API response (stop_reason: ${data.stop_reason || 'unknown'})`);
-  return { ok: true, text };
-}
+// stop_reason "max_tokens" = truncated: retried once with a higher limit, never returned or linted as a letter.
+const TOKEN_LIMITS = [3000, 6000];
+const callModel = (anthropicKey, system, messages) =>
+  callComplete('https://api.anthropic.com/v1/messages', anthropicKey, max => ({ model: MODEL, max_tokens: max, thinking: { type: 'disabled' }, system, messages }), TOKEN_LIMITS);
 
 // Citation + numeric lock, step 2: lint the output against the verified set for the user's state
 // (citations incl. subsections, and dollar / percent / day figures stated as law). A miss triggers ONE
@@ -144,7 +136,11 @@ export default async function handler(req, res) {
 
     const r = await generateLocked({ anthropicKey, system, messages, abbr, kind: reviewMode ? 'review' : 'letter', t0, userText: `${userPrompt || ''}
 ${draftLetter || ''}` });
-    if (!r.ok) return res.status(502).json({ error: 'AI generation failed', detail: r.err });
+    if (!r.ok) {
+      // returned BEFORE the mark-usage call below, so the buyer's one-use license is NOT burned
+      if (r.truncated) return res.status(502).json({ error: 'The letter was too long to finish. Please try again - your access code has not been used.' });
+      return res.status(502).json({ error: 'AI generation failed', detail: r.err });
+    }
     const text = r.text;
     if (!text.trim() || (r.stripped && text.trim().length < 150)) {
       // thrown BEFORE the mark-usage call below, so the buyer's one-use license is NOT burned
