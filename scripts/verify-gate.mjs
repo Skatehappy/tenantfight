@@ -90,5 +90,11 @@ for (const [label, args] of [['A16: source-citation mock tests failed (node scri
   if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail(label); }
 }
 
-console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged; A10 citation lock (subsections, numeric claims, checklist, templates) ok; A11 auth gate ok; A12 payhip-mock + isCheckCall ok; A13 UI wiring ok; A14 0 held / 0 unverified citations / 0 stale values; A15 STRICT: every citation and $/%/day figure on a page or fed to a generator maps to a dated log entry (fresh); A16 0 unlogged citations in scripts/data/**.');
+// ── A17: banned marketing claims (attorney/lawyer-quality etc., non-disclaimer 'legal advice') in public pages, templates, data, src; mock tests included ──
+for (const [label, args] of [['A17: banned-claims tests failed (node scripts/test-banned-claims.mjs)', ['scripts/test-banned-claims.mjs']], ['A17: banned marketing claim found (node scripts/check-banned-claims.mjs)', ['scripts/check-banned-claims.mjs']]]) {
+  const r = spawnSync(process.execPath, args, { cwd: ROOT, encoding: 'utf8' });
+  if (r.status !== 0) { console.error((r.stdout || '') + (r.stderr || '')); fail(label); }
+}
+
+console.log('GATE GREEN — A1 files ok; A9 citation-log parity: all ' + tokens.size + ' citations logged; A10 citation lock (subsections, numeric claims, checklist, templates) ok; A11 auth gate ok; A12 payhip-mock + isCheckCall ok; A13 UI wiring ok; A14 0 held / 0 unverified citations / 0 stale values; A15 STRICT: every citation and $/%/day figure on a page or fed to a generator maps to a dated log entry (fresh); A16 0 unlogged citations in scripts/data/**; A17 0 banned marketing claims.');
 process.exit(0);

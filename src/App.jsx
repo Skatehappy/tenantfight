@@ -669,8 +669,9 @@ ADDITIONAL DEMANDS: ${formData.additionalDemands || "none"}`;
             <div style={{ fontSize: "13px", color: colors.goldLight, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "12px" }}>{APP.icon} {APP.name}</div>
             <h1 style={{ fontFamily: APP.displayFont, fontSize: "clamp(28px, 5vw, 44px)", color: colors.ink, marginBottom: "16px", fontWeight: "900" }}>Tenant Demand Letter Writer</h1>
             <p style={{ fontSize: "17px", color: colors.inkMuted, marginBottom: "48px", maxWidth: "480px", margin: "0 auto 40px", lineHeight: "1.7" }}>
-              Attorney-quality demand letters for security deposits, habitability, illegal entry, retaliation, utility shutoffs, fair housing, wrongful eviction, and more. Enter your access code to begin.
+              Clear, well-organized demand letters citing your state's law for security deposits, habitability, illegal entry, retaliation, utility shutoffs, fair housing, wrongful eviction, and more. Enter your access code to begin.
             </p>
+            <p style={{ fontSize: "11px", color: colors.inkMuted, opacity: 0.7, margin: "-24px auto 28px", maxWidth: "480px" }}>TenantFight is a self-help letter tool. It is not legal advice and is not a substitute for a licensed attorney.</p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px", marginBottom: "40px", textAlign: "left" }}>
               {TIPS.map(t => (
                 <div key={t.title} style={{ background: colors.white, border: `1px solid ${colors.borderLight}`, borderRadius: "10px", padding: "20px", display: "flex", gap: "14px" }}>

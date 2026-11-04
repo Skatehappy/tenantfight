@@ -34,7 +34,7 @@ ${mergedTopicSection(state, d, stateData)}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${state.name} ${capitalize(APP_CONFIG.vertical)} — Demand Letter Generator | ${APP_CONFIG.name}</title>
-<meta name="description" content="State-specific demand letters for ${APP_CONFIG.vertical} disputes in ${state.name}. AI-generated, attorney-quality, $${APP_CONFIG.price} flat. Covers all ${disputes.length} major dispute types.">
+<meta name="description" content="State-specific demand letters for ${APP_CONFIG.vertical} disputes in ${state.name}. AI-generated, not legal advice, $${APP_CONFIG.price} flat. Covers all ${disputes.length} major dispute types.">
 <link rel="canonical" href="https://${APP_CONFIG.domain}/${state.slug}">
 <meta property="og:title" content="${state.name} ${capitalize(APP_CONFIG.vertical)} | ${APP_CONFIG.name}">
 <meta property="og:description" content="State-specific demand letters for ${state.name}. $${APP_CONFIG.price} flat.">
@@ -94,7 +94,7 @@ footer a{color:rgba(255,255,255,0.7);text-decoration:none}
 </nav>
 <section class="hero">
   <h1>${state.name} ${capitalize(APP_CONFIG.vertical)}</h1>
-  <p>State-specific demand letters citing ${state.name} statutes. AI-generated, attorney-quality, $${APP_CONFIG.price} flat. Covers all ${disputes.length} major dispute types.</p>
+  <p>State-specific demand letters citing ${state.name} statutes. AI-generated, not legal advice, $${APP_CONFIG.price} flat. Covers all ${disputes.length} major dispute types.</p>
   <a class="btn-primary" href="/app?state=${state.slug}">Generate My ${state.name} Letter →</a>
 </section>
 <div class="container">
@@ -119,7 +119,7 @@ ${mergedHTML}
     <div class="step">
       <div class="step-num">03</div>
       <div class="step-title">AI Writes Your Letter</div>
-      <div class="step-body">Citing ${state.name} statutes, deadlines, and remedies. Attorney-quality.</div>
+      <div class="step-body">Citing ${state.name} statutes, deadlines, and remedies. A letter you review and send yourself.</div>
     </div>
     <div class="step">
       <div class="step-num">04</div>
